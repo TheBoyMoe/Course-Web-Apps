@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	let scores, roundScore, activePlayer;
 	let dice = document.querySelector('.dice');
+	document.getElementById('score-0').textContent = '0';
+	document.getElementById('score-1').textContent = '0';
+	document.getElementById('current-0').textContent = '0';
+	document.getElementById('current-1').textContent = '0';
 	
 	scores = [0,0];
 	roundScore = 0;
