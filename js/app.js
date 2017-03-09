@@ -21,19 +21,29 @@ document.addEventListener('DOMContentLoaded', function () {
 	scores = [0,0];
 	roundScore = 0;
 	activePlayer = 0;
+	let activePlayerScore = document.querySelector(`#current-${activePlayer}`);
 	
 	dice.style.display = 'none'; // hide the dice until it's rolled
 
 	// add event listener to the roll dice btn
 	document.querySelector('.btn-roll').addEventListener('click', rollDice);
 	function rollDice(e) {
-		dice.style.display = 'block'; // display the dice
-		// roll the dice and display the result
+		// 1. roll the dice and display the result
 		let rolled = Math.floor(Math.random() * 6) + 1;
 		dice.src = `./imgs/dice-${rolled}.png`; // update the dice img to reflect num rolled
+		dice.style.display = 'block'; // display the dice
 		
-		// update the activePlayer's current score when the dice is rolled
-		document.querySelector(`#current-${activePlayer}`).textContent = rolled;
+		// 2. update the roundScore if the num rolled is greater than 1
+		// and update the player's current score
+		if(rolled > 1) {
+			roundScore += rolled;
+		} else {
+			// reset the players current score and switch to the other player
+			roundScore = 1;
+			// TODO switch players
+		}
+		activePlayerScore.textContent = roundScore;
+		
 	}
 	
 });
