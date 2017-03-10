@@ -15,14 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let current0 = document.getElementById('current-0');
 	let current1 = document.getElementById('current-1');
 	
-	
-	// init the app
-	current0.textContent = current1.textContent = '0';
-	scores = [0,0];
-	currentTotal = 0;
-	activePlayer = 0;
-	
-	dice.style.display = 'none'; // hide the dice until it's rolled
+	init();
 
 	// add event listener to the roll dice btn
 	document.querySelector('.btn-roll').addEventListener('click', rollDice);
@@ -52,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
 		
 		// check if the player has won the game, otherwise switch players
-		if(scores[activePlayer] > 99) {
+		if(scores[activePlayer] > 20) {
 			// player has won
 			document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
 			dice.style.display = 'none';
@@ -76,6 +69,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		dice.style.display = 'none';
 	}
 
+	function init() {
+		// initialize the app
+		current0.textContent = current1.textContent = '0';
+		scores = [0,0];
+		currentTotal = 0;
+		activePlayer = 0;
+		
+		dice.style.display = 'none'; // hide the dice until it's rolled
+		document.getElementById('score-0').textContent = '0';
+		document.getElementById('score-1').textContent = '0';
+	}
+	
 
 });
 
