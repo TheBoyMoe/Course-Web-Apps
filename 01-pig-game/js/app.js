@@ -10,7 +10,7 @@ GAME RULES:
 */
 document.addEventListener('DOMContentLoaded', function () {
 
-	let scores, currentTotal, activePlayer;
+	let scores, currentTotal, activePlayer, isPlaying;
 	let dice = document.querySelector('.dice');
 	let current0 = document.getElementById('current-0');
 	let current1 = document.getElementById('current-1');
@@ -23,39 +23,44 @@ document.addEventListener('DOMContentLoaded', function () {
 	// add event listener to the roll dice btn
 	document.querySelector('.btn-roll').addEventListener('click', rollDice);
 	function rollDice(e) {
-		// 1. roll the dice and display the result
-		let rolled = Math.floor(Math.random() * 6) + 1;
-		dice.src = `./imgs/dice-${rolled}.png`; // update the dice img to reflect num rolled
-		dice.style.display = 'block'; // display the dice
-		
-		// 2. update the roundScore if the num rolled is greater than 1
-		// and update the player's current score
-		if(rolled !== 1) {
-			currentTotal += rolled;
-		} else {
-			nextPlayer();
+		if(isPlaying) {
+			// 1. roll the dice and display the result
+			let rolled = Math.floor(Math.random() * 6) + 1;
+			dice.src = `./imgs/dice-${rolled}.png`; // update the dice img to reflect num rolled
+			dice.style.display = 'block'; // display the dice
+			
+			// 2. update the roundScore if the num rolled is greater than 1
+			// and update the player's current score
+			if (rolled !== 1) {
+				currentTotal += rolled;
+			} else {
+				nextPlayer();
+			}
+			document.querySelector(`#current-${activePlayer}`).textContent = '' + currentTotal;
 		}
-		document.querySelector(`#current-${activePlayer}`).textContent = '' + currentTotal;
 	}
 	
 	// add an event listener to the hold btn
 	document.querySelector('.btn-hold').addEventListener('click', hold);
 	function hold(e) {
-		// save current score to the player's global score
-		scores[activePlayer] += currentTotal;
-		
-		// display the player's global score
-		document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
-		
-		// check if the player has won the game, otherwise switch players
-		if(scores[activePlayer] > 20) {
-			// player has won
-			document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
-			dice.style.display = 'none';
-			document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner');
-			document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
-		} else {
-			nextPlayer();
+		if(isPlaying) {
+			// save current score to the player's global score
+			scores[activePlayer] += currentTotal;
+			
+			// display the player's global score
+			document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
+			
+			// check if the player has won the game, otherwise switch players
+			if (scores[activePlayer] > 20) {
+				// player has won
+				document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
+				dice.style.display = 'none';
+				document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner');
+				document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
+				isPlaying = false;
+			} else {
+				nextPlayer();
+			}
 		}
 	}
 
@@ -76,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function init() {
 		// initialize the app
+		isPlaying = true;
 		scores = [0,0];
 		currentTotal = 0;
 		activePlayer = 0;
