@@ -9,19 +9,19 @@ GAME RULES:
 
 */
 document.addEventListener('DOMContentLoaded', function () {
-	console.log('Page loaded');
 
 	let scores, roundScore, activePlayer;
 	let dice = document.querySelector('.dice');
-	document.getElementById('score-0').textContent = '0';
-	document.getElementById('score-1').textContent = '0';
-	document.getElementById('current-0').textContent = '0';
-	document.getElementById('current-1').textContent = '0';
+	let score0 = document.getElementById('score-0');
+	let score1 = document.getElementById('score-1');
+	let current0 = document.getElementById('current-0');
+	let current1 = document.getElementById('current-1');
 	
+	// init the app
+	score0.textContent = score1.textContent = current0.textContent = current1.textContent = '0';
 	scores = [0,0];
 	roundScore = 0;
 	activePlayer = 0;
-	let activePlayerScore = document.querySelector(`#current-${activePlayer}`);
 	
 	dice.style.display = 'none'; // hide the dice until it's rolled
 
@@ -35,14 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 		// 2. update the roundScore if the num rolled is greater than 1
 		// and update the player's current score
-		if(rolled > 1) {
+		if(rolled !== 1) {
 			roundScore += rolled;
+			//activePlayerScore.textContent = roundScore;
 		} else {
 			// reset the players current score and switch to the other player
-			roundScore = 1;
-			// TODO switch players
+			roundScore = 0;
+			activePlayer = (activePlayer === 0)? 1 : 0;
+			
+			// reset the current scores
+			current0.textContent = current1.textContent = '0';
+			
 		}
-		activePlayerScore.textContent = roundScore;
+		document.querySelector(`#current-${activePlayer}`).textContent = roundScore;
 		
 	}
 	
