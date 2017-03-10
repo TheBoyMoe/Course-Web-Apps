@@ -50,9 +50,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 		// display the player's global score
 		document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
-		nextPlayer();
 		
-		// check if the player has won the game
+		// check if the player has won the game, otherwise switch players
+		if(scores[activePlayer] > 99) {
+			// player has won
+			document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
+			dice.style.display = 'none';
+			document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner');
+			document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
+		} else {
+			nextPlayer();
+		}
 		
 	}
 
