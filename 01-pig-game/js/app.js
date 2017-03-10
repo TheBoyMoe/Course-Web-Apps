@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	let dice = document.querySelector('.dice');
 	let current0 = document.getElementById('current-0');
 	let current1 = document.getElementById('current-1');
+	let panel0 = document.querySelector('.player-0-panel');
+	let panel1 = document.querySelector('.player-1-panel');
+	
 	
 	init();
 
@@ -54,9 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		} else {
 			nextPlayer();
 		}
-		
 	}
 
+	// start a new game
+	document.querySelector('.btn-new').addEventListener('click', init);
+	
 	function nextPlayer() {
 		// reset the players current score and switch to the other player
 		currentTotal = 0;
@@ -71,14 +76,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function init() {
 		// initialize the app
-		current0.textContent = current1.textContent = '0';
 		scores = [0,0];
 		currentTotal = 0;
 		activePlayer = 0;
 		
 		dice.style.display = 'none'; // hide the dice until it's rolled
+		
+		// set the starting ui
+		current0.textContent = current1.textContent = '0';
+		panel0.classList.remove(['winner'], ['active']);
+		panel1.classList.remove(['winner'], ['active']);
+		panel0.classList.add('active');
 		document.getElementById('score-0').textContent = '0';
 		document.getElementById('score-1').textContent = '0';
+		document.getElementById('name-0').textContent = 'Player 1';
+		document.getElementById('name-1').textContent = 'Player 2';
+		
 	}
 	
 
