@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let current1 = document.getElementById('current-1');
 	let panel0 = document.querySelector('.player-0-panel');
 	let panel1 = document.querySelector('.player-1-panel');
-	
+	let input = document.getElementById('winning-score');
 	
 	init();
 
@@ -61,8 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			// display the player's global score
 			document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
 			
+			// get the winning score
+			let winningScore = document.getElementById('winning-score').value;
+			
 			// check if the player has won the game, otherwise switch players
-			if (scores[activePlayer] > 99) {
+			if (scores[activePlayer] >= (winningScore || 100)) {
 				// player has won
 				document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
 				dice.style.display = 'none';
@@ -94,9 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// initialize the app
 		isPlaying = true;
 		scores = [0,0];
-		currentTotal = 0;
-		activePlayer = 0;
-		previousScore = 0;
+		currentTotal = activePlayer = previousScore = 0;
 		
 		dice.style.display = 'none'; // hide the dice until it's rolled
 		
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById('score-1').textContent = '0';
 		document.getElementById('name-0').textContent = 'Player 1';
 		document.getElementById('name-1').textContent = 'Player 2';
-		
+		document.getElementById('winning-score').value = '';
 	}
 	
 
