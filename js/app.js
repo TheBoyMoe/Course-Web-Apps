@@ -43,12 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			roundScore = 0;
 			activePlayer = (activePlayer === 0)? 1 : 0;
 			
-			// reset the current scores
+			// reset the current scores & update ui
 			current0.textContent = current1.textContent = '0';
-			
+			document.querySelector('.player-0-panel').classList.toggle('active');
+			document.querySelector('.player-1-panel').classList.toggle('active');
+			dice.style.display = 'none';
 		}
 		document.querySelector(`#current-${activePlayer}`).textContent = roundScore;
-		
 	}
 	
 });
