@@ -10,7 +10,7 @@ GAME RULES:
 */
 document.addEventListener('DOMContentLoaded', function () {
 
-	let scores, currentTotal, activePlayer, isPlaying;
+	let scores, currentTotal, activePlayer, isPlaying, previousScore;
 	let dice = document.querySelector('.dice');
 	let current0 = document.getElementById('current-0');
 	let current1 = document.getElementById('current-1');
@@ -25,14 +25,25 @@ document.addEventListener('DOMContentLoaded', function () {
 	function rollDice(e) {
 		if(isPlaying) {
 			// 1. roll the dice and display the result
-			let rolled = Math.floor(Math.random() * 6) + 1;
-			dice.src = `./imgs/dice-${rolled}.png`; // update the dice img to reflect num rolled
+			let currentScore = Math.floor(Math.random() * 6) + 1;
+			dice.src = `./imgs/dice-${currentScore}.png`; // update the dice img to reflect num rolled
 			dice.style.display = 'block'; // display the dice
 			
 			// 2. update the roundScore if the num rolled is greater than 1
 			// and update the player's current score
-			if (rolled !== 1) {
-				currentTotal += rolled;
+			if (currentScore !== 1) {
+				currentTotal += currentScore;
+				if(currentScore === 6) {
+					if (previousScore === currentScore) {
+						// clear the active players current and global scores
+						currentScore = previousScore = currentTotal = 0;
+						scores[activePlayer] = 0;
+						document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
+						nextPlayer();
+					} else {
+						previousScore = currentScore;
+					}
+				}
 			} else {
 				nextPlayer();
 			}
@@ -51,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
 			
 			// check if the player has won the game, otherwise switch players
-			if (scores[activePlayer] > 20) {
+			if (scores[activePlayer] > 99) {
 				// player has won
 				document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
 				dice.style.display = 'none';
@@ -69,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	function nextPlayer() {
 		// reset the players current score and switch to the other player
-		currentTotal = 0;
+		currentTotal = previousScore = 0;
 		activePlayer = (activePlayer === 0)? 1 : 0;
 		
 		// reset the current scores & update ui
@@ -85,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		scores = [0,0];
 		currentTotal = 0;
 		activePlayer = 0;
+		previousScore = 0;
 		
 		dice.style.display = 'none'; // hide the dice until it's rolled
 		
