@@ -12,23 +12,23 @@ let QuizUI = {
 		}
 	},
 	displayQuestion: function () {
-		this.populateElementWithHTML('question', quiz.getCurrentQuestion().text);
+		this.populateElementWithHTML('question', quiz.getCurrentQuestion().question);
 	},
 	displayChoices: function () {
 		let choices = quiz.getCurrentQuestion().choices;
-		choices.forEach(function (question, i) {
-			this.populateElementWithHTML(`choice${i}`, question);
-			this.guessHandler(`guess${i}`, question);
-		})
+		for(let i = 0; i < choices.length; i++){
+			this.populateElementWithHTML('choice' + i, choices[i]);
+			this.guessHandler('guess' + i, choices[i]);
+		}
 	},
 	displayScore: function () {
-		let gameOverHTML = '<h1>Game Over</h1>j1>';
-		gameOverHTML += `<h2>Your score is ${quiz.score}</h2>`;
+		let gameOverHTML = '<h1>Game Over</h1>';
+		gameOverHTML += '<h2>Your score is ' + quiz.score + '</h2>';
 		this.populateElementWithHTML('quiz', gameOverHTML);
 	},
 	displayProgress: function () {
-		let currentQuestionNumber = quiz.currentQuestionIndex++;
-		this.populateElementWithHTML('progress', `Question ${currentQuestionNumber} of ${quiz.questions.length}`);
+		let currentQuestionNumber = quiz.currentQuestionIndex + 1;
+		this.populateElementWithHTML('progress', 'Question ' + currentQuestionNumber + ' of ' + quiz.questions.length);
 	},
 	populateElementWithHTML: function (id, text) {
 		let element = document.getElementById(id);
@@ -37,7 +37,7 @@ let QuizUI = {
 	guessHandler: function (id, guess) {
 		let button = document.getElementById(id);
 		button.onclick = function () {
-			quiz.guess(quess);
+			quiz.guess(guess);
 			QuizUI.displayNext();
 		}
 	}
