@@ -20,7 +20,7 @@ Playlist.prototype.stop = function () {
 Playlist.prototype.next = function () {
 	this.stop();
 	this.nowPlayingIndex++;
-	if(this.nowPlayingIndex === this.songs.length){
+	if(this.nowPlayingIndex === this.items.length){
 		this.nowPlayingIndex = 0;
 	}
 	this.play();
