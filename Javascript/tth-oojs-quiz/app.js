@@ -8,3 +8,6 @@ let questions = [
 ];
 
 let quiz = new Quiz(questions);
+
+// display quiz
+QuizUI.displayNext();
