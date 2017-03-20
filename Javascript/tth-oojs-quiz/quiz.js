@@ -2,30 +2,23 @@
 	- collection of questions
 	- similar to playlist in media player app*/
 
-function Quiz() {
-	this.questions = [];
-	this.currentQuestion = 0;
-	this.currentScore = 0;
+function Quiz(questions) {
+	this.questions = questions;
+	this.currentQuestionIndex = 0;
+	this.score = 0;
 }
 
-Quiz.prototype.next = function (container, progress, score) {
-	this.currentQuestion++;
-	if(this.currentQuestion === this.questions.length) {
-		this.currentQuestion = 0;
-		this.renderScore(progress, score);
-		
-	} else this.renderElement(container);
+Quiz.prototype.guess = function (answer) {
+	if(this.getCurrentQuestion().isCorrectAnswer(answer)){
+		this.score++;
+	}
+	this.currentQuestionIndex++;
 };
 
-
-Quiz.prototype.renderElement = function (container) {
-	container.innerHTML = this.questions[this.currentQuestion].toHTML();
+Quiz.prototype.getCurrentQuestion = function () {
+	return this.questions[this.currentQuestionIndex];
 };
 
-Quiz.prototype.renderProgress = function (progress) {
-	progress.innerHTML = `Question ${this.currentQuestion} out of ${this.questions.length}`;
-};
-
-Quiz.prototype.renderScore = function (progress, score) {
-	progress.innerHTML = `You answered ${score} correctly`;
+Quiz.prototype.hasEnded = function () {
+	return this.currentQuestionIndex >= this.questions.length;
 };
