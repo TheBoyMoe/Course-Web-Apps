@@ -27,11 +27,11 @@ Playlist.prototype.next = function () {
 	this.play();
 };
 
-Playlist.prototype.renderElement = function (list) {
+Playlist.prototype.renderElement = function (container) {
 	// clear any songs, iterate over the [playlist and display the songs
-	list.innerHTML = '';
+	container.innerHTML = '';
 	this.songs.forEach(function (song, i) {
 		// build the song list, appending each song in turn
-		list.innerHTML += song.toHTML();
+		container.innerHTML += song.toHTML();
 	})
 };
