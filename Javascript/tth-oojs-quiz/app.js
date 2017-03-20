@@ -1,0 +1,1 @@
+/* Starts the app & manages everything */
