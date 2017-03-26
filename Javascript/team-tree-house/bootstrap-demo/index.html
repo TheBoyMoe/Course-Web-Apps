@@ -10,23 +10,25 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	
 	<!--
-	  References
-	  [1] http://treehouse-code-samples.s3.amazonaws.com/bootstrap-4/index.html#home (finished demo)
-	  [2] http://v4-alpha.getbootstrap.com/layout/overview/ (layout overview)
-	  [3] http://v4-alpha.getbootstrap.com/content/images/ (Responsive images)
-	  [4] http://v4-alpha.getbootstrap.com/content/typography/ (Typography)
-	  [5] https://v4-alpha.getbootstrap.com/utilities/borders/ (dozens of single purpose classes, eg borders, clearfix, flexbox, spacing, etc)
-	  [5] http://v4-alpha.getbootstrap.com/layout/responsive-utilities/ (hide/show elms at different break points)
-	  [6] http://v4-alpha.getbootstrap.com/layout/grid/ (grid, columns, offset, alignment, etc)
-	  [7] http://v4-alpha.getbootstrap.com/components/navs/ (navigation)
-	  [8] http://v4-alpha.getbootstrap.com/components/navbar/ (position your logo, navigation nad other elements within your header)
-	  [9] http://v4-alpha.getbootstrap.com/utilities/flexbox/ (manage layout, alignment, sizing of grid cols, etc)
-	  [10] http://v4-alpha.getbootstrap.com/components/buttons/ (btns, outline buttons, active/disabled states)
-	  [11] http://v4-alpha.getbootstrap.com/components/button-group/ (group btns together in a line)
-	  [12] https://v4-alpha.getbootstrap.com/utilities/spacing/ (assign padding and margins to elms)
-	  [13] http://v4-alpha.getbootstrap.com/components/dropdowns/
-	  [14] http://v4-alpha.getbootstrap.com/components/card/ (display content as cards, laid out as rows/columns, including Masonry-style using just css)
-	  
+		References
+		[1] http://treehouse-code-samples.s3.amazonaws.com/bootstrap-4/index.html#home (finished demo)
+		[2] http://v4-alpha.getbootstrap.com/layout/overview/ (layout overview)
+		[3] http://v4-alpha.getbootstrap.com/content/images/ (Responsive images)
+		[4] http://v4-alpha.getbootstrap.com/content/typography/ (Typography)
+		[5] https://v4-alpha.getbootstrap.com/utilities/borders/ (dozens of single purpose classes, eg borders, clearfix, flexbox, spacing, etc)
+		[5] http://v4-alpha.getbootstrap.com/layout/responsive-utilities/ (hide/show elms at different break points)
+		[6] http://v4-alpha.getbootstrap.com/layout/grid/ (grid, columns, offset, alignment, etc)
+		[7] http://v4-alpha.getbootstrap.com/components/navs/ (navigation)
+		[8] http://v4-alpha.getbootstrap.com/components/navbar/ (position your logo, navigation nad other elements within your header)
+		[9] http://v4-alpha.getbootstrap.com/utilities/flexbox/ (manage layout, alignment, sizing of grid cols, etc)
+		[10] http://v4-alpha.getbootstrap.com/components/buttons/ (btns, outline buttons, active/disabled states)
+		[11] http://v4-alpha.getbootstrap.com/components/button-group/ (group btns together in a line)
+		[12] https://v4-alpha.getbootstrap.com/utilities/spacing/ (assign padding and margins to elms)
+		[13] http://v4-alpha.getbootstrap.com/components/dropdowns/
+		[14] http://v4-alpha.getbootstrap.com/components/card/ (display content as cards, laid out as rows/columns, including Masonry-style using just css)
+		[15] http://v4-alpha.getbootstrap.com/components/list-group/ (display lists of items)
+		[16] http://v4-alpha.getbootstrap.com/components/badge/ (badges)
+
 	  -->
 	
 	
@@ -206,14 +208,14 @@
 			
 			<div class="col-lg-4 col-xl-3">
 				<h3 class="mb-3">What You'll Learn</h3>
-				<ul>
-					<li><strong>MongoDB</strong>: NoSQL database</li>
-					<li><strong>Angular</strong>: JavaScript framework</li>
-					<li><strong>Express</strong>: Framework for Node</li>
-					<li><strong>Node.js</strong>: JavaScript environment</li>
-					<li><strong>ES2015</strong>: Latest version of JavaScript</li>
-					<li><strong>Babel</strong>: JavaScript compiler</li>
-				</ul>
+				<div class="list-group">
+					<a href="#" class="list-group-item"><strong>MongoDB</strong>: NoSQL database</a>
+					<a href="#" class="list-group-item"><strong>Angular</strong>: JavaScript framework </a>
+					<a href="#" class="list-group-item"><strong>Express</strong>: Framework for Node</a>
+					<a href="#" class="list-group-item"><strong>Node.js</strong>: JavaScript environment</a>
+					<a href="#" class="list-group-item"><strong>ES2015</strong>: Latest version of JavaScript</a>
+					<a href="#" class="list-group-item"><strong>Babel</strong>: JavaScript compiler</a>
+				</div>
 			</div>
 			
 			<h1 id="speakers" class="display-4 text-center my-5 text-muted col-sm-12">Speakers</h1>
@@ -283,8 +285,61 @@
 				
 			</div>
 			
+			<!-- schedule -->
 			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Schedule</h1>
-				[Conference schedule goes here]
+			
+			<ul class="list-group col" id="schedule">
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Keynote: Internet of Things</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">9:00am</span>
+					</div>
+					<p class="mb-1">NodeStradamus</p>
+				</li>
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Angular Basics</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">10:00am</span>
+					</div>
+					<p class="mb-1">Angela McAngular</p>
+				</li>
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Hey, Mongo!</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">11:00am</span>
+					</div>
+					<p class="mb-1">Jay Query</p>
+				</li>
+				<li class="list-group-item list-group-item-action list-group-item-success flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Lunch</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">12:00pm</span>
+					</div>
+					<p class="mb-1">Free pizza for everyone.</p>
+				</li>
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Introducing ES2015</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">1:00pm</span>
+					</div>
+					<p class="mb-1">Ecma Scriptnstuff</p>
+				</li>
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Gettin' MEAN</h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">2:00pm</span>
+					</div>
+					<p class="mb-1">Geo "Lo" Cation</p>
+				</li>
+				<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">What's Babel? </h5>
+						<span class="badge badge-default badge-pill bg-info px-2 py-2 mt-2">3:00pm</span>
+					</div>
+					<p class="mb-1">Json Babel</p>
+				</li>
+			</ul>
+			
 		</div>
 		
 		<!-- callout button -->
