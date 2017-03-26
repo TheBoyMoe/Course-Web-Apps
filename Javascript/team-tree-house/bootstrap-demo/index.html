@@ -28,7 +28,9 @@
 		[14] http://v4-alpha.getbootstrap.com/components/card/ (display content as cards, laid out as rows/columns, including Masonry-style using just css)
 		[15] http://v4-alpha.getbootstrap.com/components/list-group/ (display lists of items)
 		[16] http://v4-alpha.getbootstrap.com/components/badge/ (badges)
-
+		[17] http://v4-alpha.getbootstrap.com/components/modal/ (modals)
+		
+		
 	  -->
 	
 	
@@ -180,7 +182,7 @@
 			<p class="lead">A One-day Conference About All Things JavaScript!</p>
 			
 			<div class="btn-group mt-5" role="group" aria-label="Button group">
-				<button type="button" class="btn btn-primary btn-lg">Register now</button>
+				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registration">Register now</button>
 				<a class="btn btn-secondary btn-lg" href="#speakers">See Speakers</a>
 			</div>
 			
@@ -343,7 +345,7 @@
 		</div>
 		
 		<!-- callout button -->
-		<button type="button" class="btn btn-outline-info btn-lg d-block mx-auto my-5">Don't miss out, register now</button>
+		<button type="button" class="btn btn-outline-info btn-lg d-block mx-auto my-5" data-toggle="modal" data-target="#registration">Don't miss out, register now</button>
 		
 		
 		<!-- signup form -->
@@ -400,6 +402,28 @@
 		</div>
 		
 	</div>
+	
+	<!-- Bootstrap modal -->
+	<div id="registration" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Register for Full Stack Conf</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Registration form goes here</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 	<!-- jQuery first, Tether, then bootstrap js -->
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
