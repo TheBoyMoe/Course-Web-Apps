@@ -20,11 +20,9 @@
 	  [6] http://v4-alpha.getbootstrap.com/layout/grid/ (grid, columns, offset, alignment, etc)
 	  
 	  -->
-</head>
-<body>
-	<div class="container pt-5">
-		<div class="row">
-			<!--
+	
+	
+	<!--
 				Grid system if built with flexbox and is fully responsive
 				
 				columns:
@@ -41,60 +39,92 @@
 				  - each col has 30px gutter, 15px on either side
 				  - all columns are nestable, support offsets and column ordering
 			-->
-			<!--
-				Spacing
-				m - margin
-				p - padding
-				
-				t - top
-				b - bottom
-				l - left
-				r - right
-				x - left & right
-				y - top & bottom
-				
-				
-				0 - eliminate p/m
-				1 - 0.25 rem
-				2 - 0.5 rem
-				3 - 1 rem
-				4 - 1.5 rem
-				5 - 3 rem
-				
-				examples: mt-3, pb-1, px-2, ml-5, etc
-				note: m/p without t/b/etc, e.g m-2, p-5, applies the padding/margin to all 4 sides
-			-->
-			
-			<!--
-				Show/hide elements at different break points (xs/sm/md/lg/xl)
-				
-				hidden-*-up - hide the element at the given break point and up
-				hidden-*-down - hide the element at the break point and lower
-				
-				e.g  hidden-sm-down - element hidden on sm and xs devices
-					 hidden-lg-up - element hidden on lg & xl devices
-				
-				You can combine the two, e.g .hidden-sm-down and .hidden-lg-up to only show the element at md screen sizes
-			
-			-->
-			
-			<!--
-				Column ordering
-				
-				Change the ordering of your cols at different break points - structure content based on seo.
-				Use pull- and push- to change the order of cols in your layout at different break points
-				e.g push-md-4 moves a col to the right by 4*cols on medium width screens, while
-					adding pull-md-4 moves it's neighbour to the left by the same amount - results in the two swapping places
-				
-				Column offset
-				
-				Use to move columns to the right, works by adding left margin to the respective
-				column equal to the number of cols specified.
-				
-				Use offset-[break point]-[number of cols]
-				e.g offset-md-4 moves a column to the right by 4 cols
-				
-			-->
+	
+	<!--
+		Spacing
+		m - margin
+		p - padding
+		
+		t - top
+		b - bottom
+		l - left
+		r - right
+		x - left & right
+		y - top & bottom
+		
+		
+		0 - eliminate p/m
+		1 - 0.25 rem
+		2 - 0.5 rem
+		3 - 1 rem
+		4 - 1.5 rem
+		5 - 3 rem
+		
+		examples: mt-3, pb-1, px-2, ml-5, etc
+		note: m/p without t/b/etc, e.g m-2, p-5, applies the padding/margin to all 4 sides
+	-->
+	
+	<!--
+		Show/hide elements at different break points (xs/sm/md/lg/xl)
+		
+		hidden-*-up - hide the element at the given break point and up
+		hidden-*-down - hide the element at the break point and lower
+		
+		e.g  hidden-sm-down - element hidden on sm and xs devices
+			 hidden-lg-up - element hidden on lg & xl devices
+		
+		You can combine the two, e.g .hidden-sm-down and .hidden-lg-up to only show the element at md screen sizes
+	
+	-->
+	
+	<!--
+		Column ordering
+		
+		Change the ordering of your cols at different break points - structure content based on seo.
+		Use pull- and push- to change the order of cols in your layout at different break points
+		e.g push-md-4 moves a col to the right by 4*cols on medium width screens, while
+			adding pull-md-4 moves it's neighbour to the left by the same amount - results in the two swapping places
+		
+		Column offset
+		
+		Use to move columns to the right, works by adding left margin to the respective
+		column equal to the number of cols specified.
+		
+		Use offset-[break point]-[number of cols]
+		e.g offset-md-4 moves a column to the right by 4 cols
+		
+	-->
+	
+</head>
+<body>
+	<div class="container pt-5">
+		
+		<!-- navbar snippet -->
+		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#">Navbar</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Features</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Pricing</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Disabled</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- content -->
+		<div class="row">
 			
 			<div class="col-lg-4 col-xl-6 push-lg-4 push-xl-3">
 				<h3 class="mb-3">About Full Stack Conf</h3>
@@ -144,7 +174,7 @@
 				</div>
 			</div>
 		</div>
-		<hr><!-- /signup form -->
+		<hr>
 		
 	</div>
 	
