@@ -24,6 +24,8 @@
 	  [10] http://v4-alpha.getbootstrap.com/components/buttons/ (btns, outline buttons, active/disabled states)
 	  [11] http://v4-alpha.getbootstrap.com/components/button-group/ (group btns together in a line)
 	  [12] https://v4-alpha.getbootstrap.com/utilities/spacing/ (assign padding and margins to elms)
+	  [13] http://v4-alpha.getbootstrap.com/components/dropdowns/
+	  
 	  
 	  -->
 	
@@ -240,6 +242,40 @@
 			</div>
 		</div>
 		<hr>
+		
+		<!-- footer -->
+		<div class="row py-3">
+			<div class="col-md-7">
+				<ul class="nav">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Community</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Tracks</a>
+					</li>
+					<li class="nav-item">
+						<!-- Split dropup button - change to dropup to dropdown to turn into dropdown menu -->
+						<div class="btn-group dropup">
+							<button type="button" class="btn btn-secondary">Other Confs</button>
+							<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<div class="dropdown-menu">
+								<!-- Dropdown menu links -->
+								<a class="dropdown-item" href="#">Node Conf</a>
+								<a class="dropdown-item" href="#">Express Conf</a>
+								<a class="dropdown-item" href="#">MongoDB Conf</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">React Conf</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-5 text-md-right">
+				<small>&copy; 2016 Full Stack Conf &amp; Treehouse</small>
+			</div>
+		</div>
 		
 	</div>
 	
