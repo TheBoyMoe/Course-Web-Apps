@@ -30,7 +30,8 @@
 		[16] http://v4-alpha.getbootstrap.com/components/badge/ (badges)
 		[17] http://v4-alpha.getbootstrap.com/components/modal/ (modals)
 		[18] http://v4-alpha.getbootstrap.com/components/scrollspy/ (update nav items based on scroll position)
-		
+		[19] http://v4-alpha.getbootstrap.com/content/reboot/#forms (form basics)
+		[20] http://v4-alpha.getbootstrap.com/components/forms/ (forms, controls, options, styles, etc)
 	  -->
 	
 	
@@ -407,19 +408,87 @@
 	<div id="registration" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header bg-info text-white">
 					<h5 class="modal-title" id="exampleModalLabel">Register for Full Stack Conf</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>Registration form goes here</p>
+					
+					<!-- alert -->
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Hurry!</strong> Early bird registration ends in two days.
+					</div>
+					
+					<!-- registration form -->
+					<form>
+						<h5 class="mb-3">Basic Info</h5>
+						<fieldset class="form-group">
+							<label class="sr-only" for="name">Name:</label>
+							<input type="text" class="form-control" id="name" placeholder="Enter your full name">
+						</fieldset>
+						<fieldset class="form-group">
+							<label class="sr-only" for="mail">Email:</label>
+							<input type="email" class="form-control" id="mail" placeholder="name@example.com">
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="role">Job role:</label>
+							<select class="form-control custom-select" name="user_role" id="role">
+								<option value="full stack js developer">Full Stack JavaScript Developer</option>
+								<option value="front end developer">Front End Developer</option>
+								<option value="back end developer">Back End Developer</option>
+								<option value="designer">Designer</option>
+								<option value="student">Student</option>
+							</select>
+						</fieldset>
+						
+						<hr class="my-4">
+						<h5 class="mb-4">Which Topics Interest You Most?</h5>
+						<div class="form-group">
+							<div class="form-check">
+								<label class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">JavaScript Frameworks</span>
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">JavaScript Libraries</span>
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">Node.js</span>
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">Build Tools</span>
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input">
+									<span class="custom-control-indicator"></span>
+									<span class="custom-control-description">ES2015</span>
+								</label>
+							</div>
+						</div>
+						
+					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
