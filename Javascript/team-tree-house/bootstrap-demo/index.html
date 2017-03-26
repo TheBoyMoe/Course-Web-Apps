@@ -16,17 +16,30 @@
 	  [3] http://v4-alpha.getbootstrap.com/content/images/ (Responsive images)
 	  [4] http://v4-alpha.getbootstrap.com/content/typography/ (Typography)
 	  [5] https://v4-alpha.getbootstrap.com/utilities/borders/ (dozens of single purpose classes, eg borders, clearfix, flexbox, spacing, etc)
+	  [5] http://v4-alpha.getbootstrap.com/layout/responsive-utilities/ (hide/show elms at different break points)
+	  [6] http://v4-alpha.getbootstrap.com/layout/grid/ (grid, columns, offset, alignment, etc)
+	  
 	  -->
 </head>
 <body>
 	<div class="container pt-5">
 		<div class="row">
 			<!--
+				Grid system if built with flexbox and is fully responsive
+				
 				columns:
-				xs/sm/md/lg/xl
+											screen width	container width
+				extra-small: 	col-	 		<576px			auto
+				small:			col-sm-		>=576px			540px
+				medium:			col-md-		>=768px			720px
+				large:			col-lg-		>=992px			960px
+				extra large:	col-xl-		>=1200px		1140px
+				
 				note:
-				  -	add class row to surrounding <div> element
+				  -	add class row to surrounding <div> element, only cols can be immediate children of row
 				  -	cols must add up to 12
+				  - each col has 30px gutter, 15px on either side
+				  - all columns are nestable, support offsets and column ordering
 			-->
 			<!--
 				Spacing
@@ -52,13 +65,44 @@
 				note: m/p without t/b/etc, e.g m-2, p-5, applies the padding/margin to all 4 sides
 			-->
 			
-			<div class="col-lg-4 col-xl-6">
+			<!--
+				Show/hide elements at different break points (xs/sm/md/lg/xl)
+				
+				hidden-*-up - hide the element at the given break point and up
+				hidden-*-down - hide the element at the break point and lower
+				
+				e.g  hidden-sm-down - element hidden on sm and xs devices
+					 hidden-lg-up - element hidden on lg & xl devices
+				
+				You can combine the two, e.g .hidden-sm-down and .hidden-lg-up to only show the element at md screen sizes
+			
+			-->
+			
+			<!--
+				Column ordering
+				
+				Change the ordering of your cols at different break points - structure content based on seo.
+				Use pull- and push- to change the order of cols in your layout at different break points
+				e.g push-md-4 moves a col to the right by 4*cols on medium width screens, while
+					adding pull-md-4 moves it's neighbour to the left by the same amount - results in the two swapping places
+				
+				Column offset
+				
+				Use to move columns to the right, works by adding left margin to the respective
+				column equal to the number of cols specified.
+				
+				Use offset-[break point]-[number of cols]
+				e.g offset-md-4 moves a column to the right by 4 cols
+				
+			-->
+			
+			<div class="col-lg-4 col-xl-6 push-lg-4 push-xl-3">
 				<h3 class="mb-3">About Full Stack Conf</h3>
 				<img class="img-fluid rounded mb-3" src="imgs/pdx.jpg">
 				<p>The beautiful city of Portland, Oregon will be the host city for Full Stack Conf!</p>
 				<p>Explore the future of JavaScript with a lineup of industry professionals. Discover new techniques to advance your career as a web developer.</p>
 			</div>
-			<div class="col-lg-4 col-xl-3">
+			<div class="col-lg-4 col-xl-3 pull-lg-4 pull-xl-6">
 				<h3 class="mb-3">Expert Speakers</h3>
 				<p>Our expert speaker lineup was just announced, so don't wait too long before grabbing your tickets!</p>
 				<p>Want to meet the international JavaScript community and share skills with some of the world's top experts, hackers, and makers? Be the first to know what to expect for the future of JavaScript.</p>
@@ -75,10 +119,11 @@
 					<li><strong>Babel</strong>: JavaScript compiler</li>
 				</ul>
 			</div>
+			
 			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Speakers</h1>
-			[Speaker bios go here]
+				[Speaker bios go here]
 			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Schedule</h1>
-			[Conference schedule goes here]
+				[Conference schedule goes here]
 		</div>
 	</div>
 	
