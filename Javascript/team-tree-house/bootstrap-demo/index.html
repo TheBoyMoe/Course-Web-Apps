@@ -21,7 +21,9 @@
 	  [7] http://v4-alpha.getbootstrap.com/components/navs/ (navigation)
 	  [8] http://v4-alpha.getbootstrap.com/components/navbar/ (position your logo, navigation nad other elements within your header)
 	  [9] http://v4-alpha.getbootstrap.com/utilities/flexbox/ (manage layout, alignment, sizing of grid cols, etc)
-	  
+	  [10] http://v4-alpha.getbootstrap.com/components/buttons/ (btns, outline buttons, active/disabled states)
+	  [11] http://v4-alpha.getbootstrap.com/components/button-group/ (group btns together in a line)
+	  [12] https://v4-alpha.getbootstrap.com/utilities/spacing/ (assign padding and margins to elms)
 	  
 	  -->
 	
@@ -66,6 +68,8 @@
 		
 		examples: mt-3, pb-1, px-2, ml-5, etc
 		note: m/p without t/b/etc, e.g m-2, p-5, applies the padding/margin to all 4 sides
+		also: there is no 6, and up. classes are built from the default sass map ranging from 0.25 to 3rem
+		
 	-->
 	
 	<!--
@@ -170,6 +174,12 @@
 		<div class="container text-sm-center pt-5">
 			<h1 class="display-2">Full Stack Conf</h1>
 			<p class="lead">A One-day Conference About All Things JavaScript!</p>
+			
+			<div class="btn-group mt-5" role="group" aria-label="Button group">
+				<button type="button" class="btn btn-primary btn-lg">Register now</button>
+				<a class="btn btn-secondary btn-lg" href="#speakers">See Speakers</a>
+			</div>
+			
 		</div>
 	</div>
 	
@@ -202,11 +212,15 @@
 				</ul>
 			</div>
 			
-			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Speakers</h1>
+			<h1 id="speakers" class="display-4 text-center my-5 text-muted col-sm-12">Speakers</h1>
 				[Speaker bios go here]
 			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Schedule</h1>
 				[Conference schedule goes here]
 		</div>
+		
+		<!-- callout button -->
+		<button type="button" class="btn btn-outline-info btn-lg d-block mx-auto my-5">Don't miss out, register now</button>
+		
 		
 		<!-- signup form -->
 		<hr>
