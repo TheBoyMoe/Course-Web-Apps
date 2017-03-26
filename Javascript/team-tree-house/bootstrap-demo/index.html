@@ -18,6 +18,10 @@
 	  [5] https://v4-alpha.getbootstrap.com/utilities/borders/ (dozens of single purpose classes, eg borders, clearfix, flexbox, spacing, etc)
 	  [5] http://v4-alpha.getbootstrap.com/layout/responsive-utilities/ (hide/show elms at different break points)
 	  [6] http://v4-alpha.getbootstrap.com/layout/grid/ (grid, columns, offset, alignment, etc)
+	  [7] http://v4-alpha.getbootstrap.com/components/navs/ (navigation)
+	  [8] http://v4-alpha.getbootstrap.com/components/navbar/ (position your logo, navigation nad other elements within your header)
+	  [9] http://v4-alpha.getbootstrap.com/utilities/flexbox/ (manage layout, alignment, sizing of grid cols, etc)
+	  
 	  
 	  -->
 	
@@ -78,14 +82,18 @@
 	-->
 	
 	<!--
-		Column ordering
+		* Column ordering
 		
 		Change the ordering of your cols at different break points - structure content based on seo.
 		Use pull- and push- to change the order of cols in your layout at different break points
 		e.g push-md-4 moves a col to the right by 4*cols on medium width screens, while
 			adding pull-md-4 moves it's neighbour to the left by the same amount - results in the two swapping places
 		
-		Column offset
+		* Column floating
+		
+		- floats are no longer used, control layout using flexbox
+		
+		* Column offset
 		
 		Use to move columns to the right, works by adding left margin to the respective
 		column equal to the number of cols specified.
@@ -95,39 +103,66 @@
 		
 	-->
 	
+	<style>
+		
+		.container.pt-5 {
+			padding-top: 5rem!important;
+		}
+		
+		
+		@media (max-width: 576px) {
+			nav .container {
+				margin-left: 0;
+				margin-right: 0;
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	</style>
+	
 </head>
 <body>
-	<div class="container pt-5">
+
+	<!-- navbar snippet - outside of the container so it stretches to fit screen width -->
+	<nav class="navbar fixed-top navbar-toggleable-sm navbar-inverse bg-primary">
 		
-		<!-- navbar snippet -->
-		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<div class="container">
+			
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="#">Navbar</a>
+			
+			<a class="navbar-brand" href="http://www.teamtreehouse.com">Presented by Treehouse</a>
+			
 			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
+				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Features</a>
+						<a class="nav-link" href="#about">About</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Pricing</a>
+						<a class="nav-link" href="#speakers">Speakers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Disabled</a>
+						<a class="nav-link" href="#schedule">Schedule</a>
 					</li>
 				</ul>
 			</div>
-		</nav>
+			
+		</div>
+		
+	</nav>
+	
+	<div class="container pt-5">
 		
 		<!-- content -->
 		<div class="row">
 			
 			<div class="col-lg-4 col-xl-6 push-lg-4 push-xl-3">
-				<h3 class="mb-3">About Full Stack Conf</h3>
+				<h3 class="mb-3">Full Stack Conf</h3>
 				<img class="img-fluid rounded mb-3 hidden-xs-down" src="imgs/pdx.jpg">
 				<p>The beautiful city of Portland, Oregon will be the host city for Full Stack Conf!</p>
 				<p>Explore the future of JavaScript with a lineup of industry professionals. Discover new techniques to advance your career as a web developer.</p>
@@ -155,7 +190,6 @@
 			<h1 class="display-4 text-center my-5 text-muted col-sm-12">Schedule</h1>
 				[Conference schedule goes here]
 		</div>
-		
 		
 		<!-- signup form -->
 		<hr>
