@@ -429,16 +429,16 @@
 						<strong>Hurry!</strong> Early bird registration ends in two days.
 					</div>
 					
-					<!-- registration form -->
+					<!-- registration form - NOTE: FORM REQUIRES A SCRIPT TO VALIDATE AND COLLECT SUBMITTED INFO -->
 					<form>
 						<h5 class="mb-3">Basic Info</h5>
 						<fieldset class="form-group">
-							<label class="sr-only" for="name">Name:</label>
+							<label for="name">Name:</label>
 							<input type="text" class="form-control" id="name" placeholder="Enter your full name">
 						</fieldset>
-						<fieldset class="form-group">
-							<label class="sr-only" for="mail">Email:</label>
-							<input type="email" class="form-control" id="mail" placeholder="name@example.com">
+						<fieldset class="form-group has-danger">
+							<label class="form-control-label" for="mail">Email:</label>
+							<input type="email" class="form-control form-control-danger" id="mail" placeholder="name@example.com">
 						</fieldset>
 						
 						<!-- select dropdown -->
@@ -498,9 +498,9 @@
 						<hr class="mb-4">
 						<h5 class="mb-4">Payment Info</h5>
 						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label for="cc-num">Card Number:</label>
-								<input class="form-control" id="cc-num" type="text">
+							<div class="col-lg-6 form-group has-success">
+								<label class="form-control-label" for="cc-num">Card Number:</label>
+								<input class="form-control form-control-success" id="cc-num" type="text">
 							</div>
 							
 							<div class="col-lg-3 form-group">
