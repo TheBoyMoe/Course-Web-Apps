@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	
 	<!--
-		References
+		References:
 		[1] http://treehouse-code-samples.s3.amazonaws.com/bootstrap-4/index.html#home (finished demo)
 		[2] http://v4-alpha.getbootstrap.com/layout/overview/ (layout overview)
 		[3] http://v4-alpha.getbootstrap.com/content/images/ (Responsive images)
@@ -32,6 +32,8 @@
 		[18] http://v4-alpha.getbootstrap.com/components/scrollspy/ (update nav items based on scroll position)
 		[19] http://v4-alpha.getbootstrap.com/content/reboot/#forms (form basics)
 		[20] http://v4-alpha.getbootstrap.com/components/forms/ (forms, controls, options, styles, etc)
+		[21] https://jqueryvalidation.org/ (jquery form validation plugin)
+		
 	  -->
 	
 	
@@ -137,6 +139,9 @@
 			margin-bottom: 0;
 		}
 		
+		#registration .btn-primary {
+			border-color: #5bc0de;
+		}
 		
 	</style>
 	
@@ -435,6 +440,8 @@
 							<label class="sr-only" for="mail">Email:</label>
 							<input type="email" class="form-control" id="mail" placeholder="name@example.com">
 						</fieldset>
+						
+						<!-- select dropdown -->
 						<fieldset class="form-group">
 							<label for="role">Job role:</label>
 							<select class="form-control custom-select" name="user_role" id="role">
@@ -446,6 +453,7 @@
 							</select>
 						</fieldset>
 						
+						<!-- checkboxes -->
 						<hr class="my-4">
 						<h5 class="mb-4">Which Topics Interest You Most?</h5>
 						<div class="form-group">
@@ -485,6 +493,59 @@
 								</label>
 							</div>
 						</div>
+						
+						<!-- payment section -->
+						<hr class="mb-4">
+						<h5 class="mb-4">Payment Info</h5>
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label for="cc-num">Card Number:</label>
+								<input class="form-control" id="cc-num" type="text">
+							</div>
+							
+							<div class="col-lg-3 form-group">
+								<label for="zip">Zip Code:</label>
+								<input class="form-control" id="zip" type="text">
+							</div>
+							
+							<div class="col-lg-3 form-group">
+								<label for="cvv">CVV:</label>
+								<input class="form-control" id="cvv" type="text">
+							</div>
+						</div>
+						
+						<div class="row">
+							<label for="exp-month" class="col-lg-12">Expiration Date:</label>
+							<div class="form-group col-lg-8">
+								<select class="custom-select form-control" id="exp-month">
+									<option value="1">1 - January</option>
+									<option value="2">2 - February</option>
+									<option value="3">3 - March</option>
+									<option value="4">4 - April</option>
+									<option value="5">5 - May</option>
+									<option value="6">6 - June</option>
+									<option value="7">7 - July</option>
+									<option value="8">8 - August</option>
+									<option value="9">9 - September</option>
+									<option value="10">10 - October</option>
+									<option value="11">11 - November</option>
+									<option value="12">12 - December</option>
+								</select>
+							</div>
+							<label for="exp-year" class="sr-only">Expiration Year</label>
+							<div class="form-group col-lg-4">
+								<select class="custom-select" id="exp-year">
+									<option value="2016">2016</option>
+									<option value="2017">2017</option>
+									<option value="2018">2018</option>
+									<option value="2019">2019</option>
+									<option value="2020">2020</option>
+								</select>
+							</div>
+						</div>
+						
+						<hr class="mb-4">
+						<button type="submit" class="btn btn-primary bg-info text-white col-lg-12">Register</button>
 						
 					</form>
 				</div>
