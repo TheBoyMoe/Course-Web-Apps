@@ -105,11 +105,6 @@
 	
 	<style>
 		
-		.container.pt-5 {
-			padding-top: 5rem!important;
-		}
-		
-		
 		@media (max-width: 576px) {
 			nav .container {
 				margin-left: 0;
@@ -117,7 +112,21 @@
 				padding-left: 0;
 				padding-right: 0;
 			}
+			
+			.jumbotron .container {
+				text-align: center;
+			}
+			
+			.jumbotron .container h1 {
+				font-size: 3.5rem;
+			}
 		}
+		
+		.jumbotron {
+			margin-bottom: 0;
+		}
+		
+		
 	</style>
 	
 </head>
@@ -156,13 +165,21 @@
 		
 	</nav>
 	
+	<!-- jumbotron -->
+	<div class="jumbotron jumbotron-fluid bg-info text-white">
+		<div class="container text-sm-center pt-5">
+			<h1 class="display-2">Full Stack Conf</h1>
+			<p class="lead">A One-day Conference About All Things JavaScript!</p>
+		</div>
+	</div>
+	
+	<!-- content -->
 	<div class="container pt-5">
 		
-		<!-- content -->
 		<div class="row">
 			
 			<div class="col-lg-4 col-xl-6 push-lg-4 push-xl-3">
-				<h3 class="mb-3">Full Stack Conf</h3>
+				<h3 class="mb-3">About Full Stack Conf</h3>
 				<img class="img-fluid rounded mb-3 hidden-xs-down" src="imgs/pdx.jpg">
 				<p>The beautiful city of Portland, Oregon will be the host city for Full Stack Conf!</p>
 				<p>Explore the future of JavaScript with a lineup of industry professionals. Discover new techniques to advance your career as a web developer.</p>
