@@ -50,6 +50,16 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
-	
+	// define the event listener on the add button
+	document.querySelector('.add__btn').addEventListener('click', ()=>{
+		console.log(`Add button was clicked`);
+		// 1. fetch user input from field
+		// 2. add item to the budget controller
+		// 3. add item to the ui
+		// 4. calculate the budget
+		// 5. display the budget
+		
+		
+	});
 	
 })(budgetController, uiController);
