@@ -50,16 +50,26 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
-	// define the event listener on the add button
-	document.querySelector('.add__btn').addEventListener('click', ()=>{
-		console.log(`Add button was clicked`);
+	const ctrlAddItem = () => {
 		// 1. fetch user input from field
 		// 2. add item to the budget controller
 		// 3. add item to the ui
 		// 4. calculate the budget
 		// 5. display the budget
 		
-		
+		console.log('CtrlAddItem');
+	};
+	
+	// define the event listener on the add button
+	document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+	
+	// add an event listener to the global doc element to capture pressing the enter key
+	// keypress - every key except fn, Ctrl
+	document.addEventListener('keypress', (e)=>{
+		if(e.keyCode === 13 || e.which === 13) {
+			ctrlAddItem();
+		}
 	});
+	
 	
 })(budgetController, uiController);
