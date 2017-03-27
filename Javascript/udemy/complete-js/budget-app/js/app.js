@@ -3,7 +3,7 @@
  */
 
 // MODEL
-let budgetController = (function () {
+const budgetController = (() => {
 	let x = 23;
 	
 	let add = function (a) {
@@ -19,19 +19,29 @@ let budgetController = (function () {
 })();
 
 // VIEW
-let uiController = (function () {
-	// more to come...
-	
+const uiController = (() => {
+	'use strict';
+	return {
+		prop: 6,
+		api: () => {
+			return `Hello from the UI Controller`;
+		}
+	}
 	
 })();
 
 // APP CONTROLLER -- connects the other two modules
-let appController = (function (budgetCtrl, uiCtrl) {
+const appController = ((budgetCtrl, uiCtrl) => {
+	'use strict';
 	let a = budgetCtrl.api(5);
-	
+	let b = uiCtrl.api();
+	let c = uiCtrl.prop;
 	return {
-		anotherApi: function () {
+		budgetApi: () => {
 			return a;
+		},
+		uiApi: () => {
+			return `${b} ${c}`;
 		}
 	}
 	
