@@ -30,7 +30,11 @@ const uiController = (() => {
 	// 		return `Hello from the UI Controller`;
 	// 	}
 	// }
-	
+	let DOMStrings = {
+		inputType: '.add__type',
+		inputDescription: '.add__description',
+		inputValue: '.add__value'
+	};
 	
 	// functions defined in the UIController that are called from
 	// the AppController must be exported - by default all methods
@@ -38,9 +42,9 @@ const uiController = (() => {
 	return {
 		getInput: () => {
 			return {
-				value: document.querySelector('.add__value').value,
-				type: document.querySelector('.add__type').value, // either 'inc'/'exp'
-				description: document.querySelector('.add__description').value
+				value: document.querySelector(DOMStrings.inputValue).value,
+				type: document.querySelector(DOMStrings.inputType).value, // either 'inc'/'exp'
+				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		}
 	}
