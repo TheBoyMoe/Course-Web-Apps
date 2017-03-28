@@ -32,6 +32,18 @@ const uiController = (() => {
 	// }
 	
 	
+	// functions defined in the UIController that are called from
+	// the AppController must be exported - by default all methods
+	// and props of the module are private
+	return {
+		getInput: () => {
+			return {
+				value: document.querySelector('.add__value').value,
+				type: document.querySelector('.add__type').value, // either 'inc'/'exp'
+				description: document.querySelector('.add__description').value
+			}
+		}
+	}
 	
 })();
 
@@ -50,8 +62,11 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
+	// called by either hitting the 'Enter' key or the 'add item' btn
 	const ctrlAddItem = () => {
 		// 1. fetch user input from field
+		let input = uiCtrl.getInput();
+		console.log(input);
 		// 2. add item to the budget controller
 		// 3. add item to the ui
 		// 4. calculate the budget
