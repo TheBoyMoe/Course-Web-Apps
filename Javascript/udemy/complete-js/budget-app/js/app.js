@@ -29,6 +29,17 @@ const budgetController = (() => {
 		this.value = value;
 	};
 	
+	let data = {
+		allItems: {
+			exp: [],
+			inc: []
+		},
+		totals: {
+			exp: 0,
+			inc: 0
+		}
+	}
+	
 })();
 
 
