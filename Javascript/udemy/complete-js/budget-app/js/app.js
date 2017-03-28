@@ -33,7 +33,8 @@ const uiController = (() => {
 	let DOMStrings = {
 		inputType: '.add__type',
 		inputDescription: '.add__description',
-		inputValue: '.add__value'
+		inputValue: '.add__value',
+		inputBtn: '.add__btn'
 	};
 	
 	// functions defined in the UIController that are called from
@@ -46,6 +47,9 @@ const uiController = (() => {
 				type: document.querySelector(DOMStrings.inputType).value, // either 'inc'/'exp'
 				description: document.querySelector(DOMStrings.inputDescription).value
 			}
+		},
+		getDOMStrings: () => {
+			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
 	}
 	
@@ -66,6 +70,8 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
+	let DOM = uiCtrl.getDOMStrings();
+	
 	// called by either hitting the 'Enter' key or the 'add item' btn
 	const ctrlAddItem = () => {
 		// 1. fetch user input from field
@@ -80,7 +86,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	};
 	
 	// define the event listener on the add button
-	document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+	document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 	
 	// add an event listener to the global doc element to capture pressing the enter key
 	// keypress - every key except fn, Ctrl
