@@ -30,7 +30,7 @@ const uiController = (() => {
 	// 		return `Hello from the UI Controller`;
 	// 	}
 	// }
-	let DOMStrings = {
+	const DOMStrings = {
 		inputType: '.add__type',
 		inputDescription: '.add__description',
 		inputValue: '.add__value',
@@ -70,8 +70,6 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
-	let DOM = uiCtrl.getDOMStrings();
-	
 	// called by either hitting the 'Enter' key or the 'add item' btn
 	const ctrlAddItem = () => {
 		// 1. fetch user input from field
@@ -85,16 +83,21 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		console.log('CtrlAddItem');
 	};
 	
-	// define the event listener on the add button
-	document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+	const eventListenerSetup = () => {
+		const DOM = uiCtrl.getDOMStrings();
+		
+		// define the event listener on the add button
+		document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+		
+		// add an event listener to the global doc element to capture pressing the enter key
+		// keypress - every key except fn, Ctrl
+		document.addEventListener('keypress', (e)=>{
+			if(e.keyCode === 13 || e.which === 13) {
+				ctrlAddItem();
+			}
+		});
+	};
 	
-	// add an event listener to the global doc element to capture pressing the enter key
-	// keypress - every key except fn, Ctrl
-	document.addEventListener('keypress', (e)=>{
-		if(e.keyCode === 13 || e.which === 13) {
-			ctrlAddItem();
-		}
-	});
-	
+	eventListenerSetup();
 	
 })(budgetController, uiController);
