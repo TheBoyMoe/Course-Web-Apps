@@ -21,6 +21,7 @@ const budgetController = (() => {
 	
 })();
 
+
 // VIEW
 const uiController = (() => {
 	'use strict';
@@ -54,6 +55,7 @@ const uiController = (() => {
 	}
 	
 })();
+
 
 // APP CONTROLLER -- connects the other two modules
 const appController = ((budgetCtrl, uiCtrl) => {
@@ -98,6 +100,14 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		});
 	};
 	
-	eventListenerSetup();
+	return {
+		init: () => {
+			console.log('Application has started');
+			eventListenerSetup();
+		}
+	}
 	
 })(budgetController, uiController);
+
+// launch the app
+appController.init();
