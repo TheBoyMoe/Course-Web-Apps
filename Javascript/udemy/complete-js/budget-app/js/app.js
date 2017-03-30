@@ -38,6 +38,18 @@ const budgetController = (() => {
 			exp: 0,
 			inc: 0
 		}
+	};
+	
+	return {
+		addItem: (type, description, value) => {
+			// type will be either 'inc' or 'exp'
+			// get the id pf the last element in the array, increment to create the next id
+			let ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+			let newItem = (type === 'exp')? new Expense(ID, description, value): new Income(ID, description, value);
+			
+			// store the item in the data structure
+			data.allItems[type].push(newItem);
+		}
 	}
 	
 })();
@@ -95,10 +107,14 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	
 	// called by either hitting the 'Enter' key or the 'add item' btn
 	const ctrlAddItem = () => {
+		
 		// 1. fetch user input from field
 		let input = uiCtrl.getInput();
 		console.log(input);
-		// 2. add item to the budget controller
+		
+		// 2. create exp/inc item and add to the budget controller
+		budgetCtrl.addItem(input.type, input.description, input.value);
+		
 		// 3. add item to the ui
 		// 4. calculate the budget
 		// 5. display the budget
