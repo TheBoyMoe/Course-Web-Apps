@@ -17,13 +17,13 @@ const budgetController = (() => {
 	// 	}
 	// }
 	
-	const Expense = (id, description, value) => {
+	const Expense = function(id, description, value){
 		this.id = id;
 		this.description = description;
 		this.value = value;
 	};
 	
-	const Income = (id, description, value) => {
+	const Income = function(id, description, value){
 		this.id = id;
 		this.description = description;
 		this.value = value;
@@ -43,12 +43,16 @@ const budgetController = (() => {
 	return {
 		addItem: (type, description, value) => {
 			// type will be either 'inc' or 'exp'
-			// get the id pf the last element in the array, increment to create the next id
-			let ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+			// get the id of the last element in the array, increment to create the next id
+			let ID = (data.allItems[type].length > 0)? data.allItems[type][data.allItems[type].length - 1].id + 1: 0;
 			let newItem = (type === 'exp')? new Expense(ID, description, value): new Income(ID, description, value);
 			
 			// store the item in the data structure
 			data.allItems[type].push(newItem);
+		},
+		// remove in production, displays data structure content, otherwise not visible
+		testing: () => {
+			console.log(data);
 		}
 	}
 	
@@ -110,7 +114,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		
 		// 1. fetch user input from field
 		let input = uiCtrl.getInput();
-		console.log(input);
+		// console.log(input);
 		
 		// 2. create exp/inc item and add to the budget controller
 		budgetCtrl.addItem(input.type, input.description, input.value);
