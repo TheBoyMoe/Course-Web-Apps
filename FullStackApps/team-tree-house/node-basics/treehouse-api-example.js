@@ -66,7 +66,7 @@ const getUserInfo = (username)=>{
 					
 					// console.log('data', data.toString());
 					
-					str += data.toString();
+					str += data.toString(); // call toString since the reply is a buffer in chunks
 				});
 				
 				// display the json str when the end of the stream has been reached
