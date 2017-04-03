@@ -72,6 +72,14 @@ const printMessage = (username, badgeCount, points)=>{
 	return `${username} has ${badgeCount} badges and ${points} points in javascript!`;
 };
 
-const users = ['alenaholligan', 'chalkers', 'williamfero', 'davemcfarland'];
+// 5. return user info for multiple users
+// const users = ['alenaholligan', 'chalkers', 'williamfero', 'davemcfarland'];
+// for(let user of users)
+//	getUserInfo(user);
+
+// 6. use node's process global object to pass usernames via the cmd line
+// - create a cmd line app, e.g node app.js [username] [username] [etc]
+// argv property no process obj returns an array, users starting from index 2 onwards
+let users = process.argv.slice(2);
 for(let user of users)
 	getUserInfo(user);
