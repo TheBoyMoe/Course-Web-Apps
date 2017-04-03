@@ -12,6 +12,7 @@
  	[4] https://nodejs.org/api/modules.html#modules_module_require_id
  	[5] https://nodejs.org/api/stream.html#stream_event_data
  	[6] https://nodejs.org/api/stream.html#stream_event_end
+ 	[7] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
  	
 */
 
@@ -32,7 +33,7 @@ const request = https.get(`https://teamtreehouse.com/${username}.json`, (respons
 	console.log(response.statusCode);
 	let str = '';
 	// 2. read the json data - the res obj executes a 'data' event when the data is received
-	res.on('data', (data)=>{
+	response.on('data', (data)=>{
 		// data obj - separate data packets in the form of a buffer read from the stream
 		// convert to a string using toString(), and concatenate together
 		// when ever you see a 'data' event in node, there's always an 'end' event
@@ -45,10 +46,15 @@ const request = https.get(`https://teamtreehouse.com/${username}.json`, (respons
 	
 	// display the json str when the end of the stream has been reached
 	response.on('end', ()=>{
-		console.log(str);
+		// console.log(str);
+		
+		// 3. parse the json string (using native js obj) into an object so that we can
+		// retrieve the necessary properties programmatically
+		const userProfile = JSON.parse(str);
+		//console.dir(userProfile);
+		let message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
+		console.log(message);
 	})
-	
-	// 3. parse the json string
 	
 });
 
@@ -63,5 +69,3 @@ request.on('error', (err)=>{
 const printMessage = (username, badgeCount, points)=>{
 	return `${username} has ${badgeCount} badges and ${points} points in javascript!`;
 };
-
-console.log(printMessage('tom', 10, 2345));
