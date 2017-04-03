@@ -88,6 +88,31 @@ const uiController = (() => {
 				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		},
+		addListItem(item, type) {
+			let html = '';
+			if(type === 'inc') {
+				html = `<div class="item clearfix" id="income-%id%">
+                            <div class="item__description">%description%</div>
+                            <div class="right clearfix">
+                                <div class="item__value">%value%</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                                </div>
+                            </div>
+                        </div>`;
+			} else {
+				html = `<div class="item clearfix" id="expense-%id%">
+                            <div class="item__description">%description%</div>
+                            <div class="right clearfix">
+                                <div class="item__value">%value%</div>
+                                <div class="item__percentage">%percentage%</div>
+                                <div class="item__delete">
+                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                                </div>
+                            </div>
+                        </div>`;
+			}
+		},
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
