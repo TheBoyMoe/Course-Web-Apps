@@ -21,13 +21,19 @@
 
 'use strict';
 
+const https = require('https');
+const http = require('http');
+const username = 'williamfero';
+
 // 1. connect to the treehouse api (https://teamtreehouse.com/username.json)
-
-
-// 2. read the json data
-
-
-// 3. parse the json string
+const request = https.get(`https://teamtreehouse.com/${username}.json`, (res)=>{
+	console.dir(res);
+	
+	// 2. read the json data
+	
+	// 3. parse the json string
+	
+});
 
 
 // 4. display the data
