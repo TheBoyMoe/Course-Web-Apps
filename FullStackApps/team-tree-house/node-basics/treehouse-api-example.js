@@ -27,6 +27,17 @@
 
 const https = require('https');
 
+// helper functions
+const printMessage = (username, badgeCount, points)=>{
+	const message = `${username} has ${badgeCount} badges and ${points} points in javascript!`;
+	console.log(message);
+};
+
+const printErrorMessage = (location, message)=>{
+	console.error(location, message);
+};
+
+// fetch user profile info
 const getUserInfo = (username)=>{
 	
 	// use a try/catch block to catch errors resulting from malformed url's
@@ -53,15 +64,17 @@ const getUserInfo = (username)=>{
 				// console.log(str);
 				// catch any json parsing errors
 				try {
+					
 					// 3. parse the json string (using native js obj) into an object so that we can
 					// retrieve the necessary properties programmatically
 					const userProfile = JSON.parse(str);
 					//console.dir(userProfile);
-					const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
-					console.log(message);
+					
+					// 4. display the data
+					printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
 					
 				} catch (error) {
-					console.error('JSON parsing error:', error.message);
+					printErrorMessage('JSON parsing error:', error.message);
 				}
 				
 			})
@@ -71,18 +84,13 @@ const getUserInfo = (username)=>{
 		// error handler - if the server responds with an error event, and an error handler
 		// has not been set - an exception is thrown and stack trace shown
 		request.on('error', (err)=>{
-			console.error('Server error message:', err.message);
+			printErrorMessage('Server error message:', err.message);
 		});
 		
 	} catch(error){
-		console.error('Catch block: ',error.message);
+		printErrorMessage('Malformed url: ',error.message);
 	}
 	
-};
-
-// 4. display the data
-const printMessage = (username, badgeCount, points)=>{
-	return `${username} has ${badgeCount} badges and ${points} points in javascript!`;
 };
 
 // 5. return user info for multiple users
@@ -96,3 +104,5 @@ const printMessage = (username, badgeCount, points)=>{
 let users = process.argv.slice(2);
 for(let user of users)
 	getUserInfo(user);
+
+
