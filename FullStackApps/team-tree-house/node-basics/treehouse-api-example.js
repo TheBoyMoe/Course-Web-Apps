@@ -28,42 +28,49 @@
 const https = require('https');
 
 const getUserInfo = (username)=>{
-	// 1. connect to the treehouse api (https://teamtreehouse.com/username.json)
-	const request = https.get(`https://teamtreehouse.com/${username}.json`, (response)=>{
-		// console.log(response.statusCode);
-		
-		let str = '';
-		// 2. read the json data - the res obj executes a 'data' event when the data is received
-		response.on('data', (data)=>{
-			// data obj - separate data packets in the form of a buffer read from the stream
-			// convert to a string using toString(), and concatenate together
-			// when ever you see a 'data' event in node, there's always an 'end' event
-			// which indicates when reading data from the stream has completed
+	
+	// use a try/catch block to catch errors resulting from malformed url's
+	try {
+		// 1. connect to the treehouse api (https://teamtreehouse.com/username.json)
+		const request = https.get(`https://teamtreehouse.com/${username}.json`, (response)=>{
+			// console.log(response.statusCode);
 			
-			// console.log('data', data.toString());
+			let str = '';
+			// 2. read the json data - the res obj executes a 'data' event when the data is received
+			response.on('data', (data)=>{
+				// data obj - separate data packets in the form of a buffer read from the stream
+				// convert to a string using toString(), and concatenate together
+				// when ever you see a 'data' event in node, there's always an 'end' event
+				// which indicates when reading data from the stream has completed
+				
+				// console.log('data', data.toString());
+				
+				str += data.toString();
+			});
 			
-			str += data.toString();
+			// display the json str when the end of the stream has been reached
+			response.on('end', ()=>{
+				// console.log(str);
+				
+				// 3. parse the json string (using native js obj) into an object so that we can
+				// retrieve the necessary properties programmatically
+				const userProfile = JSON.parse(str);
+				//console.dir(userProfile);
+				const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
+				console.log(message);
+			})
+			
 		});
 		
-		// display the json str when the end of the stream has been reached
-		response.on('end', ()=>{
-			// console.log(str);
-			
-			// 3. parse the json string (using native js obj) into an object so that we can
-			// retrieve the necessary properties programmatically
-			const userProfile = JSON.parse(str);
-			//console.dir(userProfile);
-			const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
-			console.log(message);
-		})
+		// error handler - if the server responds with an error event, and an error handler
+		// has not been set - an exception is thrown and stack trace shown
+		request.on('error', (err)=>{
+			console.error('Server error message:', err.message);
+		});
 		
-	});
-
-	// error handler - if the server responds with an error, and an error handler
-	// has not been set - error thrown
-	request.on('error', (err)=>{
-		console.error('Server error', err.message);
-	});
+	} catch(error){
+		console.error('catch block: ',error.message);
+	}
 	
 };
 
