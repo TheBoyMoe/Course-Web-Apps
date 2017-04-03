@@ -14,6 +14,8 @@
  	[6] https://nodejs.org/api/stream.html#stream_event_end
  	[7] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
  	[8] https://nodejs.org/docs/latest/api/process.html#process_process_argv
+ 	[9] https://nodejs.org/api/modules.html#modules_file_modules
+ 	[10] https://nodejs.org/api/modules.html#modules_module_exports
  	
 */
 
