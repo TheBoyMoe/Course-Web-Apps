@@ -40,7 +40,9 @@ const $port = 3000;
 // create the web server
 http.createServer((req, res)=>{
 	res.writeHead(200, {'content-type': 'text/plain'});
+	res.write('add some text to response before end event\n');
 	res.end('Hello world!\n');
+	//res.write('add more text after end event\n'); // can't add anything after 'end' event, throws exception
 }).listen($port, '127.0.0.1');
 console.log(`Web server running on http://127.0.0.1:${$port}/`);
 
