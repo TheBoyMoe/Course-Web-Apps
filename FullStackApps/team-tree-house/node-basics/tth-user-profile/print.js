@@ -6,8 +6,8 @@ const printMessage = (username, badgeCount, points)=>{
 	console.log(message);
 };
 
-const printErrorMessage = (location, message)=>{
-	console.error(location, message);
+const printErrorMessage = (type, message)=>{
+	console.error(type, message);
 };
 
 module.exports.success = printMessage;
