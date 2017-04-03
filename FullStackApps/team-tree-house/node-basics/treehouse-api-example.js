@@ -27,7 +27,7 @@
 
 const https = require('https');
 
-const getUserProfile = (username)=>{
+const getUserInfo = (username)=>{
 	// 1. connect to the treehouse api (https://teamtreehouse.com/username.json)
 	const request = https.get(`https://teamtreehouse.com/${username}.json`, (response)=>{
 		// console.log(response.statusCode);
@@ -53,7 +53,7 @@ const getUserProfile = (username)=>{
 			// retrieve the necessary properties programmatically
 			const userProfile = JSON.parse(str);
 			//console.dir(userProfile);
-			let message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
+			const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
 			console.log(message);
 		})
 		
@@ -72,6 +72,6 @@ const printMessage = (username, badgeCount, points)=>{
 	return `${username} has ${badgeCount} badges and ${points} points in javascript!`;
 };
 
-getUserProfile('chalkers');
-getUserProfile('williamfero');
-getUserProfile('alenaholligan');
+const users = ['alenaholligan', 'chalkers', 'williamfero', 'davemcfarland'];
+for(let user of users)
+	getUserInfo(user);
