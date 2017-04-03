@@ -31,6 +31,7 @@ const username = 'williamfero';
 // 1. connect to the treehouse api (https://teamtreehouse.com/username.json)
 const request = https.get(`https://teamtreehouse.com/${username}.json`, (response)=>{
 	console.log(response.statusCode);
+	
 	let str = '';
 	// 2. read the json data - the res obj executes a 'data' event when the data is received
 	response.on('data', (data)=>{
