@@ -17,13 +17,13 @@ const budgetController = (() => {
 	// 	}
 	// }
 	
-	const Expense = function(id, description, value){
+	const Expense = function(id, description, value) {
 		this.id = id;
 		this.description = description;
 		this.value = value;
 	};
 	
-	const Income = function(id, description, value){
+	const Income = function(id, description, value) {
 		this.id = id;
 		this.description = description;
 		this.value = value;
@@ -41,7 +41,7 @@ const budgetController = (() => {
 	};
 	
 	return {
-		addItem: (type, description, value) => {
+		addItem(type, description, value) {
 			// type will be either 'inc' or 'exp'
 			// get the id of the last element in the array, increment to create the next id
 			let ID = (data.allItems[type].length > 0)? data.allItems[type][data.allItems[type].length - 1].id + 1: 0;
@@ -49,9 +49,11 @@ const budgetController = (() => {
 			
 			// store the item in the data structure
 			data.allItems[type].push(newItem);
+			
+			return newItem;
 		},
 		// remove in production, displays data structure content, otherwise not visible
-		testing: () => {
+		testing() {
 			console.log(data);
 		}
 	}
@@ -79,14 +81,14 @@ const uiController = (() => {
 	// the AppController must be exported - by default all methods
 	// and props of the module are private
 	return {
-		getInput: () => {
+		getInput() {
 			return {
 				value: document.querySelector(DOMStrings.inputValue).value,
 				type: document.querySelector(DOMStrings.inputType).value, // either 'inc'/'exp'
 				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		},
-		getDOMStrings: () => {
+		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
 	}
@@ -116,8 +118,8 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		let input = uiCtrl.getInput();
 		// console.log(input);
 		
-		// 2. create exp/inc item and add to the budget controller
-		budgetCtrl.addItem(input.type, input.description, input.value);
+		// 2. create exp/inc item, add it to the budget controller data store and return the item
+		let netItem = budgetCtrl.addItem(input.type, input.description, input.value);
 		
 		// 3. add item to the ui
 		// 4. calculate the budget
@@ -142,7 +144,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	};
 	
 	return {
-		init: () => {
+		init() {
 			console.log('Application has started');
 			eventListenerSetup();
 		}
