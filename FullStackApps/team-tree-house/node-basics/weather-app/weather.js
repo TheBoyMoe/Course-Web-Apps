@@ -1,20 +1,23 @@
 const https = require('https');
 const api = require('./api.json');
+const print = require('./print.js');
 
-// Print out temp details
 // Print out error message
 
 function getForcast(query) {
 	const request = https.get(`https://api.wunderground.com/api/${api.key}/geolookup/conditions/q/${query}.json`, (response) => {
-		let body = "";
+		let str = '';
 		// Read the data
 		response.on('data', chunk => {
-			body += chunk;
+			str += chunk;
 		});
 		response.on('end', () => {
-			console.log(body);
-			//Parse data
-			//Print the data
+			try {
+				const weather = JSON.parse(str);
+				print.success(weather);
+			} catch(e) {
+				print.error('JSON parsing error:', e.message);
+			}
 		});
 	});
 }
