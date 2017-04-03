@@ -51,13 +51,19 @@ const getUserInfo = (username)=>{
 			// display the json str when the end of the stream has been reached
 			response.on('end', ()=>{
 				// console.log(str);
+				// catch any json parsing errors
+				try {
+					// 3. parse the json string (using native js obj) into an object so that we can
+					// retrieve the necessary properties programmatically
+					const userProfile = JSON.parse(str);
+					//console.dir(userProfile);
+					const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
+					console.log(message);
+					
+				} catch (error) {
+					console.error('JSON parsing error:', error.message);
+				}
 				
-				// 3. parse the json string (using native js obj) into an object so that we can
-				// retrieve the necessary properties programmatically
-				const userProfile = JSON.parse(str);
-				//console.dir(userProfile);
-				const message = printMessage(username, userProfile.badges.length, userProfile.points.JavaScript);
-				console.log(message);
 			})
 			
 		});
@@ -69,7 +75,7 @@ const getUserInfo = (username)=>{
 		});
 		
 	} catch(error){
-		console.error('catch block: ',error.message);
+		console.error('Catch block: ',error.message);
 	}
 	
 };
