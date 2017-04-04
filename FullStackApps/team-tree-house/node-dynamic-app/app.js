@@ -38,6 +38,13 @@
 	[9] https://nodejs.org/api/http.html#http_response_writehead_statuscode_statusmessage_headers
 	
 */
+/*
+	TODO - extract css into a styles sheet and use node to serve static files (also images and client side js files)
+	TODO - build a Lorem ipsum generator
+			- include a web form so users can specify number of words, paragraphs
+			- write the response to a template
+			- example http://www.lipsum.com/
+*/
 'use strict';
 const http = require('http');
 const router = require('./router.js');

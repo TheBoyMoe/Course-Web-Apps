@@ -18,7 +18,7 @@ const homeRoute = (req, res)=>{
 		req.on('data', (data)=>{
 			// convert buffer to string, parsed to json obj
 			let query = queryString.parse(data.toString());
-			// redirect to '/[username]', passing in the username
+			// redirect to '/[username]' (redirect POST requests to GET)
 			res.writeHead(303, {'Location': `/${query.username}`});
 			res.end();
 		})
