@@ -29,7 +29,7 @@ const userRoute = (req, res)=>{
 				avatarUrl: profileJson.gravatar_url,
 				username: profileJson.profile_name,
 				badges: profileJson.badges.length,
-				jsPoints: profileJson.points.JavaScript
+				javascriptPoints: profileJson.points.JavaScript
 			};
 			
 			renderer.view('profile', info, res);
