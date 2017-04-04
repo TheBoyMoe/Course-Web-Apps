@@ -2,10 +2,12 @@
 const Profile = require('./profile.js');
 const renderer = require('./renderer.js');
 
+const pageHeaderType = {'content-type': 'text/html '};
+
 // handle home routes, ie, GET/POST '/'
 const homeRoute = (req, res)=>{
 	if(req.url === '/') {
-		res.writeHead(200, {'content-type': 'text/plain'});
+		res.writeHead(200, pageHeaderType);
 		renderer.view('header', {}, res);
 		renderer.view('search', {}, res);
 		renderer.view('footer', {}, res);
@@ -17,7 +19,7 @@ const homeRoute = (req, res)=>{
 const userRoute = (req, res)=>{
 	let username = req.url.replace('/', '');
 	if(username.length > 0){
-		res.writeHead(200, {'content-type': 'text/plain'});
+		res.writeHead(200, pageHeaderType);
 		renderer.view('header', {}, res);
 		
 		// fetch the users profile from treehouse

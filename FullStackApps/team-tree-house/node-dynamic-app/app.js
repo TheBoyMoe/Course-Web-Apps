@@ -30,7 +30,7 @@
 	[4] https://nodejs.org/api/http.html#http_response_write_chunk_encoding_callback
 	[5] https://nodejs.org/api/http.html#http_response_end_data_encoding_callback
 	[6] https://nodejs.org/api/timers.html#timers_setinterval_callback_delay_arg
-	
+	[7] https://www.iana.org/assignments/media-types/media-types.xhtml (list of content types)
 	
 */
 'use strict';
