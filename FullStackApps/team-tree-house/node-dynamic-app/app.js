@@ -39,17 +39,20 @@ const $port = 3000;
 
 // create the web server
 http.createServer((req, res)=>{
-	res.writeHead(200, {'content-type': 'text/plain'});
-	res.write('Hello world!\n');
-	setTimeout(()=>{
-		for(let i = 5; i >= 0; i--){
-			res.write(`${i}\n`);
-			if(i === 0)
-				res.end('Goodbye world!\n'); // the content is not written to the page until the 'end' event occurs
-		}
-	}, 1000);
-	
-	//res.write('add more text after end event\n'); // can't add anything after 'end' event, throws exception
+	homeRoute(req, res);
 }).listen($port, '127.0.0.1');
 console.log(`Web server running on http://127.0.0.1:${$port}/`);
 
+// handle home routes, ie, GET/POST '/'
+const homeRoute = (req, res)=>{
+	if(req.url === '/') {
+		res.writeHead(200, {'content-type': 'text/plain'});
+		res.write('Header\n');
+		res.write('Search\n');
+		res.end('Footer\n');
+	} else {
+		res.writeHead(200, {'content-type': 'text/plain'});
+		res.write('404 Not Found');
+		res.end('Footer\n');
+	}
+};
