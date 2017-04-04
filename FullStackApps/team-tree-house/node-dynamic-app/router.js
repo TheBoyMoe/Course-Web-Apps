@@ -1,17 +1,27 @@
 'use strict';
 const Profile = require('./profile.js');
 const renderer = require('./renderer.js');
+const queryString = require('querystring');
 
 const pageHeaderType = {'content-type': 'text/html '};
 
 // handle home routes, ie, GET/POST '/'
 const homeRoute = (req, res)=>{
-	if(req.url === '/') {
+	if(req.url === '/' && req.method.toLowerCase() === 'get') {
 		res.writeHead(200, pageHeaderType);
 		renderer.view('header', {}, res);
 		renderer.view('search', {}, res);
 		renderer.view('footer', {}, res);
 		res.end();
+	} else {
+		// retrieve the username from the post body (POST method used on form)
+		req.on('data', (data)=>{
+			// convert buffer to string, parsed to json obj
+			let query = queryString.parse(data.toString());
+			// redirect to '/[username]', passing in the username
+			res.writeHead(303, {'Location': `/${query.username}`});
+			res.end();
+		})
 	}
 };
 

@@ -22,6 +22,9 @@
 		$ ps -aux
 	2. kill it
 		$ kill -9 [process id]
+		
+	GET - encodes content as a query string at the end of the url, sent in plain text
+	POST - encodes content and sends it as part of the requests body
 	
 	References:
 	[1] https://medium.com/@MatHelme/the-four-ps-of-problem-solving-6e15a39a0712
@@ -31,6 +34,8 @@
 	[5] https://nodejs.org/api/http.html#http_response_end_data_encoding_callback
 	[6] https://nodejs.org/api/timers.html#timers_setinterval_callback_delay_arg
 	[7] https://www.iana.org/assignments/media-types/media-types.xhtml (list of content types)
+	[8] https://nodejs.org/api/querystring.html#querystring_querystring_parse_str_sep_eq_options
+	[9] https://nodejs.org/api/http.html#http_response_writehead_statuscode_statusmessage_headers
 	
 */
 'use strict';
