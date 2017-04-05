@@ -19,6 +19,11 @@
 	[17] https://teamtreehouse.com/community/jadepug (code fixes for using pug instead of jade)
 	[18] https://teamtreehouse.com/community/here-is-the-updated-code-for-this-projectpug-not-jade (updated pug template files with the proper spacing)
 	[19] http://expressjs.com/en/guide/using-middleware.html
+	[20] http://mongoosejs.com/
+	[21] http://mean.io/#!/
+	[22] https://github.com/brianc/node-postgres (node client for PostgreSQL)
+	[23] https://github.com/mysqljs/mysql (node client for MySQL)
+	
 	
 	Notes:
 	1. install both nodemon and node inspector globally, e.g
@@ -59,7 +64,10 @@
 	 	- add 'extends' and the relative path at the top of the template file that you want to insert and 'block content' to the file you'll be inserting
 	 	- to use partials, use the 'include' keyword and the path to the file
 	 	
-	 	
+	10. express generator allows you to scaffold an app
+		- install it globally, $ npm install express-generator -g
+		- to run it, $ express [app_name]
+		- cd into the project dir, run 'npm install' and start the app, 'npm start'
  */
 
 
@@ -106,6 +114,12 @@ app.get('/blog/:title?', (req, res)=>{
 	}
 });
 
+// add rest api end point to serve up the posts
+app.get('/posts', (req, res)=>{
+	// if the url includes the '?raw=true' query provide the raw json (shows objects with keys),
+	// otherwise provide the posts list
+	(req.query.raw)? res.json(posts): res.json(postsList);
+});
 
 app.listen($port, ()=>{
 	console.log(`Express is running on port ${$port}`);
