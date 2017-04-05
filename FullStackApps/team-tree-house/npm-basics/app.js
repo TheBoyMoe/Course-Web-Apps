@@ -75,10 +75,11 @@
 	 }
 		
  
- References:
+	References:
 	[1] http://treehouse.github.io/installation-guides/linux/node-linux.html (node & npm install guide)
 	[2] http://semver.org/ (Semantic Versioning)
 	[3] https://docs.npmjs.com/ (npm docs)
+	[4] https://docs.npmjs.com/misc/scripts (npm scripts)
 	
  */
 'use strict';
