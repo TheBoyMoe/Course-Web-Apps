@@ -13,13 +13,19 @@
 
  */
 'use strict';
-const express = require('express');
+const express = require('express'),
+	  posts = require('./mock/posts.json');
 
 const $port = 3000;
 const app = express();
 app.get('/', (req, res)=>{
-	res.send('You reached Express');
+	res.send('<h1>You reached Express</h1>');
+});
+app.get('/blog', (req, res)=>{
+	res.send(posts);
 });
 
-app.listen($port);
-console.log(`Express is running on port ${$port}`);
+
+app.listen($port, ()=>{
+	console.log(`Express is running on port ${$port}`);
+});
