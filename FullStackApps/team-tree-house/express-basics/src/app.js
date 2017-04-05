@@ -12,6 +12,8 @@
 	[10] https://github.com/remy/nodemon (monitor any changes to your source files, automatically restarting the server https://nodemon.io/)
 	[11] https://github.com/node-inspector/node-inspector (interactively debug node processes from a browser)
 	[12] https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html#debugger_v8_inspector_integration_for_node_js (using node's built in inspector)
+	[13] https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+	[14] https://github.com/rguerreiro/express-device (determine the type of device making the request tot he server)
 	
 	Notes:
 	1. install both nodemon and node inspector globally, e.g
@@ -37,9 +39,14 @@
 	6. node-inspector does NOT WORK with the current version of chrome/node
 		- instead use the inspector built into node - experimental feature
 		- $ nodemon --inspect=8080 --debug-brk [path/to app.js]
+		- each time nodemon restarts the server you get a new url generated to access the inspector in, previous one will be disconnected
 		
 	7. each route(or endpoint) is added to handle a request. The server bundles all that data into the request object
-		- you can add parameters to a route by starting the parametner with a colon, e.g :id => '/blog/:id'
+		- you can add parameters to a route by starting the parameter with a colon, e.g :id => '/blog/:id'
+		- adding a'?' (/:title?) to the parameter tels express the parameter is optional. Means that '/blog/' shows all posts, while 'blog/:title?' shows that specific post
+	
+	8. response contains the info needed to render the reply in the clients browser
+		- send() method can be used to send a string or json
  */
 'use strict';
 const express = require('express'),
@@ -48,16 +55,22 @@ const express = require('express'),
 const $port = 3000;
 const app = express();
 
-debugger;
+// debugger;
 
 app.get('/', (req, res)=>{
 	res.send('<h1>You reached Express, but is anyone home? Naaahh!</h1>');
 });
-app.get('/blog/:title', (req, res)=>{
+app.get('/blog/:title?', (req, res)=>{
+	debugger;
 	// forward requests based on the blog title
 	let title = req.params.title;
-	let post = posts[title];
-	res.send(post); // send the individual post back to client
+	if(!title) {
+		res.status(503);
+		res.send('This page is under construction!');
+	} else {
+		let post = posts[title];
+		res.send(post); // send the individual post back to client
+	}
 });
 
 
