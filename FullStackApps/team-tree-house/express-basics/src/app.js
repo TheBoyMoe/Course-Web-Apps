@@ -14,6 +14,9 @@
 	[12] https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html#debugger_v8_inspector_integration_for_node_js (using node's built in inspector)
 	[13] https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 	[14] https://github.com/rguerreiro/express-device (determine the type of device making the request tot he server)
+	[15] https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/
+	[16] https://pugjs.org/api/getting-started.html (Jade was renamed pug - newest version is 2.0)
+	[17] https://teamtreehouse.com/community/jadepug (code fixes for using pug instead of jade)
 	
 	Notes:
 	1. install both nodemon and node inspector globally, e.g
@@ -47,6 +50,7 @@
 	
 	8. response contains the info needed to render the reply in the clients browser
 		- send() method can be used to send a string or json
+		- render() method to set html
  */
 'use strict';
 const express = require('express'),
@@ -57,11 +61,18 @@ const app = express();
 
 // debugger;
 
+// configure express to use pug - path to views dir depends on the fact that
+// we're starting node/nodemon from one folder up, i.e. $ node src/app.js
+app.set('view engine', 'pug');
+app.set('views', `${__dirname}/views`);
+
 app.get('/', (req, res)=>{
-	res.send('<h1>You reached Express, but is anyone home? Naaahh!</h1>');
+	// res.send('<h1>You reached Express, but is anyone home? Naaahh!</h1>');
+	res.render('index');
 });
 app.get('/blog/:title?', (req, res)=>{
-	debugger;
+	// debugger;
+	
 	// forward requests based on the blog title
 	let title = req.params.title;
 	if(!title) {
