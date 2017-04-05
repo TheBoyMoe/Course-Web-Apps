@@ -87,6 +87,7 @@ app.set('views', `${__dirname}/views`);
 
 app.get('/', (req, res)=>{
 	// res.send('<h1>You reached Express, but is anyone home? Naaahh!</h1>');
+	res.locals.path = req.path;
 	res.render('index');
 });
 app.get('/blog/:title?', (req, res)=>{
