@@ -56,6 +56,7 @@
 	
 	9. when using pug layout files, where pug finds a 'block content' tag - insert any other pug template which extends this particular one.
 	 	- add 'extends' and the relative path at the top of the template file that you want to insert and 'block content' to the file you'll be inserting
+	 	- to use partials, use the 'include' keyword and the path to the file
  */
 'use strict';
 const express = require('express'),
