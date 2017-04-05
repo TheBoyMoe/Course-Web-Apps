@@ -37,6 +37,9 @@
 	6. node-inspector does NOT WORK with the current version of chrome/node
 		- instead use the inspector built into node - experimental feature
 		- $ nodemon --inspect=8080 --debug-brk [path/to app.js]
+		
+	7. each route(or endpoint) is added to handle a request. The server bundles all that data into the request object
+		- you can add parameters to a route by starting the parametner with a colon, e.g :id => '/blog/:id'
  */
 'use strict';
 const express = require('express'),
@@ -50,8 +53,11 @@ debugger;
 app.get('/', (req, res)=>{
 	res.send('<h1>You reached Express, but is anyone home? Naaahh!</h1>');
 });
-app.get('/blog', (req, res)=>{
-	res.send(posts);
+app.get('/blog/:title', (req, res)=>{
+	// forward requests based on the blog title
+	let title = req.params.title;
+	let post = posts[title];
+	res.send(post); // send the individual post back to client
 });
 
 
