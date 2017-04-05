@@ -79,8 +79,10 @@ app.get('/blog/:title?', (req, res)=>{
 		res.status(503);
 		res.send('This page is under construction!');
 	} else {
-		let post = posts[title];
-		res.send(post); // send the individual post back to client
+		let post = posts[title] || {};
+		// assign the post obj to a obj prop that is used to access
+		// the post obj within the pug template using the #{} notation
+		res.render('post', {post: post});
 	}
 });
 
