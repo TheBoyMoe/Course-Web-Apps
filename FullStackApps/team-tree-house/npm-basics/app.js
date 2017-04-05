@@ -31,6 +31,49 @@
 	
 	Major releases tend to not be compatible with previous versions
  
+ 	Using npm as a task Runner:
+	 
+	$ npm run [task_name] (used for task you write yourself)
+	$ npm [built in-command] (e.g npm test)
+	
+	note:
+	- add your own tasks to the 'scripts' object in package.json, using key/value pair notation.
+	- key - name of the task in double quotes
+	- value - command to be executed, in double quotes
+	- to run the task:
+		$ npm run [task_name]
+	
+	- you can use task runner to copy files from src to build folder, e.g html, css and images
+	- look in package.json for example - filecopy task
+	
+	- you can create a single task that will run multiple tasks, check build task example in package.json
+		- & run the tasks simultaneously, && run one task after the other
+		- $ rm build/* (to remove the build dir)
+		- $ npm run build
+	
+	- you can get a list of npm's built in tasks by typing:
+		- $ npm help scripts
+		
+	package.json example:
+ 
+	 {
+		 "name": "dice_simulator_2015",
+		 "version": "1.0.0",
+		 "description": "",
+		 "scripts": {
+		 "test": "mocha" ,
+		 "uglify": "uglifyjs src/models/* src/frontend.js -m -c -o build/app.js",
+		 "filecopy": "cp src/*.html build/ & cp src/*css build/",
+		 "build": "npm run filecopy && npm run uglify"
+	 },
+		 "author": "Andrew Chalkley",
+		 "license": "MIT",
+		 "devDependencies": {
+			 "mocha": "^2.2.5",
+			 "uglify-js": "^2.4.23"
+		 }
+	 }
+		
  
  References:
 	[1] http://treehouse.github.io/installation-guides/linux/node-linux.html (node & npm install guide)
