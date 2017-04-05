@@ -61,12 +61,18 @@
 	 	
 	 	
  */
+
+
 'use strict';
 const express = require('express'),
 	  posts = require('./mock/posts.json');
 
 const $port = 3000;
 const app = express();
+
+const postsList = Object.keys(posts).map((key)=>{
+	return posts[key];
+});
 
 // debugger;
 
@@ -90,7 +96,7 @@ app.get('/blog/:title?', (req, res)=>{
 	let title = req.params.title;
 	if(!title) {
 		res.status(503);
-		res.send('This page is under construction!');
+		res.render('blog', {posts: postsList});
 	} else {
 		let post = posts[title] || {};
 		// assign the post obj to a obj prop that is used to access
