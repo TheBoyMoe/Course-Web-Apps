@@ -18,7 +18,7 @@
 	[16] https://pugjs.org/api/getting-started.html (Jade was renamed pug - newest version is 2.0)
 	[17] https://teamtreehouse.com/community/jadepug (code fixes for using pug instead of jade)
 	[18] https://teamtreehouse.com/community/here-is-the-updated-code-for-this-projectpug-not-jade (updated pug template files with the proper spacing)
-	
+	[19] http://expressjs.com/en/guide/using-middleware.html
 	
 	Notes:
 	1. install both nodemon and node inspector globally, e.g
@@ -53,10 +53,13 @@
 	8. response contains the info needed to render the reply in the clients browser
 		- send() method can be used to send a string or json
 		- render() method to set html
+		- use() to serve up static files (defines middleware for the application -  middleware tells the server how to handle a request, but before it arrives at a route)
 	
 	9. when using pug layout files, where pug finds a 'block content' tag - insert any other pug template which extends this particular one.
 	 	- add 'extends' and the relative path at the top of the template file that you want to insert and 'block content' to the file you'll be inserting
 	 	- to use partials, use the 'include' keyword and the path to the file
+	 	
+	 	
  */
 'use strict';
 const express = require('express'),
@@ -67,8 +70,12 @@ const app = express();
 
 // debugger;
 
+// add static content to the app
+app.use('/static', express.static(`${__dirname}/public`));
+
 // configure express to use pug - path to views dir depends on the fact that
 // we're starting node/nodemon from one folder up, i.e. $ node src/app.js
+// paths are relative to the node process running the file
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 
