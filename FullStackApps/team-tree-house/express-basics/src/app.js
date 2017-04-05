@@ -17,6 +17,8 @@
 	[15] https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/
 	[16] https://pugjs.org/api/getting-started.html (Jade was renamed pug - newest version is 2.0)
 	[17] https://teamtreehouse.com/community/jadepug (code fixes for using pug instead of jade)
+	[18] https://teamtreehouse.com/community/here-is-the-updated-code-for-this-projectpug-not-jade (updated pug template files with the proper spacing)
+	
 	
 	Notes:
 	1. install both nodemon and node inspector globally, e.g
@@ -51,6 +53,9 @@
 	8. response contains the info needed to render the reply in the clients browser
 		- send() method can be used to send a string or json
 		- render() method to set html
+	
+	9. when using pug layout files, where pug finds a 'block content' tag - insert any other pug template which extends this particular one.
+	 	- add 'extends' and the relative path at the top of the template file that you want to insert and 'block content' to the file you'll be inserting
  */
 'use strict';
 const express = require('express'),
