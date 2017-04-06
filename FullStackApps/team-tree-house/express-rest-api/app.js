@@ -11,6 +11,7 @@
 'use strict';
 
 const express = require('express');
+const jsonParser = require('body-parser').json;
 
 const app = express();
 
@@ -20,10 +21,9 @@ const app = express();
 	 - use the query property on the req obj to access query parameters (req.params obj)
 	 - you can pass data from one middleware function to another by assigning it as a property to the req obj
 */
-app.use((req, res, next)=>{
-	console.log(`The leaves are ${req.query.color}`);
-	next();
-});
+
+// parse the requests body as json and make it accessible from the req obj's body property
+app.use(jsonParser());
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
