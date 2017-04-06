@@ -40,12 +40,23 @@ const fs = require('fs');
 
 // write the contents of the request to a file using streams
 http.createServer((req, res)=>{
-	let file = fs.createWriteStream('./data.md');
+	let file = fs.createWriteStream('./data.md'); // location of the new file
+	let fileBytes = req.headers['content-length'];
+	let uploadedBytes = 0;
 	
-	
+	// listen for the 'readable' event and read the file a chunk at a time from the req stream
+	req.on('readable', ()=>{
+		let chunk;
+		while((chunk = req.read()) !== null){
+			uploadedBytes += chunk.length;
+			let progress = (uploadedBytes/fileBytes) * 100;
+			// send the progress back to the client
+			res.write(`progress: ${parseInt(progress, 10)}%\n`);
+		}
+	});
 	req.pipe(file);
 	req.on('end', ()=>{
-		res.end('file upload complete');
+		res.end('file upload complete'); // close the stream
 	})
 }).listen(8080);
 

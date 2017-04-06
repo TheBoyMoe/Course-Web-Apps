@@ -8,6 +8,7 @@
 	[5] https://www.getpostman.com/docs/introduction
 	[6] http://expressjs.com/en/4x/api.html#router
 	[7] https://www.npmjs.com/package/morgan
+	[8] https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 	
 	
  */
@@ -26,6 +27,9 @@ const app = express();
 	 - you can pass data from one middleware function to another by assigning it as a property to the req obj
 	 - use body-parser module to parse req body into json
 	 - use Morgan logger to log http status codes as well as our routes
+	 - you need a next() call whenever a handler does not send a response to the user, otherwise the app appears to 'freeze up'
+	 - you want to use a custom error handler to ensure json errors are sent to the client when they occur
+	 - you can set multiple handlers on a single route by passing multiple callbacks into the route
 */
 
 // configures express to golor code the http status codes
