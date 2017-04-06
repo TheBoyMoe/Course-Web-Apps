@@ -37,6 +37,27 @@ app.use(jsonParser());
 // any requests that arrive with '/questions' will be directed to the routes module
 app.use('/questions', routes);
 
+// catch any 404 errors(verb and resource don't match any defined routes) and forward to an error handler
+// calling next() with a param tells express there has been an error
+// unless you provide a custom error handler, the default one will be called
+app.use((req, res, next)=>{
+	let err = new Error('Not Found');
+	err.status = 404;
+	next(err);
+});
+
+// error handler - must have 4 params, tells express that it's an error handler and not middleware
+app.use((err, req, res, next)=>{
+	// err status would be undefined if the error were internally generated bt the server
+	res.status(err.status || 500);
+	// send the error tot the client as json
+	res.json({
+		error: {
+			message: err.message
+		}
+	})
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
 	console.log(`Express is listening on port ${port}`);
