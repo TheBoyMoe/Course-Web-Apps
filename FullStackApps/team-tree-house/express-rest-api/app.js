@@ -6,13 +6,15 @@
 	[3] https://developers.google.com/google-apps/calendar/v3/reference/#Events (api example)
 	[4] https://developers.google.com/google-apps/calendar/v3/reference/events#resource-representations (example of resource representation)
 	[5] https://www.getpostman.com/docs/introduction
+	[6] http://expressjs.com/en/4x/api.html#router
+	
 	
  */
 'use strict';
 
 const express = require('express');
 const jsonParser = require('body-parser').json;
-
+const routes = require('./routes.js');
 const app = express();
 
 /*
@@ -24,6 +26,9 @@ const app = express();
 
 // parse the requests body as json and make it accessible from the req obj's body property
 app.use(jsonParser());
+
+// any requests that arrive with '/questions' will be directed to the routes module
+app.use('/questions', routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
