@@ -10,7 +10,11 @@
 	[7] https://docs.mongodb.com/manual/reference/sql-comparison/
 	[8] https://docs.mongodb.com/master/reference/method/load/
 	[9] https://docs.mongodb.com/master/reference/method/Date/ (date formats)
-	
+	[10] https://docs.mongodb.com/master/reference/operator/query/ (query collections)
+	[11] https://docs.mongodb.com/master/reference/method/js-collection/ (collection methods)
+	[12] http://stackoverflow.com/questions/10329104/why-does-direction-of-index-matter-in-mongodb
+	[13] https://docs.mongodb.com/master/reference/operator/query/ (query operators)
+	[14] https://github.com/TylerBrock/mongo-hacker
 	
 	Mongo basics:
 	1. start the mongo daemon
@@ -83,5 +87,21 @@
 	 	you can reference properties of that document using dot notation.
 	 	fields within a document can reference fields in other collections,
 	 	e.g posts.author references the author in the users collection
+	 
+	11. when querying a collection with the find(), you can pass in 2 parameters, both optional
+	 	- 1st parameter - pass in the specific property, e.g id, title, etc of the document as a key:value pair,e.g {title: 'dfsdf....'}
+	 	 	you can alo use a query operator, e.g $or, $and, $exists, etc. or you can pass in an empty document, {}
+	 	- 2nd parameter is the projection, specify the fields to return, e.g to return a document without
+	 		the title and description fields
+	 	> db.posts.find({}, {title: false, description: false}) // returns all docs without those fields
+	 	> db.posts.find({title: '....'}, {description: false}) // returns a single document (looks for an exact match - otherwise doesn't return anything) with matching title, but without the description field
+	 	
+	 	using query operators, e.g
+	 	db.posts.find({$or: [{title: '.....'}, {title: '.....'}]}, {}) // return docs with either matching title
+	 	
+	 	or return matching documents with only those fields
+	 	> db.posts.find({}, {title: true, description: true})
+	 	
+	 	
 
  */
