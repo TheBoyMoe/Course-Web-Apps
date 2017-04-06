@@ -15,6 +15,8 @@
 	[12] http://stackoverflow.com/questions/10329104/why-does-direction-of-index-matter-in-mongodb
 	[13] https://docs.mongodb.com/master/reference/operator/query/ (query operators)
 	[14] https://github.com/TylerBrock/mongo-hacker
+	[15] https://mongodb.github.io/node-mongodb-native/ (node mongo driver)
+	[16] https://docs.mongodb.com/manual/sharding/
 	
 	Mongo basics:
 	1. start the mongo daemon
@@ -101,6 +103,15 @@
 	 	
 	 	or return matching documents with only those fields
 	 	> db.posts.find({}, {title: true, description: true})
+	 	
+	 	note: you can chain the limit() to the end of your queries to limit the numbers returned
+	 	
+	 	to sort results returned, use the sort() method passing in an object with the prop to sort by, eg
+	 	> db.posts.find({}, {title: true}).sort({title: 1}) // sort ASC/DESC(-1) alphbetically(or numerically)
+	 	
+	 	you can also include pagination, eg
+	 	(limit = number of records on each page, skip = number of records on each page * page number - 1)
+	 	> db.posts.find({}, {title: true}).limit(2).skip(2)sort({title: 1})
 	
 	12. to update documents - use the update() method - takes two parameters
 		 - 1st parameter identifies the document you want to update, use a field that uniquely identifies the document
