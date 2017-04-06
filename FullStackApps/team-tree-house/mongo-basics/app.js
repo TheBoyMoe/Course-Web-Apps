@@ -3,7 +3,6 @@
 	References:
 	[1] https://github.com/hdngr/treehouse-mongo-basics (git repo)
 	[2] https://docs.mongodb.com/master/tutorial/install-mongodb-on-ubuntu (ubuntu install guide)
-	[3] http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/ (nodejs setup and quick start)
 	[4] https://docs.mongodb.com/manual/
 	[5] https://docs.mongodb.com/manual/introduction/
 	[6] https://www.mongodb.com/nosql-explained
@@ -15,8 +14,10 @@
 	[12] http://stackoverflow.com/questions/10329104/why-does-direction-of-index-matter-in-mongodb
 	[13] https://docs.mongodb.com/master/reference/operator/query/ (query operators)
 	[14] https://github.com/TylerBrock/mongo-hacker
-	[15] https://mongodb.github.io/node-mongodb-native/ (node mongo driver)
-	[16] https://docs.mongodb.com/manual/sharding/
+	[15] https://docs.mongodb.com/manual/sharding/
+	[16] https://mongodb.github.io/node-mongodb-native/ (node mongo driver)
+	[3] http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/ (nodejs setup and quick start)
+	[17] http://mongodb.github.io/node-mongodb-native/2.2/tutorials/main/ (various tutorials that explore some of the most frequently used operations using nodejs driver)
 	
 	Mongo basics:
 	1. start the mongo daemon
@@ -120,3 +121,19 @@
 	 	
 
  */
+
+
+/* http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/ */
+
+"use strict";
+const client = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = 'mongodb://localhost:27017/mongoBasics';
+
+// connect to the server - ensure that mongod is running, eg $ sudo service mongod start
+client.connect(url, (err, db)=>{
+	assert.equal(null, err);
+	console.log('Connected successfully to the server');
+	db.close();
+});
