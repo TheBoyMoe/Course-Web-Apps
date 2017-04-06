@@ -101,7 +101,11 @@
 	 	
 	 	or return matching documents with only those fields
 	 	> db.posts.find({}, {title: true, description: true})
-	 	
+	
+	12. to update documents - use the update() method - takes two parameters
+		 - 1st parameter identifies the document you want to update, use a field that uniquely identifies the document
+		 - 2nd parameter identifies the fields you wish to update, you can add properties that the object currently doesn't have
+		> db.posts.update({_id: 678wef987567rw7efgwu}, {$set: {tags: ['red','green','blue'], title: '.......'}})
 	 	
 
  */
