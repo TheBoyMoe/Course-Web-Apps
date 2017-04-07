@@ -44,6 +44,13 @@ db.once('open', ()=>{
 		return this.find({size: size}, callback);
 	};
 	
+	// instance method - exist on all documents, 'this' points to the instance of the document itself
+	AnimalSchema.methods.findSameColor = function(callback){
+		// this === document
+		return this.model('Animal').find({color: this.color}, callback);
+	};
+	
+	
 	// create the model (Mongoose object), giving it a name and using the defined schema
 	const Animal = mongoose.model('Animal', AnimalSchema);
 	
@@ -152,25 +159,49 @@ db.once('open', ()=>{
 	
 	
 	// this time pass in an array of animal data
+	// Animal.remove({}, (err)=>{
+	// 	if(err) console.error('Failed clearing the collection', err.message);
+	// 	// empty the current collection 1st (use a query to remove specific docs)
+	// 	// before executing the save
+	// 	Animal.create(animalData, (err, animals)=>{
+	// 		if(err) console.error('Saving animals failed', err.message);
+	//
+	// 		// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
+	// 		Animal.findSize('big', (err, animals)=>{ // invoke static method
+	// 		//Animal.find({}, (err, animals)=>{
+	// 			animals.forEach((animal)=>{
+	// 				console.log(`${animal.name} the ${animal.color} ${animal.type} is a ${animal.size} sized animal`);
+	// 			});
+	// 			db.close(()=>{
+	// 				console.log('connection closed');
+	// 			});
+	// 		});
+	// 	})
+	// });
+	
+	
 	Animal.remove({}, (err)=>{
 		if(err) console.error('Failed clearing the collection', err.message);
 		// empty the current collection 1st (use a query to remove specific docs)
 		// before executing the save
-		Animal.create(animalData, (err, animals)=>{
+		Animal.create(animalData, function(err, animals){
 			if(err) console.error('Saving animals failed', err.message);
 			
 			// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
-			Animal.findSize('big', (err, animals)=>{ // invoke static method
-			//Animal.find({}, (err, animals)=>{
-				animals.forEach((animal)=>{
-					console.log(`${animal.name} the ${animal.color} ${animal.type} is a ${animal.size} sized animal`);
-				});
-				db.close(()=>{
-					console.log('connection closed');
-				});
+			Animal.findOne({type: 'elephant'}, function(err, elephant){ // return first match
+				// once you've found one, find all those with matching color
+				elephant.findSameColor(function (err, animals) {
+					if(err) console.error('Finding matching animals failed', err.message);
+					animals.forEach((animal)=>{
+						console.log(`${animal.name} the ${animal.color} ${animal.type} is a ${animal.size} sized animal`);
+					});
+					db.close(()=>{
+						console.log('connection closed');
+					});
+				})
+				
 			});
 		})
-
 	});
 	
 });
