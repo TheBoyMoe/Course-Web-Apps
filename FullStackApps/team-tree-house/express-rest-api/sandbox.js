@@ -22,19 +22,27 @@ db.once('open', ()=>{
 	const Schema = mongoose.Schema;
 	const AnimalSchema = new Schema({
 		type: {type: String, default: 'goldfish'},
-		size: {type: String, default: 'small'},
+		size: String,
 		color: {type: String, default: 'orange'},
 		mass: {type: Number, default: 0.007},
 		name: {type: String, default: 'Angela'}
 	});
 	
+	// add dynamic data to the schema using a 'pre-save hook' - pre-hook middleware
+	// the handler(callback) will be executed before mongoose saves the schema to the db
+	// you CANT use fat arrows in  mongoose hooks - NOT binding the object - stick to anonymous functions
+	AnimalSchema.pre('save', function(next){
+		// 'this' points to the document being saved
+		this.size = (this.mass >=5 && this.mass < 100)? 'medium': (this.mass >= 100)? 'big': 'small';
+		next(); // tell mongoose we're done, move on to the next callback in the sequence
+	});
+	
 	// create the model (Mongoose object), giving it a name and using the defined schema
 	const Animal = mongoose.model('Animal', AnimalSchema);
 	
-	// create a document - instance
+	// create a document - instance of a model
 	const elephant = new Animal({
 		type: 'elephant',
-		size: 'big',
 		color: 'gray',
 		mass: 6000,
 		name: 'Lawrence'
@@ -42,10 +50,37 @@ db.once('open', ()=>{
 	
 	const whale = new Animal({
 		type: 'whale',
-		size: 'massive',
 		mass: 100000,
 		name: 'Amy'
 	});
+	
+	const animal = new Animal({}); // generic animal
+	
+	// mixture of js object literals and models
+	const animalData = [
+		{
+			type: 'mouse',
+			color: 'gray',
+			mass: 0.05,
+			name: 'Marvin'
+		},
+		{
+			type: 'nutria',
+			color: 'brown',
+			mass: 6.05,
+			name: 'Gretchen'
+		},
+		{
+			type: 'wolf',
+			color: 'gray',
+			mass: 45,
+			name: 'Iris'
+		},
+		elephant,
+		animal,
+		whale
+	];
+	
 	
 	// save the schema and document
 	// save is an asynchronous method, you need to call close() from a callback
@@ -81,31 +116,53 @@ db.once('open', ()=>{
 	
 	
 	// update the save procedure to include the whale as well
-	const animal = new Animal({}); // generic animal
+	// const animal = new Animal({}); // generic animal
+	// Animal.remove({}, (err)=>{
+	// 	if(err) console.error('Failed clearing the collection', err.message);
+	// 	// empty the current collection 1st (use a query to remove specific docs)
+	// 	// before executing the save
+	// 	elephant.save((err)=>{
+	// 		if(err) console.error('Saving elephant failed', err.message);
+	// 		animal.save((err)=>{
+	// 			if(err) console.error('Saving animal failed', err.message);
+	// 			whale.save((err)=>{
+	// 				if(err) console.error('Saving animal failed', err.message);
+	//
+	// 				// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
+	// 				Animal.find({size: 'big'}, (err, animals)=>{
+	// 					animals.forEach((animal)=>{
+	// 						console.log(`${animal.name} the ${animal.color} ${animal.type}`);
+	// 					});
+	// 					db.close(()=>{
+	// 						console.log('connection closed');
+	// 					});
+	// 				});
+	//
+	// 			});
+	// 		});
+	// 	});
+	// });
+	
+	
+	// this time pass in an array of animal data
 	Animal.remove({}, (err)=>{
 		if(err) console.error('Failed clearing the collection', err.message);
 		// empty the current collection 1st (use a query to remove specific docs)
 		// before executing the save
-		elephant.save((err)=>{
-			if(err) console.error('Saving elephant failed', err.message);
-			animal.save((err)=>{
-				if(err) console.error('Saving animal failed', err.message);
-				whale.save((err)=>{
-					if(err) console.error('Saving animal failed', err.message);
-					
-					// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
-					Animal.find({size: 'big'}, (err, animals)=>{
-						animals.forEach((animal)=>{
-							console.log(`${animal.name} the ${animal.color} ${animal.type}`);
-						});
-						db.close(()=>{
-							console.log('connection closed');
-						});
-					});
-					
+		Animal.create(animalData, (err, animals)=>{
+			if(err) console.error('Saving animals failed', err.message);
+			
+			// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
+			Animal.find({}, (err, animals)=>{
+				animals.forEach((animal)=>{
+					console.log(`${animal.name} the ${animal.color} ${animal.type} is a ${animal.size} sized animal`);
+				});
+				db.close(()=>{
+					console.log('connection closed');
 				});
 			});
-		});
+		})
+
 	});
 	
 });
