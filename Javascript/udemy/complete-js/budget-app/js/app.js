@@ -123,6 +123,16 @@ const uiController = (() => {
 			document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
 			
 		},
+		clearFields() {
+			let fields = document.querySelectorAll(`${DOMStrings.inputDescription}, ${DOMStrings.inputValue}`);
+			// convert the nodeList into an array using Array's slice() method
+			let fieldsArray = Array.prototype.slice.call(fields);
+			fieldsArray.forEach((elm)=>{
+				elm.value = '';
+			});
+			// set the focus on the first field
+			fieldsArray[0].focus();
+		},
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
@@ -156,8 +166,9 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		// 2. create exp/inc item, add it to the budget controller data store and return the item
 		let newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 		
-		// 3. add item to the ui
+		// 3. add item to the ui and clear the description & value input fields
 		uiCtrl.addListItem(newItem, input.type);
+		uiCtrl.clearFields();
 		
 		// 4. calculate the budget
 		// 5. display the budget
