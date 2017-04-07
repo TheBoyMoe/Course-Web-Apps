@@ -28,6 +28,9 @@
 	[6] http://expressjs.com/en/4x/api.html#router
 	[7] https://www.npmjs.com/package/morgan
 	[8] https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+	[9] http://mongoosejs.com/docs/index.html
+	[10] http://mongoosejs.com/docs/middleware.html
+	[11] http://mongoosejs.com/docs/guide.html
 	
 	
  */

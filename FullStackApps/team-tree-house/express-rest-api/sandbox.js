@@ -40,6 +40,13 @@ db.once('open', ()=>{
 		name: 'Lawrence'
 	});
 	
+	const whale = new Animal({
+		type: 'whale',
+		size: 'massive',
+		mass: 100000,
+		name: 'Amy'
+	});
+	
 	// save the schema and document
 	// save is an asynchronous method, you need to call close() from a callback
 	// otherwise it will be called before save has finished
@@ -55,20 +62,50 @@ db.once('open', ()=>{
 	// now saving elephant and animal, call animal.save() from within the elephant.save()
 	// callback and close the connection from within the animal.save() callback to ensure proper sequence of events
 	// empty the Animals collection first since the elephant already exists
+	
+	// const animal = new Animal({}); // generic animal
+	// Animal.remove({}, (err)=>{
+	// 	// empty the current collection 1st (use a query to remove specific docs)
+	// 	// before executing the save
+	// if(err) console.error('Failed clearing the collection', err.message);
+	// 	elephant.save((err)=>{
+	// 		if(err) console.error('Saving elephant failed', err.message);
+	// 		animal.save((err)=>{
+	// 			if(err) console.error('Saving animal failed', err.message);
+	// 			db.close(()=>{
+	// 				console.log('connection closed');
+	// 			});
+	// 		});
+	// 	});
+	// });
+	
+	
+	// update the save procedure to include the whale as well
 	const animal = new Animal({}); // generic animal
-	Animal.remove({}, ()=>{
+	Animal.remove({}, (err)=>{
+		if(err) console.error('Failed clearing the collection', err.message);
 		// empty the current collection 1st (use a query to remove specific docs)
 		// before executing the save
 		elephant.save((err)=>{
 			if(err) console.error('Saving elephant failed', err.message);
 			animal.save((err)=>{
 				if(err) console.error('Saving animal failed', err.message);
-				db.close(()=>{
-					console.log('connection closed');
+				whale.save((err)=>{
+					if(err) console.error('Saving animal failed', err.message);
+					
+					// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
+					Animal.find({size: 'big'}, (err, animals)=>{
+						animals.forEach((animal)=>{
+							console.log(`${animal.name} the ${animal.color} ${animal.type}`);
+						});
+						db.close(()=>{
+							console.log('connection closed');
+						});
+					});
+					
 				});
 			});
 		});
 	});
-	
 	
 });
