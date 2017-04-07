@@ -1,4 +1,23 @@
 /*
+	middleware - process client requests before handing them off to the routes
+	 - : tells express what follows is a parameter
+	 - use the query property on the req obj to access query parameters (req.params obj)
+	 - you can pass data from one middleware function to another by assigning it as a property to the req obj
+	 - use body-parser module to parse req body into json
+	 - use Morgan logger to log http status codes as well as our routes
+	 - you need a next() call whenever a handler does not send a response to the user, otherwise the app appears to 'freeze up'
+	 - you want to use a custom error handler to ensure json errors are sent to the client when they occur
+	 - you can set multiple handlers on a single route by passing multiple callbacks into the route
+	
+	Mongoose
+	 - Mongo uses collections of documents to store data, but it's not fussy about
+		- what it accepts
+		- or it's structure - it does not know how to relate two pieces of data together
+	 - Mongoose is a Mongo module which creates that structure and the relationship between the different pieces of data
+	 - A Mongoose schema is a json representation of what a document will contain
+	 	- the properties and their respective data types (String , Number, Date, Boolean, Arrays and Javascript Objects)
+	
+	
 	References:
 	
 	[1] https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
@@ -19,18 +38,6 @@ const jsonParser = require('body-parser').json;
 const routes = require('./routes.js');
 const logger = require('morgan');
 const app = express();
-
-/*
-	middleware - process client requests before handing them off to the routes
-	 - : tells express what follows is a parameter
-	 - use the query property on the req obj to access query parameters (req.params obj)
-	 - you can pass data from one middleware function to another by assigning it as a property to the req obj
-	 - use body-parser module to parse req body into json
-	 - use Morgan logger to log http status codes as well as our routes
-	 - you need a next() call whenever a handler does not send a response to the user, otherwise the app appears to 'freeze up'
-	 - you want to use a custom error handler to ensure json errors are sent to the client when they occur
-	 - you can set multiple handlers on a single route by passing multiple callbacks into the route
-*/
 
 // configures express to golor code the http status codes
 app.use(logger('dev'));
