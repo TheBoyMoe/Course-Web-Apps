@@ -9,6 +9,13 @@
 	 - you want to use a custom error handler to ensure json errors are sent to the client when they occur
 	 - you can set multiple handlers on a single route by passing multiple callbacks into the route
 	
+	Mongo
+	 - designed to save/fetch single docs quickly, working with multiple docs hots performance
+	 - 'wrap' multiple docs in a single doc for storage
+	 - we'll have a single collection, Questions. Collection of question objects, each question will contain an array of answers
+	 - the question and all it's associated answers (question -parent, answers - children) can be retrieved with one database call
+	 - you may want to break up parent-children collection, .e.g. where a parent has hundreds of children since each document has a 16MB limit
+	
 	Mongoose
 	 - Mongo uses collections of documents to store data, but it's not fussy about
 		- what it accepts
@@ -31,16 +38,33 @@
 	[9] http://mongoosejs.com/docs/index.html
 	[10] http://mongoosejs.com/docs/middleware.html
 	[11] http://mongoosejs.com/docs/guide.html
+	[12] https://docs.mongodb.com/manual/core/data-modeling-introduction/
+	[13] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1
+	[14] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-2
+	[15] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-3
 	
 	
  */
-'use strict';
 
+'use strict';
 const express = require('express');
 const jsonParser = require('body-parser').json;
 const routes = require('./routes.js');
 const logger = require('morgan');
+
 const app = express();
+
+// mongoose setup
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/qa');
+const db = mongoose.connection;
+db.on('error', (err)=>{
+	console.error(`db connection error ${err.message}`);
+});
+
+db.once('open', ()=>{
+	console.log('db connection successful');
+});
 
 // configures express to golor code the http status codes
 app.use(logger('dev'));

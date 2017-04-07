@@ -45,6 +45,7 @@ db.once('open', ()=>{
 	};
 	
 	// instance method - exist on all documents, 'this' points to the instance of the document itself
+	// use an instance method to find other documents matching the instance returned
 	AnimalSchema.methods.findSameColor = function(callback){
 		// this === document
 		return this.model('Animal').find({color: this.color}, callback);
@@ -52,6 +53,7 @@ db.once('open', ()=>{
 	
 	
 	// create the model (Mongoose object), giving it a name and using the defined schema
+	// mongoose will automatically create a collections 'animals' - plural of the model name in lower case
 	const Animal = mongoose.model('Animal', AnimalSchema);
 	
 	// create a document - instance of a model
@@ -109,8 +111,8 @@ db.once('open', ()=>{
 	// });
 	
 	// now saving elephant and animal, call animal.save() from within the elephant.save()
-	// callback and close the connection from within the animal.save() callback to ensure proper sequence of events
-	// empty the Animals collection first since the elephant already exists
+	// callback and close the connection from within the animal.save() callback to ensure
+	// the methods are called because of save asynchronous nature
 	
 	// const animal = new Animal({}); // generic animal
 	// Animal.remove({}, (err)=>{
