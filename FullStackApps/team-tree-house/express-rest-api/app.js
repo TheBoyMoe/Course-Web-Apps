@@ -23,7 +23,7 @@
 	 - Mongoose is a Mongo module which creates that structure and the relationship between the different pieces of data
 	 - A Mongoose schema is a json representation of what a document will contain
 	 	- the properties and their respective data types (String , Number, Date, Boolean, Arrays and Javascript Objects)
-	
+	 - Mongoose keeps track of any database requests made before the connection to the db has been established, and perform them once the connection is open
 	
 	References:
 	
