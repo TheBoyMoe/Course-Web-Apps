@@ -37,6 +37,13 @@ db.once('open', ()=>{
 		next(); // tell mongoose we're done, move on to the next callback in the sequence
 	});
 	
+	// static method - function we can call on the model directly to access the data in custom ways
+	// don't use fat arrows where we need 'this' - fat arrows bind 'this' of their enclosing context not the obj they're called on
+	AnimalSchema.statics.findSize = function(size, callback){
+		// this === Animal
+		return this.find({size: size}, callback);
+	};
+	
 	// create the model (Mongoose object), giving it a name and using the defined schema
 	const Animal = mongoose.model('Animal', AnimalSchema);
 	
@@ -153,7 +160,8 @@ db.once('open', ()=>{
 			if(err) console.error('Saving animals failed', err.message);
 			
 			// query the collection - use find to filter the collection based on animals whose 'size' ig 'big'
-			Animal.find({}, (err, animals)=>{
+			Animal.findSize('big', (err, animals)=>{ // invoke static method
+			//Animal.find({}, (err, animals)=>{
 				animals.forEach((animal)=>{
 					console.log(`${animal.name} the ${animal.color} ${animal.type} is a ${animal.size} sized animal`);
 				});
