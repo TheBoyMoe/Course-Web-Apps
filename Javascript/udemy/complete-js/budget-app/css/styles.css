@@ -252,10 +252,10 @@ h2 {
     background: none;
     border: none;
     cursor: pointer;
-    display: inline-block;
+    /*display: inline-block;*/
     vertical-align: middle;
     line-height: 1;
-    /*display: none;*/
+    display: none;
 }
 
 .item__delete--btn:focus { outline: none; }

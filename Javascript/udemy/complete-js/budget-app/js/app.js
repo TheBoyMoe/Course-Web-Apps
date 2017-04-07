@@ -74,7 +74,9 @@ const uiController = (() => {
 		inputType: '.add__type',
 		inputDescription: '.add__description',
 		inputValue: '.add__value',
-		inputBtn: '.add__btn'
+		inputBtn: '.add__btn',
+		incomeContainer: '.income__list',
+		expensesContainer: '.expenses__list'
 	};
 	
 	// functions defined in the UIController that are called from
@@ -88,9 +90,11 @@ const uiController = (() => {
 				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		},
-		addListItem(item, type) {
-			let html = '';
+		addListItem(obj, type) {
+			let html, newHtml, element;
+			// create HTML string with placeholder text
 			if(type === 'inc') {
+				element = DOMStrings.incomeContainer;
 				html = `<div class="item clearfix" id="income-%id%">
                             <div class="item__description">%description%</div>
                             <div class="right clearfix">
@@ -101,17 +105,23 @@ const uiController = (() => {
                             </div>
                         </div>`;
 			} else {
+				element = DOMStrings.expensesContainer;
 				html = `<div class="item clearfix" id="expense-%id%">
                             <div class="item__description">%description%</div>
                             <div class="right clearfix">
                                 <div class="item__value">%value%</div>
-                                <div class="item__percentage">%percentage%</div>
+                                <div class="item__percentage">21%</div>
                                 <div class="item__delete">
                                     <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                                 </div>
                             </div>
                         </div>`;
 			}
+			
+			// replace placeholder text with actual data  and insert the string into the DOM
+			newHtml = html.replace('%id%', obj.id).replace('%description%', obj.description).replace('%value%', obj.value);
+			document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+			
 		},
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
@@ -144,9 +154,11 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		// console.log(input);
 		
 		// 2. create exp/inc item, add it to the budget controller data store and return the item
-		let netItem = budgetCtrl.addItem(input.type, input.description, input.value);
+		let newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 		
 		// 3. add item to the ui
+		uiCtrl.addListItem(newItem, input.type);
+		
 		// 4. calculate the budget
 		// 5. display the budget
 		
