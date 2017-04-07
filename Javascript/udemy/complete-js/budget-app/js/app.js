@@ -87,7 +87,7 @@ const uiController = (() => {
 			return {
 				value: document.querySelector(DOMStrings.inputValue).value,
 				type: document.querySelector(DOMStrings.inputType).value, // either 'inc'/'exp'
-				description: document.querySelector(DOMStrings.inputDescription).value
+				description: parseFloat(document.querySelector(DOMStrings.inputDescription).value)
 			}
 		},
 		addListItem(obj, type) {
@@ -156,6 +156,16 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	// 	}
 	// }
 	
+	const updateBudget = ()=>{
+		// 1. calculate the budget
+		
+		
+		// 2. return the budget
+		
+		
+		// 3. update the ui
+	};
+	
 	// called by either hitting the 'Enter' key or the 'add item' btn
 	const ctrlAddItem = () => {
 		
@@ -171,6 +181,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		uiCtrl.clearFields();
 		
 		// 4. calculate the budget
+		
 		// 5. display the budget
 		
 		console.log('CtrlAddItem');
