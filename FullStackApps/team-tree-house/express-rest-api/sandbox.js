@@ -16,17 +16,16 @@ db.on('error', (err)=>{
 db.once('open', ()=>{
 	console.log('db connection successful');
 	
-	// TODO all dbase communication goes here
-	
+	//  all dbase communication goes here
 	
 	// create the schema
 	const Schema = mongoose.Schema;
 	const AnimalSchema = new Schema({
-		type: String,
-		size: String,
-		color: String,
-		mass: Number,
-		name: String
+		type: {type: String, default: 'goldfish'},
+		size: {type: String, default: 'small'},
+		color: {type: String, default: 'orange'},
+		mass: {type: Number, default: 0.007},
+		name: {type: String, default: 'Angela'}
 	});
 	
 	// create the model (Mongoose object), giving it a name and using the defined schema
@@ -44,12 +43,32 @@ db.once('open', ()=>{
 	// save the schema and document
 	// save is an asynchronous method, you need to call close() from a callback
 	// otherwise it will be called before save has finished
-	elephant.save((err)=>{
-		if(err) console.error('Save failed', err.message);
-		else console.log('Save successful!');
-		db.close(()=>{
-			console.log('connection closed');
+	
+	// elephant.save((err)=>{
+	// 	if(err) console.error('Save failed', err.message);
+	// 	else console.log('Save successful!');
+	// 	db.close(()=>{
+	// 		console.log('connection closed');
+	// 	});
+	// });
+	
+	// now saving elephant and animal, call animal.save() from within the elephant.save()
+	// callback and close the connection from within the animal.save() callback to ensure proper sequence of events
+	// empty the Animals collection first since the elephant already exists
+	const animal = new Animal({}); // generic animal
+	Animal.remove({}, ()=>{
+		// empty the current collection 1st (use a query to remove specific docs)
+		// before executing the save
+		elephant.save((err)=>{
+			if(err) console.error('Saving elephant failed', err.message);
+			animal.save((err)=>{
+				if(err) console.error('Saving animal failed', err.message);
+				db.close(()=>{
+					console.log('connection closed');
+				});
+			});
 		});
 	});
+	
 	
 });
