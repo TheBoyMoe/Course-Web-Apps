@@ -28,7 +28,7 @@ db.once('open', ()=>{
 		name: {type: String, default: 'Angela'}
 	});
 	
-	// add dynamic data to the schema using a 'pre-save hook' - pre-hook middleware
+	// add dynamic data to the schema using a 'pre-hook' on the save event save - pre-hook middleware
 	// the handler(callback) will be executed before mongoose saves the schema to the db
 	// you CANT use fat arrows in  mongoose hooks - NOT binding the object - stick to anonymous functions
 	AnimalSchema.pre('save', function(next){
