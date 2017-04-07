@@ -45,6 +45,8 @@
 	[14] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-2
 	[15] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-3
 	[16] http://mongoosejs.com/docs/queries.html
+	[17] https://www.html5rocks.com/en/tutorials/cors/
+	[18] https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 	
  */
 
@@ -76,6 +78,19 @@ app.use(jsonParser());
 
 // any requests that arrive with '/questions' will be directed to the routes module
 app.use('/questions', routes);
+
+// enable access to the rest api from a browser client
+// - in Production consider
+// 		- CORS, User Authentication and Authorization
+app.use((req, res, next)=>{
+	res.header('Access-Control-Allow-Origin', '*'); // allow access from any domain
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); // specify which headers are allowed in the request
+	if(req.method === 'OPTIONS'){ // no routes handle 'OPTIONS', handle it here
+		res.header('Access-Control-Allow-Methods', 'PUT, POST, DELETE');
+		return res.status(200).json({});
+	}
+	next();
+});
 
 // catch any 404 errors(verb and resource don't match any defined routes) and forward to an error handler
 // calling next() with a param tells express there has been an error
