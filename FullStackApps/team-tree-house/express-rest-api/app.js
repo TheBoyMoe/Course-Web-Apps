@@ -24,6 +24,8 @@
 	 - A Mongoose schema is a json representation of what a document will contain
 	 	- the properties and their respective data types (String , Number, Date, Boolean, Arrays and Javascript Objects)
 	 - Mongoose keeps track of any database requests made before the connection to the db has been established, and perform them once the connection is open
+	 - instance methods called on documents
+	 - static methods called on models
 	
 	References:
 	
@@ -42,7 +44,7 @@
 	[13] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1
 	[14] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-2
 	[15] https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-3
-	
+	[16] http://mongoosejs.com/docs/queries.html
 	
  */
 

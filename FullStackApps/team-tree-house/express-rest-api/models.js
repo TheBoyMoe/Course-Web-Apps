@@ -11,7 +11,7 @@ const AnswerSchema = new Schema({
 	votes: {type: Number, default: 0}
 });
 
-// instance method for updating answers
+// instance method for updating answers, called on documents - static methods are called on models
 AnswerSchema.method('update', function (updates, callback) {
 	Object.assign(this, updates, {updatedAt: new Date()});
 	this.parent().save(callback);
