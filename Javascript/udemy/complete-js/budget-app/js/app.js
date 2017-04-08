@@ -84,13 +84,17 @@ const budgetController = (() => {
 const uiController = (() => {
 	// TODO add a clear button - clear fields manually - call clearFields()
 	
-	const DOMStrings = {
+	const DOMStrings = { // these are all class references
 		inputType: '.add__type',
 		inputDescription: '.add__description',
 		inputValue: '.add__value',
 		inputBtn: '.add__btn',
 		incomeContainer: '.income__list',
-		expensesContainer: '.expenses__list'
+		expensesContainer: '.expenses__list',
+		budgetLabel: '.budget__value',
+		incomeLabel: '.budget__income--value',
+		expensesLabel: '.budget__expenses--value',
+		percentageLabel: '.budget__expenses--percentage'
 	};
 	
 	// functions defined in the UIController that are called from
@@ -104,6 +108,7 @@ const uiController = (() => {
 				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		},
+		
 		addListItem(obj, type) {
 			let html, newHtml, element;
 			// create HTML string with placeholder text
@@ -137,6 +142,7 @@ const uiController = (() => {
 			document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
 			
 		},
+		
 		clearFields() {
 			let fields = document.querySelectorAll(`${DOMStrings.inputDescription}, ${DOMStrings.inputValue}`);
 			// convert the nodeList into an array using Array's slice() method
@@ -147,6 +153,17 @@ const uiController = (() => {
 			// set the focus on the first field
 			fieldsArray[0].focus();
 		},
+		
+		displayBudget(budget) {
+			// update the inc, exp, total and percentage fields
+			document.querySelector(DOMStrings.budgetLabel).textContent = budget.budget;
+			document.querySelector(DOMStrings.incomeLabel).textContent = budget.totalInc;
+			document.querySelector(DOMStrings.expensesLabel).textContent = budget.totalExp;
+			document.querySelector(DOMStrings.percentageLabel).textContent =
+				(budget.percentage > 0)? budget.percentage: '---';
+			console.log(budget.percentage);
+		},
+		
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
@@ -166,7 +183,8 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		let budget = budgetCtrl.getBudget();
 		
 		// 3. update the ui
-		console.log(budget);
+		//console.log(budget);
+		uiCtrl.displayBudget(budget);
 	};
 	
 	// called by either hitting the 'Enter' key or the 'add item' btn
@@ -211,6 +229,12 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	return {
 		init() {
 			console.log('Application has started');
+			uiCtrl.displayBudget({
+				budget: 0,
+				totalInc: 0,
+				totalExp: 0,
+				percentage: -1
+			});
 			eventListenerSetup();
 		}
 	}
