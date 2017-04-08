@@ -15,6 +15,13 @@ const budgetController = (() => {
 		this.value = value;
 	};
 	
+	const calculateTotal = (type)=>{
+		 let sum = 0;
+		 data.totals[type] = data.allItems[type].reduce((current, next)=>{
+		 	return current + next.value;
+		 }, 0);
+	};
+	
 	let data = {
 		allItems: {
 			exp: [],
@@ -23,7 +30,10 @@ const budgetController = (() => {
 		totals: {
 			exp: 0,
 			inc: 0
-		}
+		},
+		budget: 0,
+		percentage: -1
+		
 	};
 	
 	return {
@@ -38,9 +48,32 @@ const budgetController = (() => {
 			
 			return newItem;
 		},
+		calculateBudget() {
+			// calculate total exp and inc
+			calculateTotal('exp');
+			calculateTotal('inc');
+			
+			// calculate the budget
+			data.budget = data.totals.inc - data.totals.exp;
+			
+			// calculate and store the percentage
+			if(data.totals.inc > 0)
+				data.percentage = Math.round((data.totals.exp/data.totals.inc) * 100);
+			else
+				data.percentage = -1;
+		},
+		getBudget() {
+			return {
+				totalInc: data.totals.inc,
+				totalExp: data.totals.exp,
+				budget: data.budget,
+				percentage: data.percentage
+			}
+		},
+		
 		// remove in production, displays data structure content, otherwise not visible
 		testing() {
-			console.log(data);
+			return this.getBudget();
 		}
 	}
 	
@@ -127,12 +160,13 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	
 	const updateBudget = ()=>{
 		// 1. calculate the budget
-		
+		budgetCtrl.calculateBudget();
 		
 		// 2. return the budget
-		
+		let budget = budgetCtrl.getBudget();
 		
 		// 3. update the ui
+		console.log(budget);
 	};
 	
 	// called by either hitting the 'Enter' key or the 'add item' btn
