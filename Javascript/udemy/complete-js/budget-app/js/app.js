@@ -246,7 +246,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 			uiCtrl.deleteListItem(itemId);
 			
 			// 3. update the budget & UI
-			
+			updateBudget();
 		}
 		
 	};
