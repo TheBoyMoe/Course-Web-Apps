@@ -7,6 +7,18 @@ const budgetController = (() => {
 		this.id = id;
 		this.description = description;
 		this.value = value;
+		this.percentage = -1;
+	};
+	
+	Expense.prototype.calcPercentage = function (totalIncome) {
+		if(totalIncome > 0)
+			this.percentage = Math.round((this.value/totalIncome)*100);
+		else
+			this.percentage = -1;
+	};
+	
+	Expense.prototype.getPercentage = function () {
+		return this.percentage;
 	};
 	
 	const Income = function(id, description, value) {
@@ -83,6 +95,18 @@ const budgetController = (() => {
 			}
 		},
 		
+		calculatePercentages() {
+			 data.allItems.exp.forEach((item)=>{
+			 	item.calcPercentage(data.totals.inc);
+			 })
+		},
+		
+		getPercentages() {
+			return data.allItems.exp.map((item)=>{
+				return item.getPercentage();
+			})
+		},
+		
 		// remove in production, displays data structure content, otherwise not visible
 		testing() {
 			return data;
@@ -114,6 +138,7 @@ const uiController = (() => {
 	// the AppController must be exported - by default all methods
 	// and props of the module are private
 	return {
+		// PUBLIC METHODS
 		getInput() {
 			return {
 				value: parseFloat(document.querySelector(DOMStrings.inputValue).value),
@@ -186,6 +211,7 @@ const uiController = (() => {
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
+		
 	}
 	
 })();
@@ -193,7 +219,7 @@ const uiController = (() => {
 
 // APP CONTROLLER -- connects the other two modules
 const appController = ((budgetCtrl, uiCtrl) => {
-	
+	// PRIVATE METHODS
 	const updateBudget = ()=>{
 		// 1. calculate the budget
 		budgetCtrl.calculateBudget();
@@ -204,6 +230,17 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		// 3. update the ui
 		//console.log(budget);
 		uiCtrl.displayBudget(budget);
+	};
+	
+	const updatePercentages = ()=>{
+		// 1. Calculate percentages
+		budgetCtrl.calculatePercentages();
+		
+		// 2. Read percentages
+		let percentages = budgetCtrl.getPercentages();
+		
+		// 3. Update the UI
+		console.log(percentages);
 	};
 	
 	// called by either hitting the 'Enter' key or the 'add item' btn
@@ -223,6 +260,10 @@ const appController = ((budgetCtrl, uiCtrl) => {
 			
 			// 4. calculate & update budget
 			updateBudget();
+			
+			// 5. calculate and update percentages
+			updatePercentages();
+			
 		} else {
 			// TODO add message for user to enter correct input
 			uiCtrl.clearFields();
@@ -247,6 +288,9 @@ const appController = ((budgetCtrl, uiCtrl) => {
 			
 			// 3. update the budget & UI
 			updateBudget();
+			
+			// 4. calculate and update percentages
+			updatePercentages();
 		}
 		
 	};
@@ -270,6 +314,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 	};
 	
 	return {
+		// PUBLIC METHODS
 		init() {
 			console.log('Application has started');
 			uiCtrl.displayBudget({
