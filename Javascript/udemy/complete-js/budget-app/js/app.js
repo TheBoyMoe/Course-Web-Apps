@@ -1,21 +1,7 @@
-/**
- * Created by theboymo on 15/03/17.
- */
+'use strict';
 
 // MODEL
 const budgetController = (() => {
-	'use strict';
-	// let x = 23;
-	//
-	// let add = function (a) {
-	// 	return x + a;
-	// };
-	//
-	// return {
-	// 	api: function (b) {
-	// 		return add(b);
-	// 	}
-	// }
 	
 	const Expense = function(id, description, value) {
 		this.id = id;
@@ -63,13 +49,8 @@ const budgetController = (() => {
 
 // VIEW
 const uiController = (() => {
-	'use strict';
-	// return {
-	// 	prop: 6,
-	// 	api: () => {
-	// 		return `Hello from the UI Controller`;
-	// 	}
-	// }
+	// TODO add a clear button - clear fields manually - call clearFields()
+	
 	const DOMStrings = {
 		inputType: '.add__type',
 		inputDescription: '.add__description',
@@ -85,9 +66,9 @@ const uiController = (() => {
 	return {
 		getInput() {
 			return {
-				value: document.querySelector(DOMStrings.inputValue).value,
+				value: parseFloat(document.querySelector(DOMStrings.inputValue).value),
 				type: document.querySelector(DOMStrings.inputType).value, // either 'inc'/'exp'
-				description: parseFloat(document.querySelector(DOMStrings.inputDescription).value)
+				description: document.querySelector(DOMStrings.inputDescription).value
 			}
 		},
 		addListItem(obj, type) {
@@ -143,18 +124,6 @@ const uiController = (() => {
 
 // APP CONTROLLER -- connects the other two modules
 const appController = ((budgetCtrl, uiCtrl) => {
-	'use strict';
-	// let a = budgetCtrl.api(5);
-	// let b = uiCtrl.api();
-	// let c = uiCtrl.prop;
-	// return {
-	// 	budgetApi: () => {
-	// 		return a;
-	// 	},
-	// 	uiApi: () => {
-	// 		return `${b} ${c}`;
-	// 	}
-	// }
 	
 	const updateBudget = ()=>{
 		// 1. calculate the budget
@@ -173,18 +142,21 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		let input = uiCtrl.getInput();
 		// console.log(input);
 		
-		// 2. create exp/inc item, add it to the budget controller data store and return the item
-		let newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+		if(input.description !== '' && !isNaN(input.value) && input.value > 0) {
+			// 2. create exp/inc item, add it to the budget controller data store and return the item
+			let newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+			
+			// 3. add item to the ui and clear the description & value input fields
+			uiCtrl.addListItem(newItem, input.type);
+			uiCtrl.clearFields();
+			
+			// 4. calculate & update budget
+			updateBudget();
+		} else {
+			// TODO add message for user to enter correct input
+			uiCtrl.clearFields();
+		}
 		
-		// 3. add item to the ui and clear the description & value input fields
-		uiCtrl.addListItem(newItem, input.type);
-		uiCtrl.clearFields();
-		
-		// 4. calculate the budget
-		
-		// 5. display the budget
-		
-		console.log('CtrlAddItem');
 	};
 	
 	const eventListenerSetup = () => {
