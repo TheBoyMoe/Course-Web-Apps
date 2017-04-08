@@ -48,6 +48,17 @@ const budgetController = (() => {
 			
 			return newItem;
 		},
+		
+		deleteItem(type, id) {
+			// fetch all the ids of the items stored, delete the item with a matching id
+			let ids = data.allItems[type].map((item)=>{
+				return item.id;
+			});
+			let i = ids.indexOf(id);
+			if(i !== -1)
+				data.allItems[type].splice(i, 1);
+		},
+		
 		calculateBudget() {
 			// calculate total exp and inc
 			calculateTotal('exp');
@@ -62,6 +73,7 @@ const budgetController = (() => {
 			else
 				data.percentage = -1;
 		},
+		
 		getBudget() {
 			return {
 				totalInc: data.totals.inc,
@@ -73,7 +85,7 @@ const budgetController = (() => {
 		
 		// remove in production, displays data structure content, otherwise not visible
 		testing() {
-			return this.getBudget();
+			return data;
 		}
 	}
 	
@@ -94,7 +106,8 @@ const uiController = (() => {
 		budgetLabel: '.budget__value',
 		incomeLabel: '.budget__income--value',
 		expensesLabel: '.budget__expenses--value',
-		percentageLabel: '.budget__expenses--percentage'
+		percentageLabel: '.budget__expenses--percentage',
+		container: '.container'
 	};
 	
 	// functions defined in the UIController that are called from
@@ -114,7 +127,7 @@ const uiController = (() => {
 			// create HTML string with placeholder text
 			if(type === 'inc') {
 				element = DOMStrings.incomeContainer;
-				html = `<div class="item clearfix" id="income-%id%">
+				html = `<div class="item clearfix" id="inc-%id%">
                             <div class="item__description">%description%</div>
                             <div class="right clearfix">
                                 <div class="item__value">%value%</div>
@@ -125,7 +138,7 @@ const uiController = (() => {
                         </div>`;
 			} else {
 				element = DOMStrings.expensesContainer;
-				html = `<div class="item clearfix" id="expense-%id%">
+				html = `<div class="item clearfix" id="exp-%id%">
                             <div class="item__description">%description%</div>
                             <div class="right clearfix">
                                 <div class="item__value">%value%</div>
@@ -161,7 +174,8 @@ const uiController = (() => {
 			document.querySelector(DOMStrings.expensesLabel).textContent = budget.totalExp;
 			document.querySelector(DOMStrings.percentageLabel).textContent =
 				(budget.percentage > 0)? budget.percentage: '---';
-			console.log(budget.percentage);
+			
+			// console.log(budget.percentage);
 		},
 		
 		getDOMStrings() {
@@ -211,6 +225,26 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		
 	};
 	
+	const ctrlDeleteItem = (e) => {
+		// traverse up the DOM until <div .item> reached and grab it's id (only id's on the page)
+		let itemId = e.target.parentNode.parentNode.parentNode.parentNode.id;
+		if(itemId) {
+			
+			let idArr = itemId.split('-');
+			let type = idArr[0];
+			let id = parseInt(idArr[1]);
+			
+			// 1. remove item from the data structure
+			budgetCtrl.deleteItem(type, id);
+			
+			// 2. remove item from the DOM
+			
+			// 3. update the budget & UI
+			
+		}
+		
+	};
+	
 	const eventListenerSetup = () => {
 		const DOM = uiCtrl.getDOMStrings();
 		
@@ -224,6 +258,9 @@ const appController = ((budgetCtrl, uiCtrl) => {
 				ctrlAddItem();
 			}
 		});
+		
+		// capture click events on the income & expense items on the <div .container>
+		document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
 	};
 	
 	return {
