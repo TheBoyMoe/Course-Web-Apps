@@ -131,7 +131,8 @@ const uiController = (() => {
 		incomeLabel: '.budget__income--value',
 		expensesLabel: '.budget__expenses--value',
 		percentageLabel: '.budget__expenses--percentage',
-		container: '.container'
+		container: '.container',
+		expensesPercentageLabel: '.item__percentage'
 	};
 	
 	// functions defined in the UIController that are called from
@@ -208,6 +209,22 @@ const uiController = (() => {
 			// console.log(budget.percentage);
 		},
 		
+		displayPercentages(percentages) {
+			// create a nodeList of all the percentage labels
+			const fields = document.querySelectorAll(DOMStrings.expensesPercentageLabel);
+			const nodeListForEach = (list, callback)=>{
+				for(let i = 0; i < list.length; i++){
+					callback(list[i], i);
+				}
+			};
+			nodeListForEach(fields, (item, i)=>{
+				if(percentages[i] > 0)
+					item.textContent = percentages[i] + '%';
+				else
+					item.textContent = '---';
+			})
+		},
+		
 		getDOMStrings() {
 			return DOMStrings; // export the DOM strings object so it's available to other modules
 		}
@@ -240,7 +257,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		let percentages = budgetCtrl.getPercentages();
 		
 		// 3. Update the UI
-		console.log(percentages);
+		uiCtrl.displayPercentages(percentages);
 	};
 	
 	// called by either hitting the 'Enter' key or the 'add item' btn
