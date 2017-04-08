@@ -156,6 +156,11 @@ const uiController = (() => {
 			
 		},
 		
+		deleteListItem(itemId) {
+			// you can't delete the element itself from the DOM, only child elements - grab parent 1st
+			document.getElementById(itemId).parentNode.removeChild(document.getElementById(itemId));
+		},
+		
 		clearFields() {
 			let fields = document.querySelectorAll(`${DOMStrings.inputDescription}, ${DOMStrings.inputValue}`);
 			// convert the nodeList into an array using Array's slice() method
@@ -238,6 +243,7 @@ const appController = ((budgetCtrl, uiCtrl) => {
 			budgetCtrl.deleteItem(type, id);
 			
 			// 2. remove item from the DOM
+			uiCtrl.deleteListItem(itemId);
 			
 			// 3. update the budget & UI
 			
