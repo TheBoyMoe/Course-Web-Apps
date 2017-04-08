@@ -132,7 +132,34 @@ const uiController = (() => {
 		expensesLabel: '.budget__expenses--value',
 		percentageLabel: '.budget__expenses--percentage',
 		container: '.container',
-		expensesPercentageLabel: '.item__percentage'
+		expensesPercentageLabel: '.item__percentage',
+		datelabel: '.budget__title--month'
+	};
+	
+	const formatNumber = (number, type)=>{
+		/*
+		 + or - before number
+		 2 decimal points
+		 comma separating the thousands
+		 */
+		number = Math.abs(number); // return the num minus sign
+		number = number.toFixed(2); // rounds, and returns a string (adds .00 to ints)
+		let numSplit = number.split('.');
+		let int = numSplit[0];
+		if(int.length > 3)
+			int = `${int.substr(0, int.length - 3)},${int.substr(int.length - 3, 3)}`;
+		
+		let dec = numSplit[1];
+		
+		type = (type === 'exp')? '-':'+';
+		
+		return `${type} ${int}.${dec}`;
+	};
+	
+	const nodeListForEach = (list, callback)=>{
+		for(let i = 0; i < list.length; i++){
+			callback(list[i], i);
+		}
 	};
 	
 	// functions defined in the UIController that are called from
@@ -177,7 +204,7 @@ const uiController = (() => {
 			}
 			
 			// replace placeholder text with actual data  and insert the string into the DOM
-			newHtml = html.replace('%id%', obj.id).replace('%description%', obj.description).replace('%value%', obj.value);
+			newHtml = html.replace('%id%', obj.id).replace('%description%', obj.description).replace('%value%', formatNumber(obj.value, type));
 			document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
 			
 		},
@@ -198,31 +225,45 @@ const uiController = (() => {
 			fieldsArray[0].focus();
 		},
 		
-		displayBudget(budget) {
+		displayBudget(budgetObj) {
+			let type = (budgetObj.budget > 0)? 'inc':'exp';
 			// update the inc, exp, total and percentage fields
-			document.querySelector(DOMStrings.budgetLabel).textContent = budget.budget;
-			document.querySelector(DOMStrings.incomeLabel).textContent = budget.totalInc;
-			document.querySelector(DOMStrings.expensesLabel).textContent = budget.totalExp;
+			document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(budgetObj.budget, type);
+			document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(budgetObj.totalInc, 'inc');
+			document.querySelector(DOMStrings.expensesLabel).textContent = formatNumber(budgetObj.totalExp, 'exp');
 			document.querySelector(DOMStrings.percentageLabel).textContent =
-				(budget.percentage > 0)? budget.percentage: '---';
-			
-			// console.log(budget.percentage);
+				(budgetObj.percentage > 0)? budgetObj.percentage: '---';
 		},
 		
 		displayPercentages(percentages) {
 			// create a nodeList of all the percentage labels
 			const fields = document.querySelectorAll(DOMStrings.expensesPercentageLabel);
-			const nodeListForEach = (list, callback)=>{
-				for(let i = 0; i < list.length; i++){
-					callback(list[i], i);
-				}
-			};
+			
 			nodeListForEach(fields, (item, i)=>{
 				if(percentages[i] > 0)
 					item.textContent = percentages[i] + '%';
 				else
 					item.textContent = '---';
 			})
+		},
+		
+		displayMonth() {
+			const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			const now = new Date();
+			const year = now.getFullYear();
+			const month = months[now.getMonth()];
+			document.querySelector(DOMStrings.datelabel).textContent = `${month} ${year}`;
+		},
+		
+		changedType() {
+			// toggle the focus color of the input fields and btn based on +/-
+			const fields = document.querySelectorAll(
+				`${DOMStrings.inputType}, ${DOMStrings.inputDescription}, ${DOMStrings.inputValue}`
+			);
+			nodeListForEach(fields, (item)=>{
+				item.classList.toggle('red-focus');
+			});
+			document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
 		},
 		
 		getDOMStrings() {
@@ -328,12 +369,15 @@ const appController = ((budgetCtrl, uiCtrl) => {
 		
 		// capture click events on the income & expense items on the <div .container>
 		document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+		
+		document.querySelector(DOM.inputType).addEventListener('change', uiCtrl.changedType);
 	};
 	
 	return {
 		// PUBLIC METHODS
 		init() {
 			console.log('Application has started');
+			uiCtrl.displayMonth();
 			uiCtrl.displayBudget({
 				budget: 0,
 				totalInc: 0,
