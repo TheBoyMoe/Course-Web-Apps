@@ -11,6 +11,7 @@ function Greetr() {
 	this.greeting = `Hello everyone, it's`;
 }
 
+// inherit props and methods of nodes event emitter
 util.inherits(Greetr, EventEmitter);
 
 // add your own custom methods to Greetr's prototype - passing in a parameter
