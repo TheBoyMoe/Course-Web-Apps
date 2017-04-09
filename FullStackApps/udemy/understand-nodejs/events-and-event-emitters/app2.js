@@ -7,6 +7,7 @@ const util = require('util');
 
 // create the function constructor that will do the inheriting
 function Greetr() {
+	EventEmitter.call(this);
 	this.greeting = 'Hello everyone!';
 }
 

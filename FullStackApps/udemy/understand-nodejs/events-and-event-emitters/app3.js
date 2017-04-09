@@ -8,10 +8,16 @@ const util = require('util');
 
 // create the function constructor that will do the inheriting
 function Greetr() {
+	// super constructor - passing the new obj up to the EventEmitter's constructor
+	// ensures that your new obj has access to all of EventEmitters props and methods
+	EventEmitter.call(this);
 	this.greeting = `Hello everyone, it's`;
 }
 
-// inherit props and methods of nodes event emitter
+// inherit props and methods of nodes event emitter prototypes
+// it only connects the prototypes - you need the call to the
+// super constructor in the the function constructor to ensure the new
+// obj also inherits all of the objects props
 util.inherits(Greetr, EventEmitter);
 
 // add your own custom methods to Greetr's prototype - passing in a parameter
