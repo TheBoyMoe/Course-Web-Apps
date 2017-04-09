@@ -20,3 +20,9 @@ greet.greetOne();
 greet.greetTwo();
 console.log(uiCtrl.sum(2,3));
 console.log(uiCtrl.times(2,3));
+
+// more on modules
+const lang = require('./language');
+
+lang.esp();
+lang.eng();
