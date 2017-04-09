@@ -14,5 +14,13 @@ function greet3() {
 	console.log('Greet 3.......');
 }
 
+/* EITHER
 module.exports.greetOne = greet1;
 module.exports.greetTwo = greet2;
+*/
+
+// OR
+module.exports = {
+	one: greet1,
+	two: greet2
+};
