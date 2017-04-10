@@ -2,17 +2,40 @@
 
 const http = require('http');
 const request = require('request');
+const socket = require('socket.io');
 const url = ('url');
 const express = require('express');
 
 const app = express();
+const server = http.createServer(app);
+const io = socket(server);
 
+// client connected
+io.on('connection', (client)=>{
+	console.log('Client connected....');
+});
+
+app.get('/', (req, res)=>{
+	res.sendFile(`${__dirname}/index.html`);
+});
+
+server.listen(8080``);
+
+
+
+
+// return the index.html file to any requests to '/'
 // app.get('/', (req, res)=>{
 // 	res.sendFile(`${__dirname}/index.html`);
 // }).listen(8080, ()=>{
 // 	console.log('Express is listening on port 8080.....');
 // });
 
+
+
+
+// TODO requires auth to work
+/*
 app.get('/tweets/:username', (req, res)=>{
 	// grab the user name out of the request parameters
 	let username = req.params.username;
@@ -27,4 +50,5 @@ app.get('/tweets/:username', (req, res)=>{
 	request(twitterUrl).pipe(res);
 	
 });
+*/
 
