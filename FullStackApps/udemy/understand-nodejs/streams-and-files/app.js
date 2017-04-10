@@ -11,5 +11,12 @@ const data = fs.readFileSync(`${__dirname}/dummy.txt`, 'utf-8');
 // - null if no error occurred
 const file = fs.readFile(`${__dirname}/dummy.txt`, (err, data)=>{
 	if(err) return console.log(`Error occurred reading file contents: ${err.message}`);
-	console.log(data.toString()); // by default a buffer is returned
+	// by default a buffer is returned - unless you pass in the encoding
+	// console.log(data.toString());
+});
+
+
+const string = fs.readFile(`${__dirname}/dummy.txt`, 'utf-8', (err, data)=>{
+	if(err) return console.log(`Error occurred reading file contents: ${err.message}`);
+	console.log(data);
 });
