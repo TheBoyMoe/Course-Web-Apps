@@ -19,7 +19,9 @@ switch (command){
 		message = (note)? `Note successfully created\n${notes.logNote(note)}`: 'Duplicate note';
 		break;
 	case 'list':
-		notes.getAll();
+		let list = notes.getAll();
+		console.log(`Printing ${list.length} note(s)`);
+		list.forEach((note)=> console.log(notes.logNote(note)));
 		break;
 	case 'read':
 		note = notes.getNote(argv.title);
