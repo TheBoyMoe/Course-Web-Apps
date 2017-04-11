@@ -19,12 +19,27 @@ const argv = yargs
 
 
 geocode.getLocation(argv.address, (errorMessage, results)=>{
-	(errorMessage)? console.log(errorMessage): console.log(JSON.stringify(results, undefined, 2));
+	if(errorMessage) {
+		console.log(errorMessage)
+	} else {
+		// console.log(JSON.stringify(results, undefined, 2));
+		// fetch the weather with the retrieved lat lng results
+		weather.getWeather(results.lat, results.lng, (errorMessage, weather)=>{
+			if(errorMessage) {
+				console.log(errorMessage)
+			} else {
+				results.temperature = weather.temperature;
+				results.humidity = weather.humidity;
+				results.pressure = weather.pressure;
+				console.log(JSON.stringify(results, undefined, 2));
+			}
+		});
+	}
+	
+	
 });
 
-weather.getWeather(37.8267, -122.4233, (errorMessage, results)=>{
-	(errorMessage)? console.log(errorMessage): console.log(JSON.stringify(results, undefined, 2));
-});
+
 
 
 

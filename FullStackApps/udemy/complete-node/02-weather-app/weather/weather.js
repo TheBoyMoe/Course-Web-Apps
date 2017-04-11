@@ -14,7 +14,7 @@ const getWeather = (lat, lng, callback)=>{
 		if(!error && response.statusCode === 200 ) {
 			let data = body.currently;
 			callback(undefined, {
-				Temperature: `${data.temperature}`,
+				temperature: `${data.temperature}`,
 				humidity: `${data.humidity}`,
 				pressure: `${data.pressure}`
 			})
