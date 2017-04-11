@@ -1,21 +1,26 @@
 "use strict";
 const fs = require('fs');
 
+const fetchNotes = ()=>{
+	// check if any notes have been previously saved
+	try {
+		let notesStr = fs.readFileSync(`${__dirname}/notes-data.json`, 'utf-8');
+		return JSON.parse(notesStr); // parse the string into js objs returning the array
+	} catch (e){
+		return [];
+	}
+};
+
+const saveNotes = ()=>{
+
+};
 
 const addNote = (title, body)=>{
-	let notes = [];
+	let notes = fetchNotes();
 	let note = {
 		title: title,
 		body: body
 	};
-	
-	// check if any notes have been previously saved
-	try {
-		let notesStr = fs.readFileSync(`${__dirname}/notes-data.json`, 'utf-8');
-		notes = JSON.parse(notesStr); // parse the string into js objs
-	} catch (e){
-		console.error('Error parsing saved notes', e.message);
-	}
 	
 	// check if the note already exists, before adding it
 	let duplicateNotes = notes.filter((note)=>{
