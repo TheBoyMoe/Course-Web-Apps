@@ -9,6 +9,7 @@
   "author": "theBoyMo",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "yargs": "^7.0.2"
   }
 }
