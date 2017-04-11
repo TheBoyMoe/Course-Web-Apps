@@ -16,14 +16,14 @@ let message = '', note;
 switch (command){
 	case 'add':
 		note = notes.add(argv.title, argv.body);
-		message = (note)? `Note successfully created\n-------------------------\ntitle: ${note.title}\nbody: ${note.body}\n`: 'Duplicate note';
+		message = (note)? `Note successfully created\n${notes.logNote(note)}`: 'Duplicate note';
 		break;
 	case 'list':
 		notes.getAll();
 		break;
 	case 'read':
 		note = notes.getNote(argv.title);
-		message = (note)?`Note-------------\ntitle: ${note.title}\nbody: ${note.body}\n`: 'Note not found';
+		message = (note)? notes.logNote(note): 'Note not found';
 		break;
 	case 'remove':
 		message = (notes.delete(argv.title))? `Note, title: '${argv.title}' was successfully removed`: 'Note not found';

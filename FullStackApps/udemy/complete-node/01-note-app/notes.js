@@ -65,9 +65,15 @@ const deleteNote = (title)=>{
 	return notes.length > newNotes.length;
 };
 
+const logNote = (note)=>{
+	return `------------------\nTitle: ${note.title}\nBody: ${note.body}`;
+};
+
 module.exports = {
+	// es6 allows using one term when both are the same
 	add: addNote,
-	getAll: getAll,
-	getNote: getNote,
-	delete: deleteNote
+	getAll,
+	getNote,
+	delete: deleteNote,
+	logNote
 };
