@@ -9,6 +9,7 @@
   "author": "theBoyMo",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "yargs": "^7.0.2"
   }
 }
