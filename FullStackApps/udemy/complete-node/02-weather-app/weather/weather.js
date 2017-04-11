@@ -5,7 +5,7 @@ const request = require('request');
 
 const apikey = '840178050c6f75f3641a44e2f2f547e2';
 
-const getWeather = (lat, lng)=>{
+const getWeather = (lat, lng, callback)=>{
 	
 	request({
 		url: `https://api.darksky.net/forecast/${apikey}/${lat},${lng}`,
@@ -13,9 +13,13 @@ const getWeather = (lat, lng)=>{
 	}, (error, response, body)=>{
 		if(!error && response.statusCode === 200 ) {
 			let data = body.currently;
-			console.log(`Temperature: ${data.temperature}, humidity: ${data.humidity}, pressure: ${data.pressure}`);
+			callback(undefined, {
+				Temperature: `${data.temperature}`,
+				humidity: `${data.humidity}`,
+				pressure: `${data.pressure}`
+			})
 		} else
-			console.error('Unable to fetch weather');
+			callback('Unable to fetch weather');
 	});
 	
 };

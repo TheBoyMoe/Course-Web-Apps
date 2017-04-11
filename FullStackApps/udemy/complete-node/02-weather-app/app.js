@@ -18,11 +18,13 @@ const argv = yargs
 	.argv;
 
 
-geocode.fetchData(argv.address, (errorMessage, results)=>{
+geocode.getLocation(argv.address, (errorMessage, results)=>{
 	(errorMessage)? console.log(errorMessage): console.log(JSON.stringify(results, undefined, 2));
 });
 
-weather.getWeather(37.8267, -122.4233);
+weather.getWeather(37.8267, -122.4233, (errorMessage, results)=>{
+	(errorMessage)? console.log(errorMessage): console.log(JSON.stringify(results, undefined, 2));
+});
 
 
 

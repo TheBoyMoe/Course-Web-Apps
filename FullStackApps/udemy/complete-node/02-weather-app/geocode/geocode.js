@@ -7,7 +7,7 @@ const encodeAddress = (address)=>{
 	return encodeURIComponent(address);
 };
 
-const fetchData = (address, callback)=>{
+const getLocation = (address, callback)=>{
 	let encodedAddress = encodeAddress(address);
 	request({
 		url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}`,
@@ -34,5 +34,5 @@ const fetchData = (address, callback)=>{
 };
 
 module.exports = {
-	fetchData
+	getLocation
 };
