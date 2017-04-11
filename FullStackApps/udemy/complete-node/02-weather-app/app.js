@@ -2,7 +2,7 @@
 // const request = require('request');
 const yargs = require('yargs');
 const geocode = require('./geocode/geocode');
-
+const weather = require('./weather/weather');
 // config cmd line entry using yargs
 const argv = yargs
 	.options({
@@ -22,8 +22,11 @@ geocode.fetchData(argv.address, (errorMessage, results)=>{
 	(errorMessage)? console.log(errorMessage): console.log(JSON.stringify(results, undefined, 2));
 });
 
+weather.getWeather(37.8267, -122.4233);
 
 
+
+// FETCH GEOCODE DATA FROM GOOGLE API
 // // encodeURIComponent(str) / decodeURIComponent(encodedStr)
 // // fetch the address from the cli and encode it
 // let encodedAddress = encodeURIComponent(argv.address);
