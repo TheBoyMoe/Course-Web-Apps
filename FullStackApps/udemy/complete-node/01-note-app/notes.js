@@ -42,7 +42,11 @@ const getAll = ()=>{
 };
 
 const getNote = (title)=>{
-	console.log('Get note: ', title);
+	let notes = fetchNotes();
+	// return note
+	return notes.filter((note)=>{
+		return note.title === title;
+	})[0];
 };
 
 const deleteNote = (title)=>{
