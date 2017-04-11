@@ -32,9 +32,9 @@ const addNote = (title, body)=>{
 	if(duplicateNotes.length < 1) {
 		notes.push(note);
 		saveNotes(notes); // save notes to file system
-	} else {
-		console.log('Duplicate found');
+		return note;
 	}
+	
 };
 
 const getAll = ()=>{
