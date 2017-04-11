@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 const fetchNotes = ()=>{
-	// check if any notes have been previously saved
+	// fetch the notes from the file system
 	try {
 		let notesStr = fs.readFileSync(`${__dirname}/notes-data.json`, 'utf-8');
 		return JSON.parse(notesStr); // parse the string into js objs returning the array
@@ -11,8 +11,9 @@ const fetchNotes = ()=>{
 	}
 };
 
-const saveNotes = ()=>{
-
+const saveNotes = (notes)=>{
+	// save the notes array to the file system
+	fs.writeFileSync(`${__dirname}/notes-data.json`, JSON.stringify(notes));
 };
 
 const addNote = (title, body)=>{
@@ -30,7 +31,7 @@ const addNote = (title, body)=>{
 	// if duplicates length > 0 , note already exists
 	if(duplicateNotes.length < 1) {
 		notes.push(note);
-		fs.writeFileSync(`${__dirname}/notes-data.json`, JSON.stringify(notes));
+		saveNotes(notes); // save notes to file system
 	} else {
 		console.log('Duplicate found');
 	}
