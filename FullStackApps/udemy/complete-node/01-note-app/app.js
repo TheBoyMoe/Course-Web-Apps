@@ -30,4 +30,4 @@ switch (command){
 		console.log(message);
 }
 
-console.log('Yargs: ', argv);
+// console.log('Yargs: ', argv);

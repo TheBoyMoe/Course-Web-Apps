@@ -17,8 +17,18 @@ const addNote = (title, body)=>{
 		console.error('Error parsing saved notes', e.message);
 	}
 	
-	notes.push(note);
-	fs.writeFileSync(`${__dirname}/notes-data.json`, JSON.stringify(notes));
+	// check if the note already exists, before adding it
+	let duplicateNotes = notes.filter((note)=>{
+		return note.title === title;
+	});
+	
+	// if duplicates length > 0 , note already exists
+	if(duplicateNotes.length < 1) {
+		notes.push(note);
+		fs.writeFileSync(`${__dirname}/notes-data.json`, JSON.stringify(notes));
+	} else {
+		console.log('Duplicate found');
+	}
 };
 
 const getAll = ()=>{
