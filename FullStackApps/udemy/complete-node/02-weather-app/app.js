@@ -28,8 +28,12 @@ request({
 }, (error, response, body)=>{
 	// print all objects
 	// console.log(JSON.stringify(body, undefined, 2)); // number is indentation
-	let item = body.results[0];
-	let itemLocation = item.geometry.location;
-	console.log(`Address: ${item['formatted_address']}, lat: ${itemLocation.lat}, lng: ${itemLocation.lng}`);
-	
+	if(error) console.log('Unable to connect to the Google Servers');
+	else if(body.status === 'ZERO_RESULTS') console.log('Unable to find the submitted address');
+	else if(body.status === 'OK') {
+		let item = body.results[0];
+		let itemLocation = item.geometry.location;
+		console.log(`Address: ${item['formatted_address']}, lat: ${itemLocation.lat}, lng: ${itemLocation.lng}`);
+	} else
+		console.log('Unknown error occurred, try again');
 });
