@@ -2,7 +2,8 @@
 	References:
 	[1] http://handlebarsjs.com/
 	[2] https://www.npmjs.com/package/hbs (handlebars package for express)
-	
+	[3] https://help.github.com/articles/connecting-to-github-with-ssh/
+	[4] https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction (heroku setup & user guide)
 	
 	Note:
 	- to config nodemon to watch for changes in borh js and hbs files
@@ -14,6 +15,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 // config partials dir in hbs
 hbs.registerPartials(`${__dirname}/views/partials`);
@@ -87,6 +89,6 @@ app.get('/about', (req, res)=>{
 });
 
 
-app.listen(3000, ()=>{
-	console.log("Express is listening on port 3000");
+app.listen(port, ()=>{
+	console.log(`Express is listening on port ${port}`);
 });
