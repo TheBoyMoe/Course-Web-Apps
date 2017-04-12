@@ -34,6 +34,4 @@ geocode.getLocation(argv.address, (errorMessage, results)=>{
 			}
 		});
 	}
-	
-	
 });
