@@ -4,7 +4,7 @@
 	[2] https://www.npmjs.com/package/hbs (handlebars package for express)
 	[3] https://help.github.com/articles/connecting-to-github-with-ssh/
 	[4] https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction (heroku setup & user guide)
-	
+	[5] https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app
 	Note:
 	- to config nodemon to watch for changes in borh js and hbs files
 		$ nodemon server.js -e js,hbs
