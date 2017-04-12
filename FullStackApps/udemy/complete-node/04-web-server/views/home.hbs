@@ -5,8 +5,9 @@
 	<title>About Page</title>
 </head>
 <body>
-	<h1>{{title}}</h1>
-	<p>{{message}}</p>
-	<footer>Copyright {{currentYear}}</footer>
+	{{> header}}
+	<!-- calling helper function passing in message as the argument -->
+	<p>{{screamIt message}}</p>
+	{{> footer}}
 </body>
 </html>
