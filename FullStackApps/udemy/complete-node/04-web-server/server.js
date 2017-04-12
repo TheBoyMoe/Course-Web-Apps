@@ -3,6 +3,12 @@ const express = require('express');
 
 const app = express();
 
+// set up express middleware using .use() method
+// set up folder for static content
+app.use(express.static(`${__dirname}/public`));
+
+
+
 // register handler for 'get' request
 app.get('/', (req, res)=>{
 	// res.send('<h1>Express is listening.......</h1>');
@@ -26,4 +32,6 @@ app.get('/bad', (req, res)=>{
 	})
 });
 
-app.listen(3000);
+app.listen(3000, ()=>{
+	console.log("Express is listening on port 3000");
+});

@@ -24,9 +24,9 @@ server.listen(8080``);
 
 
 
-// return the index.html file to any requests to '/'
+// return the help.html file to any requests to '/'
 // app.get('/', (req, res)=>{
-// 	res.sendFile(`${__dirname}/index.html`);
+// 	res.sendFile(`${__dirname}/help.html`);
 // }).listen(8080, ()=>{
 // 	console.log('Express is listening on port 8080.....');
 // });
