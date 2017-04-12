@@ -11,6 +11,7 @@
 'use strict';
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 
 const app = express();
 
@@ -21,8 +22,34 @@ hbs.registerPartials(`${__dirname}/views/partials`);
 app.set('view engine', 'hbs');
 
 // set up express middleware using .use() method
+
+app.use((req, res, next)=>{
+	const now = new Date().toString();
+	
+	let log = `${now}: ${req.method} ${req.url}`;
+	console.log(log);
+	fs.appendFile('server.log', log + '\n', (err)=>{
+		if(err)
+			console.log('Unable to append to server log');
+	});
+	next(); // tells express you're done, and the app continues
+});
+
+// setting up a maintenance page
+// app.use((req, res, next)=>{
+// 	// site displays maintenance page - DO NOT check req for url, e.g req.url === ...
+// 	res.render('maintenance.hbs', {
+// 		title: 'We\'ll be right back',
+// 		message: 'The site is down for maintenance'
+// 	})
+// 	// since next() is not called, app freezes on this page
+// 	// none of the other routes are accessible - ensure any access of static folders
+// 	// are defined after this method - methods are executed in order
+// });
+
 // set up folder for static content - html/css/js/imgs
 app.use(express.static(`${__dirname}/public`));
+
 
 // register handlebar helpers - functions
 hbs.registerHelper('getCurrentYear', ()=>{
@@ -59,11 +86,6 @@ app.get('/about', (req, res)=>{
 	});
 });
 
-app.get('/404', (req, res)=>{
-	res.send({
-		errorMessage: 'Unable to fulfill request'
-	})
-});
 
 app.listen(3000, ()=>{
 	console.log("Express is listening on port 3000");
