@@ -78,3 +78,19 @@ it('Should set firsname and lastname', ()=>{
 	expect(person).toBeA('object');
 });
 
+// check that the result passed into the callback is what is expected
+// 'done' keyword tells mocha this is an async test, and will wait for the callback to be executed
+it('Should async add two numbers', (done)=>{
+	utils.asyncAdd(4,3, (sum)=>{
+		expect(sum).toBeA('number').toBe(7);
+		done(); // tells mocha to carryout the test
+	});
+});
+
+
+it('Should async square of two numbers', (done)=>{
+	utils.asyncSquare(2, (square)=>{
+		expect(square).toBeA('number').toBe(4);
+		done();
+	});
+});
