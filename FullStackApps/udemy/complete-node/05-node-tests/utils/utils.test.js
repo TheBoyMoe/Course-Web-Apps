@@ -1,6 +1,8 @@
 /*
 	References:
 	[1] http://mochajs.org/
+	[2] https://github.com/mjackson/expect (assertion framework)
+	[3] http://chaijs.com/ (assertion framework)
 	
 	
 	Note:
@@ -14,16 +16,21 @@
 	
  */
 "use strict";
+const expect = require('expect');
 const utils = require('./utils');
 
 it('should add two numbers', ()=>{
 	let result = utils.add(33, 11);
-	if(result !== 44)
-		throw new Error(`Expected 44, got ${result}`);
+	expect(result).toBeA('number').toBe(44);
+	
+	// if(result !== 44)
+	// 	throw new Error(`Expected 44, got ${result}`);
 });
 
 it('Should square a number', ()=>{
-	let res = utils.square(2);
-	if(res !== 4)
-		throw new Error(`Expected 4, got ${res}`);
+	let result = utils.square(2);
+	expect(result).toBeA('number').toBe(4);
+	
+	// if(res !== 4)
+	// 	throw new Error(`Expected 4, got ${res}`);
 });
