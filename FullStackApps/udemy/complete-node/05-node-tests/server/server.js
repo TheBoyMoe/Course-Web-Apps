@@ -18,6 +18,26 @@ app.get('/', (req, res)=>{
 	});
 });
 
+// GET '/users' => [user, user, ....] , i.e return an array of user objs
+// each user to have name and age prop
+app.get('/users', (req, res)=>{
+	res.status(200)
+		.send([
+			{
+				name: 'Tom Jones',
+				age: 34
+			},
+			{
+				name: 'Peter Jones',
+				age: 43
+			},
+			{
+				name: 'Grace Jones',
+				age: 54
+			}])
+});
+
+
 app.listen(3000, ()=>{
 	console.log('Express is listening.....');
 });
