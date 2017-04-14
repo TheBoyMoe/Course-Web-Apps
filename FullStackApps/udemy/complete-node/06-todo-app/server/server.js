@@ -39,3 +39,8 @@ app.post('/todos', (req, res)=>{
 app.listen(3000, ()=>{
 	console.log('Express is listening on port 3000...');
 });
+
+// export the app so it's accessible from the tests file
+module.exports = {
+	app
+};

@@ -1,0 +1,37 @@
+"use strict";
+const expect = require('expect');
+const request = require('supertest');
+
+const {app} = require('./../server');
+const {Todo} = require('./../models/todo');
+
+// clear the db before every test case is run
+beforeEach((done)=>{
+	Todo.remove({}).then(() => done());
+});
+
+describe('POST /todos', ()=>{
+	
+	it('Should create a new todo', (done)=>{
+		// 1. check that we send back to the client correct text and status code
+		let text = 'Test todo text';
+		request(app)
+			.post('/todos')
+			.send({text: text})
+			.expect(200)
+			.expect((res)=>{
+				expect(res.body.text).toBe(text);
+			})
+			.end((err, res)=>{
+				if(err) return done(err);
+				
+				// 2. check that the item was added to the dbase
+				Todo.find().then((todos)=>{
+					expect(todos.length).toBe(1);
+					expect(todos[0].text).toBe(text);
+					done();
+				}).catch((e) => done(e));
+			});
+	});
+	
+});
