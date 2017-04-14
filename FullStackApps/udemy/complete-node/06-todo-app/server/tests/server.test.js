@@ -5,11 +5,22 @@ const request = require('supertest');
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
+// seed data
+const todos = [
+	{text: 'First todo'},
+	{text: 'Second todo'},
+	{text: 'Third todo'}
+];
+
+
 // clear the db before every test case is run
 beforeEach((done)=>{
-	Todo.remove({}).then(() => done());
+	Todo.remove({}).then(()=>{
+		Todo.insertMany(todos);
+	}).then(() => done());
 });
 
+// test POST /todos route
 describe('POST /todos', ()=>{
 	
 	it('Should create a new todo', (done)=>{
@@ -26,7 +37,7 @@ describe('POST /todos', ()=>{
 				if(err) return done(err);
 				
 				// 2. check that the item was added to the dbase
-				Todo.find().then((todos)=>{
+				Todo.find({text: text}).then((todos)=>{
 					expect(todos.length).toBe(1);
 					expect(todos[0].text).toBe(text);
 					done();
@@ -47,11 +58,27 @@ describe('POST /todos', ()=>{
 				
 				// 2. check that nothing has been added to the database
 				Todo.find().then((todos)=>{
-					expect(todos.length).toBe(0);
+					expect(todos.length).toBe(3);
 					done();
 				}).catch((e) => done(e));
 				
 			})
+	});
+	
+});
+
+
+// test GET /todos route
+describe('GET /todos', ()=>{
+	
+	it('Should get all todos', (done)=>{
+		request(app)
+			.get('/todos')
+			.expect(200)
+			.expect((res)=>{
+				expect(res.body.todos.length).toBe(3);
+			})
+			.end(done);
 	});
 	
 });
