@@ -26,15 +26,9 @@ app.post('/todos', (req, res)=>{
 	todo.save().then((doc)=>{
 		res.send(doc);
 	}, (err)=>{
-		console.error('Unable to save todo ', err);
-		res.status(400).send({ // 400 === bad request
-			status: 400,
-			text: 'Unable to save todo to server',
-			error: err
-		});
+		res.status(400).send(err);
 	});
 });
-
 
 app.listen(3000, ()=>{
 	console.log('Express is listening on port 3000...');

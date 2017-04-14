@@ -34,4 +34,24 @@ describe('POST /todos', ()=>{
 			});
 	});
 	
+	
+	// verify that a Todo is not created when bad data sent
+	it('Should not create todo with invalid body data', (done)=>{
+		// 1. check that the status code returned is 400
+		request(app)
+			.post('/todos')
+			.send({}) // sending invalid data, should get back a 400 status
+			.expect(400)
+			.end((err, res)=>{
+				if(err) return done(err);
+				
+				// 2. check that nothing has been added to the database
+				Todo.find().then((todos)=>{
+					expect(todos.length).toBe(0);
+					done();
+				}).catch((e) => done(e));
+				
+			})
+	});
+	
 });
