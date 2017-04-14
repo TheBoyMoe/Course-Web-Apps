@@ -18,13 +18,23 @@ const app = express();
 // body parser will take the json and convert to an obj
 app.use(bodyParser.json()); // middleware
 
-
+// create todos
 app.post('/todos', (req, res)=>{
 	let todo = new Todo({
 		text: req.body.text
 	});
 	todo.save().then((doc)=>{
 		res.send(doc);
+	}, (err)=>{
+		res.status(400).send(err);
+	});
+});
+
+// get todos - return all of them
+app.get('/todos', (req, res)=>{
+	Todo.find().then((todos)=>{
+		// return the todos as an object instead of an array, allows you to add props, eg status code
+		res.send({todos});
 	}, (err)=>{
 		res.status(400).send(err);
 	});
