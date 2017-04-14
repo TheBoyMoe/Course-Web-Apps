@@ -1,4 +1,3 @@
-
 /*
 	References:
 	[1] http://mongoosejs.com/docs/guide.html
@@ -10,10 +9,10 @@
  	 - use mongoose to create your model, schema
  	 	- Mongodb has no data structure other than db consists of collections, collections contain documents
  	 	- Create the model using .model() - give it a name and pass in a settings obj which defines the docs property names and data types
- 	 	- Mongoose automatically creates the database and collection (lowercase, and plural of model name) when inserting 1st doc
+ 	 	- Mongoose automatically creates the database and collection (lowercase, and plural of the name passed in with the settings obj) when inserting 1st doc
  	 	- mongoose will coerce numbers/booleans into strings when passing bools/nums when a string is expected
  	 	
-  */
+*/
 'use strict';
 const mongoose = require('mongoose');
 
@@ -46,6 +45,34 @@ let newTodo = new Todo({
 
 // to save the obj, call save() - returns a promise - returns actual doc or error
 newTodo.save().then((doc)=>{
+	console.log('Success: ', doc);
+}, (err)=>{
+	console.error('Unable to save Todo: ', err);
+});
+
+
+// user model
+const User = mongoose.model('User', {
+	name: {
+		type: String,
+		required: true,
+		minlength: 2,
+		trim: true
+	},
+	email: {
+		type: String,
+		required: true,
+		minlength: 1,
+		trim: true
+	}
+});
+
+// create the new user and save them to the database
+let newUser = new User({
+	name: 'Tom Jones',
+	email: 'tom@jonesfamily.com'
+});
+newUser.save().then((doc)=>{
 	console.log('Success: ', doc);
 }, (err)=>{
 	console.error('Unable to save Todo: ', err);
