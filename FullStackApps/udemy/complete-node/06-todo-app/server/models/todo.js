@@ -6,7 +6,7 @@ const Todo = mongoose.model('Todo', {
 	text: {
 		type: String,
 		required: true,
-		minlength: 6,
+		minlength: 2,
 		trim: true // remove leading/trailing spaces
 	},
 	completed: {

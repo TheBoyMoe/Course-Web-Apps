@@ -4,6 +4,7 @@
 	 References:
 	 [1] http://mongoosejs.com/docs/guide.html
 	 [2] http://mongoosejs.com/docs/validation.html (define validation on your schema/data model)
+	 [3] https://httpstatuses.com/ (http status codes)
 	 
 	 - mongoose doesn't support promises out of the box, uses callbacks by default
 	 - configure it to use global.Promise - built in Promise library
