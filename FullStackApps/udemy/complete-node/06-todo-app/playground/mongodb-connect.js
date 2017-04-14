@@ -12,7 +12,12 @@
 		$ /usr/local/bin/robomongo
  */
 "use strict";
-const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb'); // using ES6 destructuring
+
+// you can generate object ids
+console.log(new ObjectID);
+
 
 // use the url to the dbase
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db)=>{
@@ -20,6 +25,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db)=>{
 	console.log('Successfully connected to Mongodb server');
 	
 	// Todo's collection - insert a document into the collection
+	
 	// db.collection('Todos').insertOne({ // inserting the first record creates the db
 	// 	text: 'First todo added',
 	// 	completed: false
@@ -35,15 +41,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db)=>{
 	//  - made up of a time stamp (no need for a date created field),
 	//  - unique machine identifier
 	//  - process id & counter
-	db.collection('Users').insertOne({
-		name: 'Grace Jones',
-		age: 58,
-		location: 'Paris, Tx'
-	}, (err, result)=>{
-		if(err) return console.error('Unable to insert record');
-		
-		console.log('Insert successful: ', JSON.stringify(result.ops, undefined, 2));
-	});
+	// you can 'extract' the timestamp using the getTimestamp() method
+	
+	// db.collection('Users').insertOne({
+	// 	// _id: 879678687687, // you can specify your own id
+	// 	name: 'John Paul Jones',
+	// 	age: 63,
+	// 	location: 'Los Angeles, Ca'
+	// }, (err, result)=>{
+	// 	if(err) return console.error('Unable to insert record');
+	//
+	// 	console.log('Insert successful: ', JSON.stringify(result.ops, undefined, 2));
+	// 	console.log('Timestamp: ', result.ops[0]._id.getTimestamp());
+	// });
 	
 	
 	db.close();
