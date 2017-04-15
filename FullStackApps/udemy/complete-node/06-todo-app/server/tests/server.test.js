@@ -14,11 +14,15 @@ const todos = [
 	},
 	{
 		_id: new ObjectID(),
-		text: 'Second todo'
+		text: 'Second todo',
+		completed: true,
+		completedAt: 234345
 	},
 	{
 		_id: new ObjectID(),
-		text: 'Third todo'
+		text: 'Third todo',
+		completed: true,
+		completedAt: 121234
 	}
 ];
 
@@ -34,7 +38,7 @@ beforeEach((done)=>{
 // test POST /todos route
 describe('POST /todos', ()=>{
 	
-	it('Should create a new todo', (done)=>{
+	it('should create a new todo', (done)=>{
 		// 1. check that we send back to the client correct text and status code
 		let text = 'Test todo text';
 		request(app)
@@ -82,7 +86,7 @@ describe('POST /todos', ()=>{
 // test GET /todos route
 describe('GET /todos', ()=>{
 	
-	it('Should get all todos', (done)=>{
+	it('should get all todos', (done)=>{
 		request(app)
 			.get('/todos')
 			.expect(200)
@@ -99,7 +103,7 @@ describe('GET /todos', ()=>{
 describe('GET /todos/:id', ()=>{
 
 	// fetch the first todo obj from the db using it's _id (db seeded using todos array)
-	it('Should return todo doc', (done)=>{
+	it('should return todo doc', (done)=>{
 		request(app)
 			.get(`/todos/${todos[0]._id.toHexString()}`) // convert obj id to string
 			.expect(200)
@@ -132,7 +136,7 @@ describe('GET /todos/:id', ()=>{
 
 
 // test DELETE /todos/:id route
-describe('DELETE /todos/id', ()=>{
+describe('DELETE /todos/:id', ()=>{
 	
 	it('should remove a todo', (done)=>{
 		const id = todos[0]._id.toHexString();
@@ -172,4 +176,48 @@ describe('DELETE /todos/id', ()=>{
 			.end(done);
 	});
 	
+});
+
+// test PATCH /todos/:id route
+describe('PATCH /todos/:id', ()=>{
+
+	it('should update the todo', (done)=>{
+		// grab id of 1st item
+		const id = todos[0]._id.toHexString();
+		const text = 'Updated text for todo item';
+		// update text, set completed === true
+		request(app)
+			.patch(`/todos/${id}`)
+			.send({
+				text: text,
+				completed: true
+			})
+			.expect(200)
+			.expect((res)=>{
+				expect(res.body.todo.text).toNotBe(todos[0].text);
+				expect(res.body.todo.completed).toBe(true);
+				expect(res.body.todo.completedAt).toBeA('number');
+			})
+			.end(done);
+	});
+
+	it('should clear completedAt when todo is not completed', (done)=>{
+		const id = todos[1]._id.toHexString();
+		const text = 'Updated text for 2nd todo item';
+		
+		request(app)
+			.patch(`/todos/${id}`)
+			.send({
+				text: text,
+				completed: false
+			})
+			.expect(200)
+			.expect((res)=>{
+				expect(res.body.todo.text).toNotBe(todos[1].text);
+				expect(res.body.todo.completed).toBe(false);
+				expect(res.body.todo.completedAt).toNotExist(); // value is null
+			})
+			.end(done);
+	});
+
 });
