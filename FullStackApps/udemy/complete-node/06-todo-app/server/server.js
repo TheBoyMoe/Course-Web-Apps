@@ -16,6 +16,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
+const _ = require('lodash');
 
 const {mongoose} = require('./db/mongoose');
 const {Todo} = require('./models/todo');
@@ -103,6 +104,46 @@ app.delete('/todos/:id', (req, res)=>{
 		}));
 	}
 });
+
+// update todo items
+app.patch('/todos/:id', (req, res)=>{
+	const id = req.params.id;
+	if(!ObjectID.isValid(id)) {
+		return res.status(404).send({
+			code: 404,
+			error: 'Invalid id'
+		});
+	}
+	
+	// pick of the 'text' and 'completed' props off of the body obj
+	const body = _.pick(req.body, ['text', 'completed']);
+	
+	// check that completed is a boolean and is set to true
+	if(_.isBoolean(body.completed) && body.completed) {
+		body.completedAt = new Date().getTime();
+	} else {
+		body.completed = false;
+		body.completedAt = null; // in mongo set values to null when there is no value
+	}
+	
+	Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo)=>{
+		if(!todo){
+			return res.status(404).send({
+				code: 404,
+				error: 'Todo not found'
+			});
+		}
+		res.send({todo});
+		
+	}).catch((e)=>{
+		res.status(400).send({
+			code: 400,
+			error: 'Failed to update todo'
+		});
+	});
+	
+});
+
 
 app.listen(port, ()=>{
 	console.log(`Express is listening on port ${port}...`);
