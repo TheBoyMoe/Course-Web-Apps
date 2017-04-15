@@ -8,6 +8,7 @@
 	- add, engines: {"node": "6.9.3"}, to package.json so Heroku knows what ver of node you need
 			- you need v6+ to use ES6 features
 	- setup mongo database - specific to the host provider
+		- check sec 4/ video 9 on heroku setup
 		- on Heroku use the mLab MongoDB add-on - check video sec 6/ video 22 4:30min onwards
 		- amend the mongoose connector in mongoose.js to use process.env.MONGODB_URI || localhost to connect ot the database
  */
