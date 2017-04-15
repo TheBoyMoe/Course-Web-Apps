@@ -90,12 +90,12 @@ app.delete('/todos/:id', (req, res)=>{
 			error: 'Invalid id'
 		});
 	} else {
-		Todo.findByIdAndRemove(id).then((doc)=>{
-			if(!doc) return res.status(404).send({
+		Todo.findByIdAndRemove(id).then((todo)=>{
+			if(!todo) return res.status(404).send({
 				code: 404,
 				error: 'Todo not found'
 			});
-			res.send({doc});
+			res.send({todo});
 			
 		}).catch((e) => res.status(400).send({
 			code: 400,
