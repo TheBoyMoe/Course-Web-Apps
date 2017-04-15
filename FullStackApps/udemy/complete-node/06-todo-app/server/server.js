@@ -2,6 +2,14 @@
 	References:
 	[1] https://httpstatuses.com/ (http status codes)
 	
+	Note - Heroku setup:
+	- set the port to use a process.env variable
+	- add a start script, "start": "node server/server.js", to package.json so host provider knows how to start app
+	- add, engines: {"node": "6.9.3"}, to package.json so Heroku knows what ver of node you need
+			- you need v6+ to use ES6 features
+	- setup mongo database - specific to the host provider
+		- on Heroku use the mLab MongoDB add-on - check video sec 6/ video 22 4:30min onwards
+		- amend the mongoose connector in mongoose.js to use process.env.MONGODB_URI || localhost to connect ot the database
  */
 'use strict';
 const express = require('express');
@@ -13,6 +21,7 @@ const {Todo} = require('./models/todo');
 const {User}  = require('./models/user');
 
 const app = express();
+const port = process.env.PORT || 3000; // use port provided by host, or 3000 locally
 
 // POST / - create a resource - use a POST, include the data in the body of the request
 // server will receive the json, create doc, save to db and send the doc back to the client
@@ -72,8 +81,8 @@ app.get('/todos/:id', (req, res)=>{
 });
 
 
-app.listen(3000, ()=>{
-	console.log('Express is listening on port 3000...');
+app.listen(port, ()=>{
+	console.log(`Express is listening on port ${port}...`);
 });
 
 // export the app so it's accessible from the tests file
