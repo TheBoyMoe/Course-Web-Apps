@@ -22,7 +22,7 @@ const id = '58f0fe2dc99fd8321f9c10e311';
 // }).catch((e) => console.error(e));
 
 // methods for removing individual docs (and return it)
-// Collection_name.findOneAndRemove({}); // takes query object, first match is removed
+// Collection_name.findOneAndRemove({}); // takes query object, query by any prop, first match is removed
 // Collection_name.findByIdAndRemove(id);
 
 // Todo.findByIdAndRemove('58f22b37a71a1c29b7665eb1').then((doc)=>{
@@ -35,10 +35,3 @@ Todo.findOneAndRemove({text: "one more for the road jack"}).then((doc)=>{
 	console.log(JSON.stringify(doc, undefined, 2));
 }).catch((e) => console.error(e));
 
-
-// User.findById(id).then((user)=>{
-// 	if(!user) return console.error('No match found');
-//
-//
-//
-// }).catch((e) => console.error(e));
