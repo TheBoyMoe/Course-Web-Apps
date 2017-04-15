@@ -11,8 +11,15 @@
 		- check sec 4/ video 9 on heroku setup
 		- on Heroku use the mLab MongoDB add-on - check video sec 6/ video 22 4:30min onwards
 		- amend the mongoose connector in mongoose.js to use process.env.MONGODB_URI || localhost to connect ot the database
+	
+	- when the app is run locally - by default the 'env' value will be set to 'development'
+	- Heroku automatically sets process.env to 'production'
+	- To run in test, either:
+		- $ npm test OR $ npm run test-watch (scripts in package.json)
  */
 'use strict';
+require('./config/config'); // set 'env'
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
@@ -23,7 +30,8 @@ const {Todo} = require('./models/todo');
 const {User}  = require('./models/user');
 
 const app = express();
-const port = process.env.PORT || 3000; // use port provided by host, or 3000 locally
+
+const port = process.env.PORT; // use port provided by host, or 3000 locally
 
 // POST / - create a resource - use a POST, include the data in the body of the request
 // server will receive the json, create doc, save to db and send the doc back to the client
