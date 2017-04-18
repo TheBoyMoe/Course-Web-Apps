@@ -6,8 +6,8 @@ describe('gatherNamesOf', function () {
   let people, names;
 
   beforeEach (function () {
-    people = [{name: 'Günter'}, {name: 'Marceline'}, {name: 'Simon'}]
-    names = gatherNamesOf(people)
+    people = [{name: 'Günter'}, {name: 'Marceline'}, {name: 'Simon'}];
+    names = gatherNamesOf(people);
   });
 
   it('should return an array', function () {
