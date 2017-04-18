@@ -8,11 +8,24 @@ const checkForShip = (player, coordinates)=>{
 			return (coords[0] === coordinates[0]) && (coords[1] === coordinates[1])
 		})[0]; // filter returns an array
 		if(shipPresent)
-			return true;
+			return ship;
 	}
 	return false;
 };
 
+const checkForDamage = (ship, coords)=>{
+	ship.damage.push(coords);
+};
+
+const fire = (player, coords)=>{
+	let ship = checkForShip(player, coords);
+	if(ship)
+		checkForDamage(ship, coords);
+};
+
+
 module.exports = {
-	checkForShip
+	checkForShip,
+	checkForDamage,
+	fire
 };
