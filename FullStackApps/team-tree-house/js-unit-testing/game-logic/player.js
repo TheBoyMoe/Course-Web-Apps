@@ -48,8 +48,49 @@ function placeShip (player, ship, startingCoordinates, direction) {
 	}
 }
 
+/*
+	computerFire and computerPlace ship are difficult to test because each carries out 2 steps
+	generate random coordinates and execute the fire or place ship method
+	 - tight coupling in methods like these make them difficult to test
+	 - when they are tested the results are often meaningless as a result of the random nature of the input
+
+ */
+
+// OLD VERSION
+// function computerFire (player) {
+// 	let x = Math.floor(Math.random() * 9);
+// 	let y = Math.floor(Math.random() * 9);
+// 	let coordinates = [x, y];
+//
+// 	fire(player, coordinates);
+// }
+//
+// function computerPlaceShip (player, ship) {
+// 	let direction = (Math.random() > 0.5)? 'horizontal': 'vertical';
+// 	let x = Math.floor(Math.random() * 9);
+// 	let y = Math.floor(Math.random() * 9);
+// 	let coordinates = [x, y];
+// 	placeShip(player, ship, coordinates, direction);
+// }
+
+
+// NEW VERSION
+const getRandomCoordinates = ()=>{
+	let x = Math.floor(Math.random() * 9);
+	let y = Math.floor(Math.random() * 9);
+	return [x, y];
+};
+
+const getRandomDirection = ()=>{
+	return (Math.random() > 0.5)? 'horizontal': 'vertical';
+};
+
+//fire(player, getRandomCoordinates());
+//placeShip(player, ship, getRandomCoordinates(), getRandomDirection());
+
+
 module.exports = {
 	placeShip,
 	validateLocations,
-	validateLocation,
+	validateLocation
 };
