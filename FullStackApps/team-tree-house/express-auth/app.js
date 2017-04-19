@@ -1,3 +1,12 @@
+/*
+	References:
+	[1] https://pugjs.org/api/getting-started.html
+	[2] http://expressjs.com/en/starter/basic-routing.html
+	[3] https://nodemon.io/
+	
+	
+ */
+
 'use strict';
 let express = require('express');
 let bodyParser = require('body-parser');
