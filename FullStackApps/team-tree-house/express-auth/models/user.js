@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		trim: true
 	},
-	favouriteBook: {
+	favoriteBook: {
 		type: String,
 		required: true,
 		trim: true
@@ -26,6 +26,4 @@ const UserSchema = new mongoose.Schema({
 
 // create the User model and export
 const User = mongoose.model('User', UserSchema);
-module.exports = {
-	User
-};
+module.exports = User;

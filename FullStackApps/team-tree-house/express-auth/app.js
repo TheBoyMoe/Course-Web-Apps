@@ -1,10 +1,21 @@
 /*
 	References:
-	[1] https://pugjs.org/api/getting-started.html
+	[1] https://pugjs.org/api/getting-started.html (pug)
 	[2] http://expressjs.com/en/starter/basic-routing.html
 	[3] https://nodemon.io/
 	[4] http://mongoosejs.com/docs/index.html
+	[5] http://mongoosejs.com/docs/guide.html
+	[6] https://docs.mongodb.com/getting-started/shell/client/
 	
+	Note:
+	Mongo shell commands
+	 - show dbs — display the databases
+	 - use [database_name] — specify the database you're going to work with
+	 - show collections — shows the document collections for the selected database
+	 - db.users.find() — display all the documents in the users collection
+	 - db.users.find().pretty() — nicer format for output documents within the shell
+	 - db.users.drop() — remove the users collection from the current database
+	 
  */
 
 'use strict';
