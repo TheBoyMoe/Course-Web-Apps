@@ -1,3 +1,33 @@
+/*
+	Reporting in Mocha
+	- mocha --reporter min => show only the failing tests
+	- mocha --reporter markdown => print the full report but in markdown format
+	
+	Create pending tests
+	- DO NOT add the 2nd arg (function) to it()
+	- you can add an x, e.g xdescribe() or xit()
+	- Using xdescribe marks all tests in that block as pending
+	
+	Running tests when ever you save changes
+	- you can run --watch command to automatically run your tests when ever you save a change to the test file, e.g
+		$ mocha --watch [path.to/test/file] [path/to/logic/file]
+		$ mocha --watch ./test/game.test.js ./game-logic/game.js
+		
+	You can automatically run tests on multiple files, add a line to the 'scripts' block in package json file
+	 e.g run all the tests found in the test dir, 2nd arg are all the files we want to watch for changes
+		"scripts": {
+			"test:watch": "mocha --watch ./test ./"
+		}
+    The first argument describes the tests you want to run: all the tests in the ./test directory.
+    The second argument describes the files you want to watch for changes: all the files in the current directory ./
+    
+    References
+    [1] https://mochajs.org/ (testing framework)
+    [2] http://sinonjs.org/ (test spies, mocks and stubs)
+    [3] http://chaijs.com/ (assertion library)
+	[4] https://github.com/mjackson/expect (assertion library)
+ */
+
 'use strict';
 const {expect} = require('chai');
 const {validateLocation, validateLocations, placeShip} = require('./../game-logic/player');
