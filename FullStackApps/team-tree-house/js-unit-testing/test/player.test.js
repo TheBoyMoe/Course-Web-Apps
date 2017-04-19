@@ -1,10 +1,10 @@
+'use strict';
 const {expect} = require('chai');
 const {validateLocation, validateLocations, placeShip} = require('./../game-logic/player');
 
 describe('PLAYER METHODS', function () {
 	describe('validateLocation', function () {
 		let player;
-		
 		beforeEach(function () {
 			player = {
 				ships: [
@@ -15,21 +15,21 @@ describe('PLAYER METHODS', function () {
 			};
 		});
 		
-		it('shoud confirm valid for unoccupied locations in range', function () {
+		it('should confirm valid for unoccupied locations in range', function () {
 			let location = [0, 0];
 			let actual = validateLocation(player, location);
 			
 			expect(actual).to.be.ok;
 		});
 		
-		it('shoud confirm INvalid for occupied locations in range', function () {
+		it('should confirm Invalid for occupied locations in range', function () {
 			let location = [9, 9];
 			let actual = validateLocation(player, location);
 			
 			expect(actual).to.be.false;
 		});
 		
-		it('shoud confirm INvalid for UNoccupied locations OUT of range', function () {
+		it('should confirm Invalid for Unoccupied locations OUT of range', function () {
 			let locationHigh = [10, 10];
 			let locationLow = [-1, -1];
 			
@@ -40,7 +40,6 @@ describe('PLAYER METHODS', function () {
 	
 	describe('validateLocations', function () {
 		let player;
-		
 		beforeEach(function () {
 			player = {
 				ships: [
@@ -67,7 +66,6 @@ describe('PLAYER METHODS', function () {
 	
 	describe('placeShip', function () {
 		let player;
-		
 		beforeEach(function () {
 			player = {
 				ships: [
@@ -94,6 +92,18 @@ describe('PLAYER METHODS', function () {
 			expect(actual).to.have.length(1);
 			expect(actual[0]).to.deep.equal([0, 1]);
 		});
+		
+		it('should throw an error if no direction is specified', ()=>{
+			let ship = player.ships[0];
+			let coordinates = [0,1];
+			let handler = ()=>{
+				placeShip(player, ship, coordinates);
+			};
+			expect(handler).to.throw(Error); // checks that an error is thrown
+			expect(handler).to.throw('Direction required'); // check the error message shown
+		});
+		
+		
 	});
 	
 });

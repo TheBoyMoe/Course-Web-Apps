@@ -1,3 +1,4 @@
+'use strict';
 const {checkForShip} = require('./ship');
 
 function validateLocation (player, coordinates) {
@@ -21,6 +22,8 @@ function validateLocations (player, locations) {
 }
 
 function placeShip (player, ship, startingCoordinates, direction) {
+	if(!direction) throw Error('Direction required');
+	
 	let proposedLocations = [];
 	let previousLocation,
 		rowNumber,
