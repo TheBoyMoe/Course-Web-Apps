@@ -21,11 +21,19 @@
     The first argument describes the tests you want to run: all the tests in the ./test directory.
     The second argument describes the files you want to watch for changes: all the files in the current directory ./
     
+    Testing asynchronous code
+     - Mocha allows us to say that a test spec or test suite is "asynchronous"
+     - Passing an argument to the internal function of a describe() or it() block will tell Mocha to wait on running our expectations until we specifically say so
+     - Passing the done argument to our test spec tells Mocha that it’s supposed to wait for our instructions before checking our expectations.
+     - Mocha will wait for done() to fire before checking the expectations
+    
     References
     [1] https://mochajs.org/ (testing framework)
     [2] http://sinonjs.org/ (test spies, mocks and stubs)
     [3] http://chaijs.com/ (assertion library)
 	[4] https://github.com/mjackson/expect (assertion library)
+	[5] https://mochajs.org/#asynchronous-code (working with asyncronous code in mocha)
+	
  */
 
 'use strict';

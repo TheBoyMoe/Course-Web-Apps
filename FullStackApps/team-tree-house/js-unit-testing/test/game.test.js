@@ -24,6 +24,7 @@ describe('Game instance functions', ()=>{
 	});
 	
 	
+	// simulate stub/mocks
 	describe('take turn', ()=>{
 		let guess, player ;
 		
@@ -49,6 +50,23 @@ describe('Game instance functions', ()=>{
 	});
 	
 	
+	// simulate asynchronous function - call to database
+	const saveGame = (callback)=>{
+		setTimeout(()=>{
+			callback(); // simulates replay from database to confirm record saved
+		}, 1000);
+	};
+	
+	describe('save game', ()=>{
+		it('should update save status', (done)=>{ // tells mocha code is asynchronous
+			let status = 'game not saved...';
+			saveGame(()=>{
+				status = 'game saved';
+				expect(status).to.equal('game saved');
+				done();
+			});
+		});
+	});
 	
 	
 	describe('set an individual spec to pending', ()=>{
