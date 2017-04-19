@@ -3,14 +3,22 @@
 	[1] https://pugjs.org/api/getting-started.html
 	[2] http://expressjs.com/en/starter/basic-routing.html
 	[3] https://nodemon.io/
-	
+	[4] http://mongoosejs.com/docs/index.html
 	
  */
 
 'use strict';
-let express = require('express');
-let bodyParser = require('body-parser');
-let app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const app = express();
+
+// mongoose and db setup
+mongoose.connect('mongodb://localhost:27017/bookworm');
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error: '));
+
 
 // parse incoming requests
 app.use(bodyParser.json());

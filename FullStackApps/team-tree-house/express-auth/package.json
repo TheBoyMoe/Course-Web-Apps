@@ -10,6 +10,8 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.4",
+    "mongod": "^2.0.0",
+    "mongoose": "^4.9.5",
     "pug": "^2.0.0-beta2"
   },
   "license": "MIT"
