@@ -71,6 +71,8 @@ describe('fire', ()=>{
 	
 	let player;
 	// executed before each test runs - the function has side effects, altering the state of the app outside the function
+	// objects such as these will be overwritten the next time the function is called.
+	// no need in this case for after() or afterEach() - use to 'teardown' databases and servers
 	beforeEach(()=>{
 		player = {
 			ships: [
@@ -80,6 +82,14 @@ describe('fire', ()=>{
 				}
 			]
 		};
+	});
+	
+	after(()=>{
+		console.log('Entire test suite completed');
+	});
+	
+	afterEach(()=>{
+		console.log('one unit test completed');
 	});
 	
 	it('should record damage on the given players ship at a given coordinate', ()=>{
