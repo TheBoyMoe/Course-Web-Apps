@@ -8,6 +8,8 @@
 	[6] https://docs.mongodb.com/getting-started/shell/client/
 	[7] http://bcrypt.sourceforge.net/
 	[8] https://www.npmjs.com/package/bcrypt
+	[9] https://github.com/expressjs/session (session module created by the express team)
+	[10] https://github.com/expressjs/session#compatible-session-stores
 	
 	Note:
 	Mongo shell commands
@@ -24,12 +26,20 @@
 	
 	Hashing lets you store a password in a database so that, even if the database is accessed,
 	hackers won't be able to figure out the real password and log into your site
+ 
+	Session — Information pertaining to a specific user of a website
+	Cookie — File managed by the web browser that can save information from a website
+	
+	Use sessions to track logged in users
+	 - also track anon users (what pages visited, how long they stay) - Google Analytics uses sessions
+	 - by default session store is saved to RAM, in production you want to use a dbase
  */
 
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const app = express();
 
@@ -37,6 +47,13 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/bookworm');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
+
+// config session for tracking logins
+app.use(session({
+	secret: 'mongo express app', // req'd, used to sign the session id cookie
+	resave: true, // optional, ensures the session is saved in the session store
+	saveUninitialized: false // optional, save an uninitialized session in the session store
+}));
 
 
 // parse incoming requests
