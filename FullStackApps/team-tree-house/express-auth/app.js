@@ -10,7 +10,9 @@
 	[8] https://www.npmjs.com/package/bcrypt
 	[9] https://github.com/expressjs/session (session module created by the express team)
 	[10] https://github.com/expressjs/session#compatible-session-stores
-	
+	[11] https://docs.stormpath.com/nodejs/express/latest/introduction.html (user account management)
+	[12] http://passportjs.org/ (authentication for node)
+	[13] http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/ (password reset in node)
 	Note:
 	Mongo shell commands
 	 - show dbs — display the databases
@@ -27,12 +29,16 @@
 	Hashing lets you store a password in a database so that, even if the database is accessed,
 	hackers won't be able to figure out the real password and log into your site
  
-	Session — Information pertaining to a specific user of a website
-	Cookie — File managed by the web browser that can save information from a website
-	
+	Session — Information pertaining to a specific user of a website - stored on server (may contain sensitive data)
 	Use sessions to track logged in users
 	 - also track anon users (what pages visited, how long they stay) - Google Analytics uses sessions
 	 - by default session store is saved to RAM, in production you want to use a dbase
+	 - sessions provide a way of tracking visitors to your site
+	 
+	Cookie — File managed by the web browser that can save information from a website - holds session ID
+	 -  the session ID -- a key to associate that one user and browser with a specific collection of session data.
+	 - cookies can be created both in the clients browser (using javascript) and server (by the headers sent to the browser)
+	 - a server can create, modify, delete and read cookies
  */
 
 'use strict';
@@ -50,7 +56,7 @@ db.on('error', console.error.bind(console, 'connection error: '));
 
 // config session for tracking logins
 app.use(session({
-	secret: 'mongo express app', // req'd, used to sign the session id cookie
+	secret: 'mongo express app', // req'd, used to sign the session id cookie - extra layer of security
 	resave: true, // optional, ensures the session is saved in the session store
 	saveUninitialized: false // optional, save an uninitialized session in the session store
 }));

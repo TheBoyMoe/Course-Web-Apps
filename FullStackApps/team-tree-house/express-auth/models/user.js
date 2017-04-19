@@ -25,6 +25,27 @@ const UserSchema = new mongoose.Schema({
 	}
 });
 
+// authenticate user against their saved user info
+// - statics object allows you to add methods directly to the model
+// email & password args are from user input - call method in POST /login route
+UserSchema.statics.authenticate = (email, password, callback)=>{
+	// find user with matching email
+	User.findOne({email: email})
+		.exec((err, user)=>{
+			if(err) return callback(err);
+			else if(!user){
+				let error = new Error('User not found');
+				error.status = 401;
+				return callback(error);
+			}
+			// match found
+			bcrypt.compare(password, user.password, (err, result)=>{
+				if(result === true) return callback(null, user); // callback pattern callback(err, result)
+				else return callback();
+			})
+		})
+};
+
 // hash the password prior to saving ot the database
 UserSchema.pre('save', function (next) {
 	let user = this; // this refers to the user obj created

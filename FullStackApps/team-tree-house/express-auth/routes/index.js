@@ -53,7 +53,10 @@ router.post('/register', (req, res, next)=>{
 		User.create(userData, (err, user)=>{
 			if(err) return next(err);
 			// redirect the user to there profile page if successful
-			else return res.redirect('/profile');
+			else {
+				req.session.userId = user._id; // create session
+				return res.redirect('/profile');
+			}
 		});
 		
 		
@@ -64,6 +67,32 @@ router.post('/register', (req, res, next)=>{
 		return next(err);
 	}
 	
+});
+
+// GET /login
+router.get('/login', (req, res, next)=>{
+	return res.render('login', {title: 'Login'});
+});
+
+// POST /login - login post submit action
+router.post('/login', (req, res, next)=>{
+	// check that the user supplied a username and password
+	if(req.body.email && req.body.password){
+		User.authenticate(req.body.email, req.body.password, (err, user)=>{
+			if(err || !user){
+				let error = new Error('Email and password do not match');
+				error.status = 401;
+				return next(error);
+			}
+			// user exists, create the session (sensitive data - remains on the server, only the cookie with the session ID is sent)
+			req.session.userId = user._id; // use the users mongod id
+			return res.redirect('/profile');
+		});
+	} else {
+		let err = new Error('Email and password are required');
+		err.status = 401; // unauthorised - missing or bad authentication
+		return next(err);
+	}
 });
 
 module.exports = router;
