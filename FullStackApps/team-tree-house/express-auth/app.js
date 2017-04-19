@@ -6,6 +6,8 @@
 	[4] http://mongoosejs.com/docs/index.html
 	[5] http://mongoosejs.com/docs/guide.html
 	[6] https://docs.mongodb.com/getting-started/shell/client/
+	[7] http://bcrypt.sourceforge.net/
+	[8] https://www.npmjs.com/package/bcrypt
 	
 	Note:
 	Mongo shell commands
@@ -15,7 +17,13 @@
 	 - db.users.find() — display all the documents in the users collection
 	 - db.users.find().pretty() — nicer format for output documents within the shell
 	 - db.users.drop() — remove the users collection from the current database
-	 
+ 
+	Hashing — using a function which takes some piece of information and return a hash that represents that information
+	Salt — randomly generated string that is concatenated with a password
+	BCrypt - a hashing algorithm that converts a password to a fixed length, string of characters.
+	
+	Hashing lets you store a password in a database so that, even if the database is accessed,
+	hackers won't be able to figure out the real password and log into your site
  */
 
 'use strict';
