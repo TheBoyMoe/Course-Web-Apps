@@ -51,6 +51,8 @@
 	 	next piece of middleware in the request/response cycle, calling next() tells express to move on to the next piece of middleware.
 	 - to add middleware to your app, call use() method on the app object
 	 
+	Connect-Mongo - 3rd party module which allows you to save user session variables to mongodb, rather than use the servers' memory
+	
  */
 
 'use strict';
@@ -58,6 +60,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+// load connect-mongo after the session module and pass session as an arg,
+// allows the middleware to access the session
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
@@ -70,7 +75,13 @@ db.on('error', console.error.bind(console, 'connection error: '));
 app.use(session({
 	secret: 'mongo express app', // req'd, used to sign the session id cookie - extra layer of security
 	resave: true, // optional, ensures the session is saved in the session store
-	saveUninitialized: false // optional, save an uninitialized session in the session store
+	saveUninitialized: false, // optional, save an uninitialized session in the session store
+	// config mongo store to save session data, need to create mongodb connection and db first lines 70-72
+	// the session will be deleted when the user logs out
+	// - ser will be logged out if they delete the cookie from their browser (session obj will remain in the store)
+	store: new MongoStore({
+		mongooseConnection: db
+	})
 }));
 
 // make the users session ID available to the whole app (including templates)
