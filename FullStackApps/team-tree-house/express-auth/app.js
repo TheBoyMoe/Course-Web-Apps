@@ -54,12 +54,22 @@ mongoose.connect('mongodb://localhost:27017/bookworm');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 
-// config session for tracking logins
+// config session for tracking logins - users who haven't logged in will not have a session ID
 app.use(session({
 	secret: 'mongo express app', // req'd, used to sign the session id cookie - extra layer of security
 	resave: true, // optional, ensures the session is saved in the session store
 	saveUninitialized: false // optional, save an uninitialized session in the session store
 }));
+
+// make the users session ID available to the whole app (including templates)
+app.use((req, res, next)=>{
+	// grab the session id from the req obj
+	// - locals obj gives you a way of adding values to the res obj
+	// - in express all views have access to the res obj
+	// - if the user is not logged in currentUser will be undefined
+	res.locals.currentUser = req.session.userId;
+	next();
+});
 
 
 // parse incoming requests

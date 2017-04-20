@@ -94,6 +94,11 @@ a:hover {
 	margin-right: 18px;
 	border: solid 2px rgba(255,255,255, .75);
 }
+
+h1 .avatar {
+	width: 70px;
+}
+
 .options {
 	display: none;
 }
