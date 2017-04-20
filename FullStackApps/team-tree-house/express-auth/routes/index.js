@@ -117,4 +117,16 @@ router.get('/profile', (req, res, next)=>{
 	
 });
 
+// GET /logout - destroy the user session and log them out of the authentication system
+router.get('/logout', (req, res, next)=>{
+	// if a session obj exists, i.e user logged in
+	if(req.session){
+		// delete the session obj
+		req.session.destroy((err)=>{
+			if(err) return next(err);
+			else return res.redirect('/');
+		})
+	}
+});
+
 module.exports = router;
