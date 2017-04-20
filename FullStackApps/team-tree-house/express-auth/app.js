@@ -1,5 +1,5 @@
 /*
-	References:
+	General References:
 	[1] https://pugjs.org/api/getting-started.html (pug)
 	[2] http://expressjs.com/en/starter/basic-routing.html
 	[3] https://nodemon.io/
@@ -15,6 +15,18 @@
 	[13] http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/ (password reset in node)
 	[14] https://expressjs.com/en/guide/using-middleware.html (guide to using middleware in express)
 	[15] https://httpstatuses.com/ (http status codes)
+	[16] https://github.com/jdesboeufs/connect-mongo
+	
+	Authentication References:
+	[1] https://teamtreehouse.com/library/oauth-authentication-with-passport (pro tth workshop)
+	[2] https://letsencrypt.org/ (Let’s Encrypt is a free, automated, and open certificate authority)
+	[3] https://github.com/Daplie/greenlock-express (Free SSL and Automatic HTTPS for node.js with Express, Connect, and other middleware systems)
+	[4] https://oauth.net/ (The OAuth 2.0 authorization framework enables a third-party application to obtain limited access to an HTTP service)
+	[5] https://jwt.io/ (an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object)
+	[6] http://passportjs.org/ (Authentication middleware that can be dropped in to any Express-based web application)
+	[7] https://www.danielgynn.com/build-an-authentication-app-using-express-node-passport/ (tutorial on using passport with express)
+		& https://www.danielgynn.com/node-auth-part2/ (part 2 of tutorial)
+		& Github repo https://github.com/danielgynn/express-authentication/tree/master
 	
 	Note:
 	Mongo shell commands
@@ -53,6 +65,17 @@
 	 
 	Connect-Mongo - 3rd party module which allows you to save user session variables to mongodb, rather than use the servers' memory
 	
+	// TODO Three different options for improving the app's authentication
+	
+	1. ensure all login sessions are via https, ensure communication between client and server is encrypted in case it's intercepted
+		- get a ssl certificate from 'Lets Encrypt'
+	2. instead of using cookies and sessions to add authentication, use token based auth.
+		- when a user logs in, they're issued with a token that allows them to request various resources without having to submit
+		  their username and password again - the token is offered to the server to gain access to a specific resource
+		- technique used when you sign into a site using Google, FB or Github accounts
+		- two popular implementations are OAuth and JWT(json web tokens)
+	3. 	Passport - express middleware that supports 3rd party sign in, e.g Google, FB, etc,
+		as well as authenticating with a username and password
  */
 
 'use strict';
