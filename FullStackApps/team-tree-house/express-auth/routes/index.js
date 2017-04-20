@@ -96,14 +96,17 @@ router.post('/login', (req, res, next)=>{
 });
 
 // GET /profile
-router.get('/profile', (req, res, next)=>{
+router.get('/profile', mid.requiresLogin, (req, res, next)=>{
 	// the users mongo id is stored as a session variable and the session id of the cookie
 	// if the user id does not exist in the session variable, they can't be logged in
-	if(!req.session.userId){
-		let err = new Error('You are not authorised to view this page');
-		err.status = 403; // forbidden
-		return next(err);
-	}
+	
+	// replaced with middleware requiresLogin function
+	// if(!req.session.userId){
+	// 	let err = new Error('You are not authorised to view this page');
+	// 	err.status = 403; // forbidden
+	// 	return next(err);
+	// }
+	
 	// user logged, retrieve their info from mongodb
 	User.findById(req.session.userId)
 		.exec((error,  user)=>{
@@ -127,6 +130,11 @@ router.get('/logout', (req, res, next)=>{
 			else return res.redirect('/');
 		})
 	}
+});
+
+// GET /secret
+router.get('/secret', mid.requiresLogin, (req, res, next)=>{
+	return res.render('secret', {title: 'Top Secret Page!'});
 });
 
 module.exports = router;

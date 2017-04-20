@@ -13,7 +13,19 @@ const loggedOut = (req, res, next)=>{
 	return next();
 };
 
+// password protect any page on a site
+const requiresLogin = (req, res, next)=>{
+	// if you're logged in, carry on
+	if(req.session && req.session.userId) return next();
+	else {
+		let err = new Error('You must be logged in to view this page');
+		err.status = 401;
+		return next(err);
+	}
+};
+
 
 module.exports = {
-	loggedOut
+	loggedOut,
+	requiresLogin
 };
