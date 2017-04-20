@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('./../models/user');
-
+const mid = require('./../middleware'); // automatically loads the index.js in that dir
 
 // GET /
 router.get('/', function(req, res, next) {
@@ -20,8 +20,8 @@ router.get('/contact', function(req, res, next) {
   return res.render('contact', { title: 'Contact' });
 });
 
-// GET /signup - display the form
-router.get('/register', (req, res, next)=>{
+// GET /register - display the signup form to logged out users
+router.get('/register', mid.loggedOut, (req, res, next)=>{
 	return res.render('register', {title: 'Signup Form'});
 });
 
@@ -69,8 +69,8 @@ router.post('/register', (req, res, next)=>{
 	
 });
 
-// GET /login
-router.get('/login', (req, res, next)=>{
+// GET /login - disply login form to logged out users
+router.get('/login', mid.loggedOut, (req, res, next)=>{
 	return res.render('login', {title: 'Login'});
 });
 

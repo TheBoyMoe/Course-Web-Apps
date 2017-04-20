@@ -13,6 +13,9 @@
 	[11] https://docs.stormpath.com/nodejs/express/latest/introduction.html (user account management)
 	[12] http://passportjs.org/ (authentication for node)
 	[13] http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/ (password reset in node)
+	[14] https://expressjs.com/en/guide/using-middleware.html (guide to using middleware in express)
+	[15] https://httpstatuses.com/ (http status codes)
+	
 	Note:
 	Mongo shell commands
 	 - show dbs — display the databases
@@ -39,6 +42,15 @@
 	 -  the session ID -- a key to associate that one user and browser with a specific collection of session data.
 	 - cookies can be created both in the clients browser (using javascript) and server (by the headers sent to the browser)
 	 - a server can create, modify, delete and read cookies
+	 
+	Middleware - software that runs after a request is received, but before a response is sent back
+	 - body parser - takes the request body, makes it readable by the app, before handing it off to the next part of the app
+	 - express session module - track session of logged in users
+	 - you chain together multiple middleware functions that run one after the other
+	 - a typical middleware function receives 3 args: req, res and next. Next is a function and it represents the
+	 	next piece of middleware in the request/response cycle, calling next() tells express to move on to the next piece of middleware.
+	 - to add middleware to your app, call use() method on the app object
+	 
  */
 
 'use strict';
