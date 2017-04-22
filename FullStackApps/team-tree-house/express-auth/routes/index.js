@@ -69,7 +69,7 @@ router.post('/register', (req, res, next)=>{
 	
 });
 
-// GET /login - disply login form to logged out users
+// GET /login - display login form to logged out users
 router.get('/login', mid.loggedOut, (req, res, next)=>{
 	return res.render('login', {title: 'Login'});
 });
