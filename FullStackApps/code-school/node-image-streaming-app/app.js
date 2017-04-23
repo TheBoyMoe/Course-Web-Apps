@@ -1,7 +1,9 @@
 /*
 	References:
 	[1] https://github.com/tj/axon (pub/sub server)
-
+	[2] https://github.com/codeschool/WatchUsBuild-ImageStreamingAppWithNodeWebServer
+	[3] https://github.com/codeschool/WatchUsBuild-ImageStreamingAppWithNodePubSubServer
+	[4] https://www.npmjs.com/package/redis (redis client setup)
  */
 'use strict';
 
