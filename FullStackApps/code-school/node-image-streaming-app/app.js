@@ -9,6 +9,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
+const badges = require('./controllers/badges');
 
 const app = express();
 
@@ -16,9 +17,12 @@ const app = express();
 app.use(bodyParser.json());
 
 // routes
-app.post('/', (req, res)=>{
-	res.send('hello world!');
-});
+// app.post('/', (req, res)=>{
+// 	res.send('hello world!');
+// });
+
+// pass post requests to '/' to the badges controller, calls save() then send()
+app.post('/', badges.save, badges.send);
 
 app.listen(port, ()=>{
 	console.log(`Express is listening on port ${port}`);
