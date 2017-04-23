@@ -1,6 +1,6 @@
 'use strict';
 const redis = require('./../lib/redis').client;
-
+const broadcast = require('./../lib/broadcast');
 
 /**
  * Save badges to the database
@@ -20,6 +20,27 @@ const save = (badges, callback)=>{
 	})
 };
 
+/**
+ * Send out badges to the broadcaster
+ * @param {Array} badges
+ * @param {Function} callback
+ */
+const send = (badges, callback)=>{
+	badges.forEach((badge)=>{
+		broadcast.send(badge);
+		callback(null, null);
+	})
+};
+
+/**
+ * Trim the redis list
+ */
+const trim = ()=>{
+	redis.ltrim('badges', 0, 9);
+};
+
 module.exports = {
-	save
+	save,
+	send,
+	trim
 };

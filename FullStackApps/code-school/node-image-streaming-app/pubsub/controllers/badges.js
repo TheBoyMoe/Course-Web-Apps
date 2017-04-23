@@ -15,10 +15,21 @@ const save = (req, res, next)=>{
 
 // send badges to the pub/sub socket in the model
 const send = (req, res, next)=>{
+	const badges = _.clone(req.body);
+	model.send(badges, (err)=>{
+		if(err) return res.send(503, err);
+		res.send(200, 'success');
+	});
+};
+
+// trim the badges
+const trim = (req, res, next)=>{
+	model.trim();
 	next();
 };
 
 module.exports = {
 	save,
-	send
+	send,
+	trim
 };
