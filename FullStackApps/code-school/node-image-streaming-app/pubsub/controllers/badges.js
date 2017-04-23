@@ -28,8 +28,18 @@ const trim = (req, res, next)=>{
 	next();
 };
 
+// get badges from model
+const get = (req, res)=>{
+	model.get((err, data)=>{
+		if(err) return res.send(503, err);
+		res.json(200, data);
+	});
+};
+
+
 module.exports = {
 	save,
 	send,
-	trim
+	trim,
+	get
 };

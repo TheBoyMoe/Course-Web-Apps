@@ -21,10 +21,12 @@ const app = express();
 // middleware - parse any json data in the body of any request
 app.use(bodyParser.json());
 
-// pass post requests to '/' to the badges controller, calls save() then send()
-app.post('/', badges.save, badges.send, (req, res)=>{
-	res.send('\ndone\n\n');
-});
+// pass post requests to '/' to the badges controller, calls save(), trim(), then send()
+app.post('/', badges.save, badges.trim, badges.send);
+
+// get the ten last badges to populate the client to begin with,
+// each subsequent badge will be received via the socket
+app.get('/badges', badges.get);
 
 app.listen(port, ()=>{
 	console.log(`Express is listening on port ${port}`);

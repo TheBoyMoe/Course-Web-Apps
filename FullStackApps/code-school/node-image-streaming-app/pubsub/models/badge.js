@@ -39,8 +39,24 @@ const trim = ()=>{
 	redis.ltrim('badges', 0, 9);
 };
 
+/**
+ * get all available badges
+ */
+const get = (callback)=>{
+	redis.lrange('badges', 0, -1, (err, data)=>{
+		if(err) return callback(err, null);
+		// convert the json string into an arry of objects
+		data = data.map((badge)=>{
+			return JSON.parse(badge);
+		});
+		callback(null, data);
+	});
+};
+
+
 module.exports = {
 	save,
 	send,
-	trim
+	trim,
+	get
 };
