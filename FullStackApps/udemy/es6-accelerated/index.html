@@ -3,12 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Project</title>
-	<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
 	<script src="https://jspm.io/system.js"></script>
-	<script type="text/javascript" src="app.js"></script>
-	<script type="text/javascript">
-        System.import('./app.js');
-	</script>
+	<script type="text/javascript" src="config.js"></script>
+	
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,5 +26,9 @@
 			<div id="weatherTemperature">Temperature</div>
 		</div>
 	</div>
+	<!-- use system.js lib to import the app.js file -->
+	<script type="text/javascript">
+        System.import('./app.js');
+	</script>
 </body>
 </html>
