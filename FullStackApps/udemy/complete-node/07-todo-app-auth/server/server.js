@@ -157,9 +157,14 @@ app.post('/users', ((req, res)=>{
     // get the email and password properties off of the req body
     const body = _.pick(req.body, ['email', 'password']);
     const user = new User(body); // enough to pass in the obj to both validate and create the user obj
-    user.save().then((user)=>{
-        res.send(user);
-    }).catch((e) => res.status(400).send(e));
+    user.save().then(()=>{
+        return user.generateAuthToken();
+    }).then((token)=>{
+        // send the token back within a http header
+        res.header('x-auth', token).send(user);
+    }).catch((e) => {
+        res.status(400).send(e)
+    });
 }));
 
 
