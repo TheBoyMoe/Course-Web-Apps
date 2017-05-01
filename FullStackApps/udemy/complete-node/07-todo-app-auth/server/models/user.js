@@ -9,6 +9,7 @@
 const mongoose = require('mongoose'); // don't need to import the config'd version for models
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 // by defining a UserSchema we can define functions on the Schema and user objects
 const UserSchema = new mongoose.Schema({
@@ -62,6 +63,14 @@ UserSchema.methods.generateAuthToken = function () {
     })
     
 };
+
+// control what info is sent back with the jwt token - override the toJSON() method
+UserSchema.methods.toJSON = function () {
+    let user = this; // method is called on instances of user objects
+    let userObject = user.toObject(); // only properties defined on the user model will be available
+    return _.pick(userObject, ['_id', 'email']); // we don't want to return the token or the password - could be compromised
+};
+
 
 
 
