@@ -14,18 +14,24 @@ const searchWeather = ()=>{
     // console.log(CITY_NAME);
     
     // fetch the weather data from OpenWeather.org using promises
-    const URL = `api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${API_KEY}`;
+    const URL = `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${API_KEY}`;
     Http.fetchData(URL)
         .then((responseData)=>{
             const WEATHER_DATA = new WeatherData(CITY_NAME, responseData.weather[0].description.toUpperCase());
             const WEATHER_PROXY = new Proxy(WEATHER_DATA, WEATHER_PROXY_HANDLER);
             WEATHER_PROXY.temperature = responseData.main.temp;
+            updateWeather(WEATHER_PROXY)
         })
         .catch((err)=>console.error(err));
 };
 
 const updateWeather = (weatherData)=>{
-
+    ELEMENTS.ELEMENT_WEATHER_CITY.textContent = weatherData.cityName;
+    ELEMENTS.ELEMENT_WEATHER_DESCRIPTION.textContent = weatherData.description;
+    ELEMENTS.ELEMENT_WEATHER_TEMPERATURE.textContent = weatherData.temperature; // triggers the proxy get method??
+    
+    // display the weather
+    ELEMENTS.ELEMENT_WEATHER_BOX.style.display = 'block';
 };
 
 export {
