@@ -152,6 +152,16 @@ app.patch('/todos/:id', (req, res)=>{
 	
 });
 
+// POST /users - create new users in mongo, ensure email is unique and valid
+app.post('/users', ((req, res)=>{
+    // get the email and password properties off of the req body
+    const body = _.pick(req.body, ['email', 'password']);
+    const user = new User(body); // enough to pass in the obj to both validate and create the user obj
+    user.save().then((user)=>{
+        res.send(user);
+    }).catch((e) => res.status(400).send(e));
+}));
+
 
 app.listen(port, ()=>{
 	console.log(`Express is listening on port ${port}...`);
