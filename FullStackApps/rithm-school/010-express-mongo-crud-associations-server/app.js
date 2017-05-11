@@ -15,10 +15,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 // routes
-const petsRoutes = require('./routes/pets');
-app.use('/pets', petsRoutes);
+const ownerRoutes = require('./routes/owners');
+const petRoutes = require('./routes/pets');
+app.use('/owners', ownerRoutes);
+app.use('/owners/:owner_id/pets', petRoutes);
+
 app.get('/', (req, res, next)=>{
-    res.redirect('/pets');
+    res.redirect('/owners');
 });
 
 // error handling

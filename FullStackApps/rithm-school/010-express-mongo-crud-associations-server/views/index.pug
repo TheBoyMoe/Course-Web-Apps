@@ -1,8 +1,0 @@
-extends base.pug
-
-block content
-	h1 See all the pets
-	a(href="/pets/new") Add a new pet
-	each pet in pets
-		p Name: #{pet.name}&nbsp;
-			a(href=`/pets/${pet.id}/edit`) Edit

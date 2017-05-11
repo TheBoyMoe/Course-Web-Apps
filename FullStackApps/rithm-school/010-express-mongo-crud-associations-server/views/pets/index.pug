@@ -1,0 +1,9 @@
+extends ../base
+
+block content
+	h1 See all of #{owner.name}'s pets
+	a(href=`/owners/${owner.id}/pets/new`) Add a new pet
+	ul
+		each pet in owner.pets
+			li Pet's name: #{pet.name}&nbsp;
+				a(href=`/owners/${owner.id}/pets/${pet.id}/edit`) Edit
