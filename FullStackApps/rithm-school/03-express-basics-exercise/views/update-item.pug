@@ -1,0 +1,11 @@
+extends index
+
+block content
+	form.clearfix(action="/updated-list" method="POST")
+		.form-group
+			label(for="old-item") Update item:
+			input(id="old-item" type="text" name="oldItem" placeholder="Enter item...")
+		.form-group
+			label(for="new-item") Updated details:
+			input(id="new-item" type="text" name="newItem" placeholder="Updated details...")
+		input(type="submit" value="Update")

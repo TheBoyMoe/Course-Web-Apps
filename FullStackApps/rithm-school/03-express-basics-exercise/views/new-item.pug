@@ -1,0 +1,8 @@
+extends index
+
+block content
+	form.clearfix(action="/add-item" method="POST")
+		.form-group
+			label(for="new-item") Add a new item to the Shopping List:
+			input(id="new-item" type="text" name="newItem" placeholder="Enter item...")
+		input(type="submit" value="Add")

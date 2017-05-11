@@ -1,0 +1,8 @@
+extends index
+
+block content
+	form.clearfix(action="/delete-all" method="POST")
+		.form-group
+			label(for="remove-all") Delete all items from the Shopping List:
+			input(id="remove-all" type="text" name="removeAll" placeholder="")
+		input(type="submit" value="Delete All")

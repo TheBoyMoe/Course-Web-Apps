@@ -1,0 +1,8 @@
+extends index
+
+block content
+	include search
+	h1 Shopping list
+	ul#shopping-list
+		each item in items
+			li.item #{item}

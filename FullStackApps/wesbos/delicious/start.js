@@ -8,6 +8,8 @@ if (major <= 7 && minor <= 5) {
 }
 
 // import environmental variables from our variables.env file
+// - api keys, passwords, tokens, etc
+// accessed through process.env.var_name thanks to 'dotenv' package
 require('dotenv').config({ path: 'variables.env' });
 
 // Connect to our Database and handle an bad connections
@@ -22,7 +24,7 @@ mongoose.connection.on('error', (err) => {
 
 // Start our app!
 const app = require('./app');
-app.set('port', process.env.PORT || 7777);
+app.set('port', process.env.PORT || 3000);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });

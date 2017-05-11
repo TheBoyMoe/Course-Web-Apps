@@ -1,0 +1,8 @@
+extends index
+
+block content
+	h1 Here are the colors!
+	ul#colors
+		each color in colors
+			li.color
+				a(href="`/colors/${color}`") #{color}

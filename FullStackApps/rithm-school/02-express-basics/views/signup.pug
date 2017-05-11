@@ -1,0 +1,16 @@
+extends index
+
+block content
+
+	//form(action="/register") // for GET request, data retrieved from query object
+	form(action="/register" method="POST")
+		.form-group
+			label(for="firstname") First name:
+			input(id="firstname" type="text" name="firstname" placeholder="Enter your first name")
+		.form-group
+			label(for="lastname") Last name:
+			input(id="lastname" type="text" name="lastname" placeholder="Enter your lastname")
+		.form-group
+			label(for="email") Email:
+			input(id="email" type="text" name="email" placeholder='Email address')
+		input(type="submit" value="Register")

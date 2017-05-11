@@ -1,0 +1,23 @@
+{
+  "name": "010-express-mongo-crud-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.8",
+    "pug": "^2.0.0-rc.1"
+  },
+  "devDependencies": {
+    "locus": "^2.0.1",
+    "morgan": "^1.8.1"
+  }
+}

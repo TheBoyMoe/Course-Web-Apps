@@ -1,0 +1,9 @@
+extends base
+
+block content
+	h1 See all Users!
+	a(href="/users/new") make a new one!
+	ul
+		each user in users
+			li #{user.name} &nbsp;
+				a(href=`/users/${user.id}/edit`) Edit

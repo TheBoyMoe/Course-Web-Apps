@@ -1,0 +1,8 @@
+extends index
+
+block content
+	form.clearfix(action="/delete-item" method="POST")
+		.form-group
+			label(for="remove-item") Remove item from the Shopping List:
+			input(id="remove-item" type="text" name="removeItem" placeholder="Enter item...")
+		input(type="submit" value="Remove")
