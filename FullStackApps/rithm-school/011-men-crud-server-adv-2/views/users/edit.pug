@@ -1,0 +1,9 @@
+extends ../base
+
+block content
+	h1 Edit owner details!
+	form(action=`/users/${user.id}?_method=PATCH`, method="POST")
+		input(type="text", name="name", value=`${user.name}`)
+		input(type="submit", value="Edit a Pet!")
+	form(action=`/users/${user.id}?_method=DELETE`, method="POST")
+		input(type="submit", value="Delete")

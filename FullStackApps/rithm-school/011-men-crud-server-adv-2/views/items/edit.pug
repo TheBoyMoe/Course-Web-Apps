@@ -1,0 +1,9 @@
+extends ../base
+
+block content
+	h1 Edit an item!
+	form(action=`/users/${item.user.id}/items/${item.id}?_method=PATCH`, method="POST")
+		input(type="text", name="name", value=`${item.name}`)
+		input(type="submit", value="Edit a Item!")
+	form(action=`/users/${item.user.id}/items/${item.id}?_method=DELETE`, method="POST")
+		input(type="submit", value="Delete")

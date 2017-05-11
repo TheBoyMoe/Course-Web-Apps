@@ -1,0 +1,9 @@
+extends ../base
+
+block content
+	h1 #{user.name}'s shopping list
+	a(href=`/users/${user.id}/items/new`) Add a new item
+	ul
+		each item in user.items
+			li item: #{item.name}&nbsp;
+				a(href=`/users/${user.id}/items/${item.id}/edit`) Edit

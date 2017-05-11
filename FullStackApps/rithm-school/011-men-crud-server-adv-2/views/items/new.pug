@@ -1,0 +1,7 @@
+extends ../base
+
+block content
+	h1 Add a new item!
+	form(action=`/users/${user.id}/items`, method="POST")
+		input(type="text", name="name")
+		input(type="submit", value="Add an item!")
