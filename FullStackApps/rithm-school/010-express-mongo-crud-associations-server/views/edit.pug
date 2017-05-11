@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+	h1 Edit a pet!
+	form(action=`/pets/${pet.id}?_method=PATCH`, method="POST")
+		input(type="text", name="name", value=`${pet.name}`)
+		input(type="submit", value="Edit a Pet!")
+	form(action=`/pets/${pet.id}?_method=DELETE`, method="POST")
+		input(type="submit", value="X")

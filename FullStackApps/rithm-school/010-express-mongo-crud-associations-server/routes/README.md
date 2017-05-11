@@ -18,3 +18,7 @@ GET	    /owners/:owner_id/pets/:id/edit	    Show a form for editing an owner's p
 POST	/owners/:owner_id/pets	            Create a pet for an owner when a form is submitted
 PATCH	/owners/:owner_id/pets/:id	        Edit an owner's pet when a form is submitted
 DELETE	/owners/:owner_id/pets/:id	        Delete an owner's pet when a form is submitted
+
+#### References
+[Creating one-to-many relationships using embedded docs](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/)
+[Creating one-to-many relationships using document references](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
