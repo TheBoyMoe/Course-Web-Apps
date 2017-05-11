@@ -37,7 +37,7 @@ router.get('/:id/edit', (req, res, next)=>{
 router.post('/', (req, res, next)=>{
     db.Pet.create(req.body)
         .then((pet)=>{
-            res.redirect('/users');
+            res.redirect('/pets');
         })
         .catch((err)=>next(err));
 });
@@ -46,7 +46,7 @@ router.post('/', (req, res, next)=>{
 router.patch('/:id', (req, res, next)=>{
     db.Pet.findByIdAndUpdate(req.params.id, req.body)
         .then((pet)=>{
-            res.redirect('/users');
+            res.redirect('/pets');
         })
         .catch((err)=>next(err));
 });
@@ -55,7 +55,7 @@ router.patch('/:id', (req, res, next)=>{
 router.delete('/:id', (req, res, next)=>{
     db.Pet.findByIdAndRemove(req.params.id)
         .then((pet)=>{
-            res.redirect('/users')
+            res.redirect('/pets')
         })
         .catch((err)=>next(err));
 });
