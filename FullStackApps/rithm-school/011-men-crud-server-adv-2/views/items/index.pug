@@ -5,5 +5,6 @@ block content
 	a(href=`/users/${user.id}/items/new`) Add a new item
 	ul
 		each item in user.items
-			li item: #{item.name}&nbsp;
+			li
+				a(href=`/users/${user.id}/items/${item.id}`) #{item.name}&nbsp;
 				a(href=`/users/${user.id}/items/${item.id}/edit`) Edit

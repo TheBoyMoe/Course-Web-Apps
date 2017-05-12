@@ -12,7 +12,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('./../models/index');
 
-// display all items
+// display all owners
 router.get('/', (req, res, next)=>{
     db.Owner.find().then((owners)=>{
         res.render('owners/index', {owners});
@@ -20,12 +20,12 @@ router.get('/', (req, res, next)=>{
     .catch((err)=>next(err));
 });
 
-// display a form to allow the addition of an item
+// display a form to allow the addition of a owner
 router.get('/new', (req, res, next)=>{
     res.render('owners/new');
 });
 
-// get an individual item & display
+// get an individual owner & display
 router.get('/:id', (req, res, next)=>{
     db.Owner.findById(req.params.id)
         .then((owner)=>{
@@ -34,7 +34,7 @@ router.get('/:id', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
-// fetch an individual item and display it for editing
+// fetch an individual owner and display it for editing
 router.get('/:id/edit', (req, res, next)=>{
     db.Owner.findById(req.params.id)
         .then((owner)=>{
@@ -43,7 +43,7 @@ router.get('/:id/edit', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
-// create a new item in the database
+// create a new owner in the database
 router.post('/', (req, res, next)=>{
     db.Owner.create(req.body)
         .then(()=>{
@@ -52,7 +52,7 @@ router.post('/', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
-// update an individual item in the database
+// update an individual owner in the database
 router.patch('/:id', (req, res, next)=>{
     db.Owner.findByIdAndUpdate(req.params.id, req.body)
         .then((owner)=>{
@@ -61,10 +61,10 @@ router.patch('/:id', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
-// delete item form the database
+// delete owner form the database
 router.delete('/:id', (req, res, next)=>{
     db.Owner.findByIdAndRemove(req.params.id)
-        .then((oqner)=>{
+        .then((owner)=>{
             res.redirect('/owners');
         })
         .catch((err)=>next(err));
