@@ -27,7 +27,12 @@ router.post('/login', (req, res, next)=>{
                 if(isMatch) res.redirect('/users');
                 else res.redirect('/users/login');
             })
-        }, (err) => res.send(err));
+        })
+        .catch((e)=>{
+            let err = new Error('User not found');
+            err.status = 400;
+            next(err);
+        });
 });
 
 // POST /users/signup
@@ -35,7 +40,7 @@ router.post('/signup', (req, res, next)=>{
     db.User.create(req.body)
         .then((user)=>{
             res.redirect('/users/login');
-        });
+        })
 });
 
 module.exports = router;
