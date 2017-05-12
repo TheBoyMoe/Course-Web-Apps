@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // app config
 const app = express();
 const port = process.env.PORT || 3000;
+const env = process.env.NODE_ENV || 'development';
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'));
@@ -32,7 +33,7 @@ app.use((req, res, next)=>{
 });
 
 // dev errors - print stack trace
-if(app.get('env') === 'development'){
+if(env === 'development'){
     app.use((err, req, res, next)=>{
         res.status(err.status || 500);
         res.render('error', {

@@ -89,4 +89,20 @@ router.delete('/:id', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
+// TODO GET /users/:user_id/items/search - seach user shopping list
+router.get('/search', (req, res, next)=>{
+    
+    db.Item.findOne({name: req.body.name})
+        .then((item)=>{
+            res.redirect(`/users/${req.params.user_id}/items/show`, {item});
+        })
+        .catch((err)=>next(err));
+});
+
+
+// TODO DELETE //users/:user_id/items - delete all items in the list
+router.delete('/items', (req, res, next)=>{
+
+});
+
 module.exports = router;

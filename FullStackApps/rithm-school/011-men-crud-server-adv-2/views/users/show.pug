@@ -4,6 +4,6 @@ block content
 	h1 #{user.name}
 
 	h2 Search the shopping list
-	form(action=`/users/${user.id}/items/${name}/search` method="POST")
+	form(action=`/users/${user.id}/items/search` method="POST")
 		input(type="text", name="name")
 		input(type="submit", value="Submit!")
