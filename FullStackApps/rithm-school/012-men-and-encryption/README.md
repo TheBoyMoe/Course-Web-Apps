@@ -9,4 +9,6 @@
     * validate - when a document is validated
     * save - when a document is saved
     * when a document is removed
- * we can use these features to hash the users password and save it the the user to the database.   
+    
+ * we can use these features to hash the users password and save it the the user to the database.
+ * pre- and post- save hooks are not executed on update(), findOneAndUpdate(), and other update methods. When we need to update a user's password, we need to find first find the actual document, modify the document and then call save() to trigger the pre-save hook to save the updated password.
