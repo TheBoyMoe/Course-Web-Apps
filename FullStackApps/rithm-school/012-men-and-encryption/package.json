@@ -1,0 +1,21 @@
+{
+  "name": "012-men-and-encryption",
+  "version": "1.0.0",
+  "description": "* Bcrypt is a library used for encrypting or hashing passwords.  * based on the Blowfish Cipher- widely recognised as a secure one-way hashing algorithm.  * with one-way encryption, hashing, the password is not meant to be decrypted. The hashed password is saved on the server. When a user tries to authenticate the password is hashed and the two hashes compared. Hashing on it's own is not secure since it opens you up to dictionary attacks. To prevent dictionary attacks a salt, or random series or characters, is added to the password before hashing  *",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.8",
+    "morgan": "^1.8.1",
+    "pug": "^2.0.0-rc.1"
+  }
+}
