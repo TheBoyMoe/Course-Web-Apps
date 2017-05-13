@@ -20,4 +20,58 @@
  * session - the client state can be persisted between requests using a session object, which can be used to store info such as the userId. The session object can be requested from anywhere in the request-response cycle.
  * two different npm packages are commonly used for storing sessions:
     * express-session - session object stored in memory, lost if the service is re-started - user has to login again.
-    * cookie-session - stores the session obj in memory, and sets a cookie in the client browser in case the session is destroyed - the cookie can be used to restore the session again if it has not expired.
+    * cookie-session - stores the session obj in memory, and sets a cookie in the client browser in case the session is destroyed - the cookie can be used to restore the session again if it has not expired. the cookie-session package gives us access to the session on the request object.
+    * to ensure authentication on each request we need some middleware which will intercept each request and check if there is some some info saved in the session (put there when logging in). If not the user is re-directed to the login page, otherwise we allow the request to continue.
+    
+### Authentication
+ * once a user has logged in information, e.g user_id, is placed in the session object. All we need to do is check it using middleware and verify if the user is logged in or not.
+    
+```javascript
+    app.use(function(req, res, next){
+        // if there is no value for the key of user_id in the session (null if we logged out or undefined if it has not been created yet)
+        if(!req.session.user_id){
+            res.redirect('/users/login');
+        } else {
+            next();
+        }
+    })
+```
+    
+ * the problem with the above code is that it's executed for every route, certain pages such as about, contact etc should be available to everyone. To accommodate this, place the session checking code in a function and only use it on routes that need to be protected.
+
+```javascript
+    function loginRequired(req, res, next){
+        if(!req.session.user_id){
+            res.redirect('/users/login');
+        } else {
+            next();
+        }
+    }
+    
+    // now we can add that middleware....in the middle!
+    app.get('/welcome', loginRequired, function(req, res, next){
+        res.send('You are logged in!');
+    })
+```     
+
+### Authorisation
+ * Just because you can login does not mean you should be able to access every page , e.g. another use's profile page or be able to delete another user's blog posts. To ensure that only certain users are authorised to access certain routes or perform certain actions we can use middleware, e.g.
+ 
+```javascript
+    function ensureCorrectUser(req, res, next){
+        if(req.params.user_id !== req.session.user_id){
+            req.flash('Not Authorized');
+            res.redirect(`/users/${req.session.user_id}/posts`);
+        } else {
+            next();
+        }
+    }
+    
+    app.delete('/users/:user_id/post', loginRequired, ensureCorrectUser, function(req, res, next){
+        res.send('A post was just deleted!');
+    })
+
+``` 
+ * flash messages allow us to store messages in the session object, and a so available across multiple requests - we need to set up some session storage before using flash messages - use the connect-flash package.
+
+ 
