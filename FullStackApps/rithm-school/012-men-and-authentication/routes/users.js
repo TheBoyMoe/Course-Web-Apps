@@ -46,6 +46,7 @@ router.post('/login', (req, res, next)=>{
 router.post('/signup', (req, res, next)=>{
     db.User.create(req.body)
         .then((user)=>{
+            req.flash('Successfully registered, now log in!');
             res.redirect('/users/login');
         })
 });

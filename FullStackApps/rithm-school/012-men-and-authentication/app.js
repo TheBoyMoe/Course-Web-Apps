@@ -1,9 +1,15 @@
+/*
+    References:
+    [1] https://github.com/expressjs/cookie-session
+    [2] https://auth0.com/blog/cookies-vs-tokens-definitive-guide/
+
+ */
 'use strict';
 
 // load the app variable(s) defined in the .env file in the root of the app
 // dotenv loads environment variables into process.env
 require('dotenv').load();
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_KEY = process.env.SESSION_KEY;
 
 const express = require('express');
 const methodOverride = require('method-override');
@@ -22,7 +28,10 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
-app.use(session({secret: SESSION_SECRET}));
+app.use(session({
+    name: 'session',
+    keys: ['hello'] // encrypt/decrypt session cookie
+}));
 app.use(flash()); // must follow session setup
 
 // routes
