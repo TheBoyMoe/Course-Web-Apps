@@ -89,7 +89,7 @@ router.delete('/:id', (req, res, next)=>{
         .catch((err)=>next(err));
 });
 
-// TODO GET /users/:user_id/items/search - seach user shopping list
+// TODO GET /users/:user_id/items/search - search user shopping list
 router.get('/search', (req, res, next)=>{
     
     db.Item.findOne({name: req.body.name})

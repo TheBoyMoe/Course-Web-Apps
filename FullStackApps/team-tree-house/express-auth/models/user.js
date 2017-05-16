@@ -38,10 +38,10 @@ UserSchema.statics.authenticate = (email, password, callback)=>{
 				error.status = 401;
 				return callback(error);
 			}
-			// match found
+			// user found, compare passwords
 			bcrypt.compare(password, user.password, (err, result)=>{
 				if(result === true) return callback(null, user); // callback pattern callback(err, result)
-				else return callback();
+				else return callback(); // user undefined
 			})
 		})
 };

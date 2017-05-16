@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 
 // pre-hook method called prior to saving the user
 // 'next' is a callback function that needs to be executed to
-// ensure that we can move on to the next pice of middleware, otherwise the server will hang
+// ensure that we can move on to the next piece of middleware, otherwise the server will hang
 userSchema.pre('save', function (next) {
     // cache the context of 'this'
     let user = this;
