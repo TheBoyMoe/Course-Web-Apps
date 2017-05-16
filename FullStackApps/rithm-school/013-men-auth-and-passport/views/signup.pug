@@ -1,9 +1,9 @@
 extend base.pug
 
 block content
-	h1 Log In
-	form(action='/users/login', method="POST")
+	h1 Sign Up
+	form(action='/users/signup', method="POST")
 		input(type="text" name="username" placeholder="username")
 		input(type="password" name="password" placeholder="password")
-		input(type="submit" value = "Log in!")
-	a(href='/users/signup') Not yet registered? Sign up
+		input(type="submit" value = "Register!")
+	a(href='/users/login') already have an account? Login
