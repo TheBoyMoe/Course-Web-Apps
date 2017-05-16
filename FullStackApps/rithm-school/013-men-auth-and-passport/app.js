@@ -9,6 +9,12 @@
     3. pass in a 2nd parameter which is a callback function(the verify callback)
     4. if authentication is successful the user will be serialised - their info stored in the
         session object, marking them as logged in and redirected to the successRoute.
+    
+    Methods available on the user object:
+     - req.isAuthenticated() - returns true if the user is authenticated
+     - req.user() - returns the user object
+     - req.login() - logs in the user and serializes the object
+     - req.logout() - remove the session info for hte logged in user
 
  */
 'use strict';
