@@ -20,6 +20,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('cookie-session');
+const flash = require('connect-flash');
 
 
 // config app
@@ -38,19 +39,21 @@ app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
 
 // routes
 const userRoutes = require('./routes/users');
 app.use('/users', userRoutes);
 
 app.get('/', (req, res)=>{
-    res.redirect('/users');
+    res.redirect('/users/login');
 });
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}));
+// send flash messages to all routes
+app.use((req, res, next)=>{
+    res.locals.message = req.flash('message');
+    next();
+});
 
 // error handling
 app.use((req, res, next)=>{
