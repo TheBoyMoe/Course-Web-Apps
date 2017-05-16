@@ -23,14 +23,18 @@ userSchema.pre('save', function (next) {
     bcrypt.hash(user.password, 10)
         .then((hash)=>{
             user.password = hash;
+            next();
         })
         .catch((err)=>next(err));
 });
 
 // compare the submitted password to the saved one
 userSchema.methods.comparePassword = (enteredPassword, next)=>{
-    bcrypt.compare(enteredPassword, this.password)
-}
+    bcrypt.compare(enteredPassword, this.password, (err, isMatch)=>{
+        if(err) return next(err);
+        next(null, isMatch);
+    });
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
