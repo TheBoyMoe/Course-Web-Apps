@@ -39,7 +39,7 @@ router.post('/', (req, res, next)=>{
 
 // PATCH /pets/:id
 router.patch('/:id', (req, res, next)=>{
-    db.Pet.findByIdAndUpdate(req.params.id)
+    db.Pet.findByIdAndUpdate(req.params.id, req.body)
         .then((pet) => res.status(200).send(pet));
 });
 
