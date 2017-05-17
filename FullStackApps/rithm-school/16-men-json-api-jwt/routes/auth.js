@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config({path: './../variables.env'});
+require('dotenv').config({ path: __dirname + '/../variables.env' });
 const express = require('express');
 const router = express.Router();
 const db = require('./../models/index');
@@ -23,7 +23,7 @@ router.post('/signup', (req, res)=>{
     db.User.create(req.body)
         .then((user)=>{
             let token = jwt.sign({user_id: user.id}, process.env.SECRET_KEY);
-            res.status(200).send({token});
+            res.status(201).send({token});
         })
 });
 

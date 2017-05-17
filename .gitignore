@@ -47,4 +47,5 @@ FullStackApps/rithm-school/13-men-auth-and-passport/variables.env
 FullStackApps/rithm-school/14-men-auth-and-passport-oauth/node_modules
 FullStackApps/rithm-school/14-men-auth-and-passport-oauth/variables.env
 FullStackApps/rithm-school/15-men-json-api/node_modules
-FullStackApps/rithm-school/16-men-json-api/variables.env
+FullStackApps/rithm-school/16-men-json-api-jwt/variables.env
+FullStackApps/rithm-school/16-men-json-api-jwt/node_modules

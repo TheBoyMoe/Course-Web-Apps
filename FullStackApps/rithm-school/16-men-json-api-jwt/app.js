@@ -5,7 +5,7 @@
 
  */
 'use strict';
-require('dotenv').config({path: 'variables.env'});
+
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -60,3 +60,5 @@ app.use((err, req, res, next)=>{
 app.listen(port, ()=>{
     console.log(`Express is listening on port ${port}`);
 });
+
+module.exports = app; // export the app  for testing

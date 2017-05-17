@@ -1,10 +1,10 @@
 'use strict';
-require('dotenv').config({path: './../variables.env'});
+require('dotenv').config({ path: __dirname + '/../variables.env' });
 const jwt = require('jsonwebtoken');
 
 const loginRequired = (req, res, next)=>{
     try{
-        let token = req.headers.authorisation.split(' ')[1];
+        let token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded)=>{
             if(decoded) next();
             else res.status(401).send('Please log in first');
@@ -17,7 +17,7 @@ const loginRequired = (req, res, next)=>{
 
 const ensureCorrectUser = (req, res, next)=>{
     try{
-        let token = req.headers.authorisation.split(' ')[1];
+        let token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded)=>{
             if(decoded.user_id === req.params.id) next();
             else res.status(401).send('Unauthorised');
