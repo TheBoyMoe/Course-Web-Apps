@@ -27,7 +27,7 @@
         
     References:
     [1] https://socket.io/
-
+    [2] https://socket.io/get-started/chat/ (chat app demo)
 
  */
 "use strict";
