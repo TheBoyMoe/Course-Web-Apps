@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Socket.io Demo</title>
+</head>
+<body>
+<script src="./../node_modules/socket.io/lib/socket.js"></script>
+<script>
+	let socket = io(); // client creates the connection - websocket established
+	socket.on('from server', (data)=>{
+	    console.log(data);
+	    socket.emit('from client', 'Hello from client!')
+	});
+	
+</script>
+</body>
+</html>
