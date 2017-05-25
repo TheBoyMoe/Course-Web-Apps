@@ -1,3 +1,13 @@
+/*
+	References:
+	[1] http://code.jquery.com/ (jquery cdn)
+	[2] https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+	[3] https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/
+	[4] http://www.htmlgoodies.com/beyond/javascript/events-and-javascript-part-3-the-event-object.html
+	
+	
+ */
+
 // Puppy images fade in
 $('main img').css('display', 'none').fadeIn(1600);
 
@@ -9,9 +19,9 @@ $('.card').on('click', function() {
 // Not a necessary feature, but shows the use of hover()
 $('.loc').hover(
   function(){
-    $(this).html("<strong>Location:</strong> Your house?!");
+    $(this).html("<strong>Location:</strong> Your house?!"); // mouse over
   }, function() {
-    $(this).html("<strong>Location:</strong> Treehouse Adoption Center");
+    $(this).html("<strong>Location:</strong> Treehouse Adoption Center"); // mouse out
 });
 
 // Adds a pet to the page with user input
@@ -28,7 +38,8 @@ $('#add-pet').on('click', function() {
     '<section class="six columns"><div class="card"><p><strong>Name:</strong> ' + $name +
     '</p><p><strong>Species:</strong> ' + $species +
     '</p><p><strong>Notes:</strong> ' + $notes +
-    '</p><span class="close">&times;</span></div></section>'
+    '</p><span class="close">&times;</span></div>' +
+	'</section>'
   );
   // Attach the new element to the page
   $('#posted-pets').append($newPet);
