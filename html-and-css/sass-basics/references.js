@@ -16,6 +16,8 @@
 	[14] http://thesassway.com/beginner/the-inception-rule
 	[15] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#parent-selector
 	[16] http://blog.teamtreehouse.com/sass-tip-double-ampersand-selector
+	[17] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins
+	[18] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-content
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css
@@ -25,5 +27,14 @@
 	
 	you can automatically combine multiple sass files into a single css file by watching the sass folder
 	$ sass --watch scss:css
-
+ 
+ 
+	Mixins allow you to declare styles that can be referenced in other parts of your style sheet
+	1. create the mixin with the @mixin directive
+	2. include the mixin inside other rules with the @include directive
+		- must be declared before called, wither at the top of the style sheet or in a separate file.
+	
+	content directive allows you to pass values to mixins, allowing you to use the same mixin in different locations. Add @content to the mixin definition, add {} with the content to the @include statement, following it's name.
+		
+ 
  */
