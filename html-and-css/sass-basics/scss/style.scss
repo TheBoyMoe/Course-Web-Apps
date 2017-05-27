@@ -189,6 +189,7 @@ footer {
 	}
 }
 
+/*
 .btn {
 	color: $color-text-secondary;
 	display: inline-block;
@@ -209,6 +210,59 @@ footer {
 		margin-top: auto;
 	}
 }
+*/
+
+
+/* impl btn class using extend */
+
+
+%btn {
+	color: $color-text-secondary;
+	display: inline-block;
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 0.75em 1.5em;
+	border-radius: 0.35em;
+
+	&:hover {
+		color: $color-bg-secondary;
+		opacity: 0.8;
+	}
+
+	&:active {
+		opacity: initial;
+	}
+
+}
+
+.btn {
+
+	&-callout {
+		@extend %btn;
+		font-size: 1.1em;
+		background-color: $color-secondary;
+	}
+
+	&-info {
+		@extend %btn;
+		font-size: 0.85em;
+		background-color: $color-primary;
+		margin-top: auto;
+	}
+
+}
+
+
+/* Clearfix floats  - impl by adding @extend clearfix to any selectors */
+%clearfix {
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
 
 /*
 	Sass also provides a shorthand for writing properties using CSS namespaces:

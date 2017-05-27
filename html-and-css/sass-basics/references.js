@@ -18,6 +18,9 @@
 	[16] http://blog.teamtreehouse.com/sass-tip-double-ampersand-selector
 	[17] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins
 	[18] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-content
+	[19] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend
+	[20] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholder_selectors_
+	[21] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#comments
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css
@@ -31,10 +34,16 @@
  
 	Mixins allow you to declare styles that can be referenced in other parts of your style sheet
 	1. create the mixin with the @mixin directive
-	2. include the mixin inside other rules with the @include directive
+	2. include the mixin inside other rules with the @include directive followed by the mixin name
 		- must be declared before called, wither at the top of the style sheet or in a separate file.
 	
-	content directive allows you to pass values to mixins, allowing you to use the same mixin in different locations. Add @content to the mixin definition, add {} with the content to the @include statement, following it's name.
-		
+	Content directive allows you to pass values to mixins, allowing you to use the same mixin in different locations. Add @content to the mixin definition, add {} with the content to the @include statement, following it's name.
+	
+	Extend Directive allows you to share snippets of code across your style sheets.
+	
+	Placeholder selectors are used for those selectors that do not appear in the html, thus not referenced directly, only used by sass, e.g with extend directives - create a placeholder selector to reference the styles common to two or more selectors, reference the placeholder selector in the style sheet with the @extend directive.
+	
+	Comments - single line comments defined with // DO NOT appear in the css output
+	
  
  */
