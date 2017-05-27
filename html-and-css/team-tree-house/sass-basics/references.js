@@ -59,4 +59,6 @@
 	
  	Media Queries - sass lets you nest media queries directly inside the selector they're being applied to. Instead of defining the media query and then defining the selector inside it with the specific styles to be applied at that break point, simply place the media query with the styles in that selector where it's initially defined. You can also create variables for the min-width and max-width values.
  	
+ 	Functions output a single value, NO css. Define a function with the @function directive followed by the name of the function. Functions can take parameters, comma separated list. To make the parameters reusable define them as variables, name starts with a $ sign. All functions have a @return diractive to return the functions result.
+ 	
  */

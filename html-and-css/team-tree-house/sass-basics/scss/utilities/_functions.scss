@@ -2,3 +2,33 @@
 //  Functions
 // ======================================
 
+// functions can access any globally defined variables, you can also define default values to parameters, applied whenarg not supplied.
+
+@function px-to-percentage($target, $context: $max-width) {
+	@return ($target/$context) * 100%;
+}
+
+.test {
+	width: px-to-percentage(400px);
+}
+
+
+// calculate rem
+
+$base-font-size: 16px;
+
+// Write your function here
+@function px-to-rem($target, $context: $base-font-size){
+	@return ($target/$context) * 1rem;
+}
+
+h1 {
+	font-size: px-to-rem(60px)
+}
+
+// calculate column widths - uses local vars, not visible else where
+@function per-line($items){
+	$gutter-percemtage: px-to-percentage($gutter) * 2;
+	$gutter-total: $items * $gutter-percemtage;
+	@return (100% / $items) - $gutter-total;
+}
