@@ -45,5 +45,11 @@
 	
 	Comments - single line comments defined with // DO NOT appear in the css output
 	
+	Partials - allow you to split your stylesheet into separate files, allowing you to modularize your css so it's easier to maintain. Use partials to group related styles, all your variables. Sass will automatically merge your partials into a single file on compilation.
+	1. create the partial - add an _ to the beginning of the name of the sass file. The _ tells sass not to be compiled into css, you need to import partials into other sass files
+	2. import the partial into other sass files, where required. You can even import partials into other partials.
+	
+	The order in which you import partials matters, that's the order in which they're compiled into css. Import partials that are being referenced in other partials first, e.g. mixins, variables, placeholders, etc.
+	
  
  */
