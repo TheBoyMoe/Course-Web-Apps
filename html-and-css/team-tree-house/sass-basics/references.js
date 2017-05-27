@@ -21,6 +21,12 @@
 	[19] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend
 	[20] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholder_selectors_
 	[21] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#comments
+	[22] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#partials
+	[23] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media
+	[24] https://github.com/necolas/normalize.css/blob/master/normalize.css (normalize v 7.0)
+	[25] http://sass-lang.com/documentation/Sass/Script/Functions.html#rgb_functions
+	[26] http://sass-lang.com/documentation/Sass/Script/Functions.html#hsl_functions
+	[27] http://sass-lang.com/documentation/Sass/Script/Functions.html#opacity_functions
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css
@@ -51,5 +57,6 @@
 	
 	The order in which you import partials matters, that's the order in which they're compiled into css. Import partials that are being referenced in other partials first, e.g. mixins, variables, placeholders, etc.
 	
- 
+ 	Media Queries - sass lets you nest media queries directly inside the selector they're being applied to. Instead of defining the media query and then defining the selector inside it with the specific styles to be applied at that break point, simply place the media query with the styles in that selector where it's initially defined. You can also create variables for the min-width and max-width values.
+ 	
  */

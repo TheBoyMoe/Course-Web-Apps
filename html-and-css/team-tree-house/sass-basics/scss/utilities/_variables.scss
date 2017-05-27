@@ -6,6 +6,7 @@
 $white: #fff;
 
 $color-primary: #278da4; // teal
+$color-primary-light: lighten($color-primary, 10%);
 $color-secondary: #b13c69; // dark violet red
 $color-accent: #eeea72;
 $color-shade: #eee;
@@ -20,3 +21,9 @@ $font-stack-secondary: 'Bree Serif', serif;
 
 // Layout
 $max-width: 1000px;
+
+// Break points
+$break-xs: 575px;
+$break-s: 576px;
+$break-m: 768px;
+$break-l: 992px;
