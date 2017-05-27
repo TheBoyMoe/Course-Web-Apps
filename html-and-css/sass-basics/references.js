@@ -12,6 +12,10 @@
 	[10] http://koala-app.com/
 	[11] https://coryetzkorn.com/blog/color-variables-in-sass/
 	[12] http://thesassway.com/beginner/variable-naming
+	[13] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_rules
+	[14] http://thesassway.com/beginner/the-inception-rule
+	[15] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#parent-selector
+	[16] http://blog.teamtreehouse.com/sass-tip-double-ampersand-selector
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css
@@ -21,5 +25,5 @@
 	
 	you can automatically combine multiple sass files into a single css file by watching the sass folder
 	$ sass --watch scss:css
-	
+
  */

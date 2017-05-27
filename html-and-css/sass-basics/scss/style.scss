@@ -1,4 +1,4 @@
-/*  Variables */
+ /*  Variables */
 $color-primary: #278da4;
 $color-secondary: #b13c69;
 $color-accent: #eeea72;
@@ -16,7 +16,7 @@ $font-stack-secondary: 'Bree Serif', serif;
 /* BASE ------------------------------------------------- */
 
 * {
-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
@@ -39,37 +39,85 @@ ul {
 	margin: 0;
 }
 
+p {
+	margin-bottom: 1.25em;
+
+	// targets p elements in .intro
+	.intro & {
+		font-size: 1.2em;
+	}
+}
+
+
+a {
+	color: $color-text-primary;
+	text-decoration: none;
+
+	&:hover { // & replaced by parent element, e.g. a, in the css
+		color: $color-secondary;
+	}
+}
+
+
+
 /* HEADER & FOOTER ----------------------------------------- */
 
 header {
 	height: 460px;
-	background: linear-gradient($color-bg-light, $color-bg),
-			  url('../img/bg.jpg') no-repeat;
+	background: linear-gradient($color-bg-light, $color-bg), url('../img/bg.jpg') no-repeat;
 	background-blend-mode: multiply;
 	background-size: cover;
+	position: relative;
+
+	// adds the angle effect to the header
+	&::after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 50px;
+		position: absolute;
+		transform: skewY(-2deg);
+		background-color: $color-text-secondary;
+		bottom: -25px;
+	}
+
+	h1 {
+		color: $color-text-secondary;
+		font-size: 4.8em;
+		margin-bottom: 0;
+		letter-spacing: 1px;
+	}
+
+	p {
+		color: $color-accent;
+		font-size: 1.25em;
+		margin: 0;
+	}
 }
 
-header h1 {
-	color: $color-text-secondary;
-	font-size: 4.8em;
-	margin-bottom: 0;
-	letter-spacing: 1px;
-}
-
-header p {
-	color: $color-accent;
-	font-size: 1.25em;
-	margin: 0;
-}
 
 footer {
 	padding: 2em 0 0;
 	height: 100px;
 	background-color: $color-shade;
 	margin-top: 3.5em;
+	position: relative;
+
+	// adds the angle effect to the footer
+	&::before {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 50px;
+		position: absolute;
+		transform: skewY(-2deg);
+		background-color: $color-shade;
+		top: -25px;
+	}
 }
 
-/* CONTAINERS ---------------------------------------------- */
+
+ /* CONTAINERS ---------------------------------------------- */
 
 .inner {
 	padding: 0.5em 1em;
@@ -84,6 +132,32 @@ footer {
 
 .main-nav {
 	margin-top: 1em;
+
+	li {
+		display: inline-block;
+		margin: 0 0.65em;
+	}
+
+	a {
+		color: $color-text-secondary;
+		font-size: 0.85em;
+		text-decoration: none;
+		text-transform: uppercase;
+		padding: 0.5em;
+
+		&:hover {
+			color: $color-accent;
+		}
+	}
+}
+
+.img-featured {
+	width: 165px;
+	border: 4px solid $color-text-secondary;
+	border-radius: 50%;
+	margin-top: 75px;
+	position: relative;
+	z-index: 100;
 }
 
 .card {
@@ -91,27 +165,60 @@ footer {
 	flex-direction: column;
 	padding: 1.5em 1em;
 	border: 1px solid $color-shade;
-	border-radius: .25em;
+	border-radius: 0.25em;
+
+	h1 {
+		margin: 0.35em 0 0;
+		line-height: 1.25;
+	}
+
+	h1,
+	.icon {
+		color: $color-primary;
+	}
 }
 
-.card h1 {
-	color: $color-primary;
-	margin: 0.35em 0 0;
-	line-height: 1.25;
-}
-
-.btn-info {
+.btn {
 	color: $color-text-secondary;
 	display: inline-block;
-	font-size: 0.85em;
 	font-weight: bold;
 	text-decoration: none;
 	text-transform: uppercase;
 	padding: 0.75em 1.5em;
 	border-radius: 0.35em;
-	background-color: $color-primary;
-	margin-top: auto;
+
+	&-callout {
+		font-size: 1.1em;
+		background-color: $color-secondary;
+	}
+
+	&-info {
+		font-size: 0.85em;
+		background-color: $color-primary;
+		margin-top: auto;
+	}
 }
+
+/*
+	Sass also provides a shorthand for writing properties using CSS namespaces:
+
+	.button {
+		text: {
+			align: center;
+			decoration: none;
+			transform: uppercase;
+		}
+	}
+
+	.button {
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+ */
+
+
 
 
 /* MEDIA QUERIES ------------------------------------------------- */
@@ -147,10 +254,10 @@ footer {
 }
 
 @media (min-width: 992px) {
-header {
-	background-position: 0 0, 0 45%;
-}
-.intro {
-	width: 45%;
-}
+	header {
+		background-position: 0 0, 0 45%;
+	}
+	.intro {
+		width: 45%;
+	}
 }
