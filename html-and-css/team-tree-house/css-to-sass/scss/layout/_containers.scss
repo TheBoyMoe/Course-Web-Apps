@@ -21,10 +21,10 @@
 	color: white;
 	text-align: left;
 	padding: 18% 24%;
-	border-top: 10px solid $color-prim;
+	border-top: $br solid $color-prim;
 	margin: 105px 0 60px;
-	background: $color-shadow url('./../img/bear.jpg') no-repeat center;
+	background: $color-shadow url('#{$path-img}/bear.jpg') no-repeat center;
 	background-size: cover;
 	box-shadow: inset 0 0 50px 10px $color-shadow;
-	border-radius: 10px;
+	border-radius: $br;
 }
