@@ -12,8 +12,8 @@
 	position: relative;
 	z-index: 100;
 
-	@media (max-width: $break-xs) {
-		display: none;
+	@include mquery('xs') {
+		display: none; // content passed in
 	}
 
 }

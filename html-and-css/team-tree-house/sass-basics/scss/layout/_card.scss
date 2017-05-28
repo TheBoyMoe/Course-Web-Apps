@@ -15,11 +15,11 @@
 		line-height: 1.25;
 	}
 
-	@media (min-width: $break-xs) {
+	@include mquery('xs') {
 		flex: 1 per-line(2); // 2 equal sized columns
 	}
 
-	@media (min-width: $break-l) {
+	@include mquery('l') {
 		flex-basis: per-line(3); // 3 equal sized columns
 	}
 }

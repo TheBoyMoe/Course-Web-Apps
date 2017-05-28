@@ -30,6 +30,10 @@
 	[28] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
 	[29] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#number_operations
 	[30] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
+	[31] http://blog.teamtreehouse.com/smarter-sass-mixins-null
+	[32] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#keyword_arguments_2
+	[33] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
+	
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css
@@ -67,5 +71,7 @@
  	* Media Queries - sass lets you nest media queries directly inside the selector they're being applied to. Instead of defining the media query and then defining the selector inside it with the specific styles to be applied at that break point, simply place the media query with the styles in that selector where it's initially defined. You can also create variables for the min-width and max-width values.
  	
  	* Functions output a single value, NO css. Define a function with the @function directive followed by the name of the function. Functions can take parameters, comma separated list. To make the parameters reusable define them as variables, name starts with a $ sign. All functions have a @return diractive to return the functions result.
+ 	
+ 	* Conditionals, @if(expression){} - output a block of code only if the expression evaluates as true. You'll often use conditionals inside mixins to make your mixins more intelligent, e.g make a flexible media query mixin that outputs different code for each break point.
  	
  */

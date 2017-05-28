@@ -24,14 +24,14 @@ header {
 		margin: 0;
 	}
 
-	@media (max-width: $break-xs) {
+	@include mquery('xs') {
 		height: 340px;
 		h1 {
 			font-size: 3.4em;
 		}
 	}
 
-	@media (min-width: $break-l) {
+	@include mquery('l') {
 		background-position: 0 0, 0 45%;
 	}
 }
