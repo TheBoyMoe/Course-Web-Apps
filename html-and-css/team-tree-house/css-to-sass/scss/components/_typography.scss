@@ -1,13 +1,6 @@
-/* Web Fonts -------------------- */
 
-@font-face {
-	font-family: 'Abolition Regular';
-	src: url('./../fonts/abolition-regular-webfont.eot');
-	src: url('./../fonts/abolition-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('./../fonts/abolition-regular-webfont.woff') format('woff'),
-	url('./../fonts/abolition-regular-webfont.ttf') format('truetype');
-}
-
+// web font
+@include font-face('Abolition Regular', abolition-regular);
 
 // nest selectors where the selectors share a namespace
 .main {

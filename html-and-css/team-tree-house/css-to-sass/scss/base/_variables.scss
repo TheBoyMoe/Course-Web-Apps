@@ -38,4 +38,5 @@ $stack-abolition  : 'Abolition Regular', $stack-sans-serif;
 $br: 10px;
 
 // asset paths - use interpolation to inject the string into the css - #{}
-$path-img: './../img'
+$path-img: './../img';
+$path-font: './../font';
