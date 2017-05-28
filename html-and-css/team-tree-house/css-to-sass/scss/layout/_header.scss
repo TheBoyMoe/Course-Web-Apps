@@ -1,4 +1,7 @@
+
+
 .main-header {
+	@extend %centered;
 	padding-top: 170px;
 	height: 850px;
 	background: linear-gradient(#ffa949, transparent 90%),

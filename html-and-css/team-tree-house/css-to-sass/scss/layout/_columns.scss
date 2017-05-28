@@ -1,14 +1,10 @@
-/* Floated Columns ------------------ */
-
-.resorts,
-.tips {
-	width: 46.5%;
-}
 
 .tips {
+	@extend %columns;
 	float: left;
 }
 
 .resorts {
+	@extend %columns;
 	float: right;
 }
