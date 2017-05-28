@@ -28,7 +28,7 @@ h1 {
 
 // calculate column widths - uses local vars, not visible else where
 @function per-line($items){
-	$gutter-percemtage: px-to-percentage($gutter) * 2;
-	$gutter-total: $items * $gutter-percemtage;
+	$gutter-percentage: px-to-percentage($gutter) * 2;
+	$gutter-total: $items * $gutter-percentage;
 	@return (100% / $items) - $gutter-total;
 }

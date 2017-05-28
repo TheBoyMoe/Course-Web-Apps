@@ -1,6 +1,6 @@
 /*
 	References:
-	[1] http://sass-lang.com/guide
+	[1] http://sass-lang.com/guide & http://thesassway.com/ & http://sassbreak.com/
 	[2] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variables_
 	[3] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#syntax
 	[4] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#using_sass
@@ -43,6 +43,11 @@
 	[41] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists
 	[42] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-directive
 	[43] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
+	[44] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_6 (error)
+	[45] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_5 (warn and debug)
+	[46] https://www.sitepoint.com/using-source-maps-debug-sass-chrome/#live-editing-scss-in-the-browser (debug sass with source maps)
+	[47] https://robots.thoughtbot.com/sass-source-maps-chrome-magic (more on source maps)
+	[48] http://thesassway.com/intermediate/using-source-maps-with-sass
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css

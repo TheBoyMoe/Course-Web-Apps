@@ -16,7 +16,15 @@
 	}
 
 	@include mquery('xs') {
-		flex: 1 per-line(2); // 2 equal sized columns
+		flex: 1 per-line(1);
+	}
+
+	@include mquery('s'){
+		flex-basis: per-line(2);  // 2 equal sized columns
+	}
+
+	@include mquery('m'){
+		flex-basis: per-line(2);
 	}
 
 	@include mquery('l') {
