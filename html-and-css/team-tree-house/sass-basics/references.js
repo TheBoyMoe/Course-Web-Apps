@@ -36,7 +36,13 @@
 	[34] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_9
 	[35] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
 	[36] http://sass-lang.com/documentation/Sass/Script/Functions.html#map-functions
-	
+	[37] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_10
+	[38] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_12
+	[39] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#interpolation_
+	[40] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-directive
+	[41] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists
+	[42] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#each-directive
+	[43] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
 	
 	compiling single sass file to css:
 	$ sass input.scss:output.css

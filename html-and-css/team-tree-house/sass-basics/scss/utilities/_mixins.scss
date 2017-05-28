@@ -45,43 +45,55 @@
 
 
 // Media Queries - if no match is found the mixin outputs nothing
-@mixin mquery($break-point){
-	@if($break-point == 'xs'){
-		@media (max-width: $break-xs) {
+//@mixin mquery($break-point){
+//	@if($break-point == 'xs'){
+//		@media (max-width: $break-xs) {
+//			@content;
+//		}
+//	}
+//	@else if($break-point == 's'){
+//		@media (min-width: $break-s) {
+//			@content;
+//		}
+//	}
+//	@else if($break-point == 'm'){
+//		@media (min-width: $break-m) {
+//			@content;
+//		}
+//	}
+//	@else if($break-point == 'l'){
+//		@media (min-width: $break-l) {
+//			@content;
+//		}
+//	}
+//}
+
+
+// media queries using maps - DOES NOT WORK
+@mixin mquery($breakpoint){
+	$value: map-get($breakpoints, $breakpoint);
+	$s: map-get($breakpoints, 's');
+
+	@if($value < $s){
+		@media (max-width: $value) {
 			@content;
 		}
 	}
-	@else if($break-point == 's'){
-		@media (min-width: $break-s) {
-			@content;
-		}
-	}
-	@else if($break-point == 'm'){
-		@media (min-width: $break-m) {
-			@content;
-		}
-	}
-	@else if($break-point == 'l'){
-		@media (min-width: $break-l) {
+	@else { // 's', 'm' & 'l'
+		@media (min-width: $value) {
 			@content;
 		}
 	}
 }
 
 
-// media queries using maps - DOES NOT WORK
-//@mixin mquery($breakpoint){
-//	$value: map-get($breakpoints, $breakpoint);
-//	$s: map-get($breakpoints, 's');
-//
-//	@if($value < $s){
-//		@media (max-width: $value) {
-//			@content;
-//		}
-//	}
-//	@else { // 's', 'm' & 'l'
-//		@media (min-width: $value) {
-//			@content;
-//		}
-//	}
-//}
+// icon themes
+@mixin themes($map){
+	// implement color theme using loops
+	@each $theme, $color in $map {
+		&-#{$theme} {
+			color: $color;
+		}
+	}
+
+}
