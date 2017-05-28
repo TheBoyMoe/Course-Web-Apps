@@ -17,9 +17,28 @@
 }
 
 // Center containers
-@mixin center {
-	width: 90%;
+@mixin center($width) {
+	width: $width;
 	max-width: $max-width;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+
+// rounded elements - using null as the default(instead of none) stops the out put
+// of needless css when that property is not required
+@mixin roundy($dimension, $border-properties: null) {
+	width: $dimension;
+	height: $dimension;
+	border: $border-properties;
+	border-radius: 50%;
+}
+
+
+// create a flex container - props set to null are optional
+@mixin flexy($display: flex, $direction: null, $wrap: null, $content: null){
+	display: $display;
+	flex-direction: $direction;
+	flex-wrap: $wrap;
+	justify-content: $content;
 }

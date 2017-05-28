@@ -3,8 +3,7 @@
 // ======================================
 
 .card {
-	display: flex;
-	flex-direction: column;
+	@include flexy($direction: column);
 	padding: 1.5em 1em;
 	border: 1px solid $color-shade;
 	border-radius: 0.25em;
