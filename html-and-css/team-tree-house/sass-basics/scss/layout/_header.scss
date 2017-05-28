@@ -17,6 +17,10 @@ header {
 		font-size: 4.8em;
 		margin-bottom: 0;
 		letter-spacing: 1px;
+
+		@include mquery('xs') {
+			font-size: 3.4em;
+		}
 	}
 	p {
 		color: $color-accent;
@@ -26,9 +30,6 @@ header {
 
 	@include mquery('xs') {
 		height: 340px;
-		h1 {
-			font-size: 3.4em;
-		}
 	}
 
 	@include mquery('l') {

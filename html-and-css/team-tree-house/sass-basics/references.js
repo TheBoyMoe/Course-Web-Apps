@@ -33,6 +33,9 @@
 	[31] http://blog.teamtreehouse.com/smarter-sass-mixins-null
 	[32] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#keyword_arguments_2
 	[33] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
+	[34] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_9
+	[35] http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
+	[36] http://sass-lang.com/documentation/Sass/Script/Functions.html#map-functions
 	
 	
 	compiling single sass file to css:
@@ -73,5 +76,7 @@
  	* Functions output a single value, NO css. Define a function with the @function directive followed by the name of the function. Functions can take parameters, comma separated list. To make the parameters reusable define them as variables, name starts with a $ sign. All functions have a @return diractive to return the functions result.
  	
  	* Conditionals, @if(expression){} - output a block of code only if the expression evaluates as true. You'll often use conditionals inside mixins to make your mixins more intelligent, e.g make a flexible media query mixin that outputs different code for each break point.
+ 	
+ 	* Sass Maps - provide a way to keep track of data, by associating a name with a value - key/value pair. You can accessing any value in a map by using the name you assign it. A key can be any data type, eg string or number, must be unique. Sass provides a number of functions to manipulate maps.
  	
  */
