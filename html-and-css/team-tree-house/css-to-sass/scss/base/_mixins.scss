@@ -9,3 +9,12 @@
 		url('#{$path-font}/#{file}-regular-webfont.ttf') format('truetype');
 	}
 }
+
+
+// Text mixin
+@mixin text($size, $line-height: null, $weight: null, $color: null){
+	font-size: $size;
+	line-height: $line-height;
+	font-weight: $weight;
+	color: $color;
+}
