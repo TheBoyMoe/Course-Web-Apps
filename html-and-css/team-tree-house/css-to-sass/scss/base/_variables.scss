@@ -1,4 +1,6 @@
 
+// When naming variables, follow a pattern that makes variables easier to read, start with a generic term first, followed by a specific description.
+
 // Descriptive color variables
 
 $white          : #fff;
@@ -39,4 +41,9 @@ $br: 10px;
 
 // asset paths - use interpolation to inject the string into the css - #{}
 $path-img: './../img';
-$path-font: './../font';
+$path-font: './../fonts';
+
+
+// Media Query breakpoints
+$break-narrow: '(max-width: 768px)';
+$break-wide: '(max-width: 1024px)';

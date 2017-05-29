@@ -1,7 +1,7 @@
 
 
 /* Media Queries -------------------- */
-
+// TODO complete media queries - sass does not allow extending from within a media query (?? possibly change in a future update - because it outputs invalid css and extends rules from another scope - known as cross-media extensions)
 @media (max-width: 1024px) {
 	.primary-content,
 	.secondary-content {
@@ -23,20 +23,6 @@
 	.main-header {
 		max-height: 380px;
 		padding: 50px 25px 0;
-	}
-	.main-title {
-		font-size: 1.3rem;
-		border: none;
-	}
-	.main-heading {
-		font-size: 5rem;
-		line-height: 1.1;
-	}
-	.arrow {
-		display: none;
-	}
-	.intro {
-		font-size: 1rem;
 	}
 	.resorts,
 	.tips {

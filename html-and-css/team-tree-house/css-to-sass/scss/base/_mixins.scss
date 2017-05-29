@@ -3,10 +3,10 @@
 @mixin font-face($family, $file){
 	@font-face {
 		font-family: $family;
-		src: url('#{$path-font}/#{file}-webfont.eot');
-		src: url('#{$path-font}/#{file}-webfont.eot?#iefix') format('embedded-opentype'),
-		url('#{$path-font}/#{file}-webfont.woff') format('woff'),
-		url('#{$path-font}/#{file}-regular-webfont.ttf') format('truetype');
+		src: url('#{$path-font}/#{$file}-webfont.eot');
+		src: url('#{$path-font}/#{$file}-webfont.eot?#iefix') format('embedded-opentype'),
+		url('#{$path-font}/#{$file}-webfont.woff') format('woff'),
+		url('#{$path-font}/#{$file}-regular-webfont.ttf') format('truetype');
 	}
 }
 
