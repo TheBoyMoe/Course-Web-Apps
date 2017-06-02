@@ -2,12 +2,17 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const consolidate = require('consolidate');
 
+// app config
 const app = express();
 const port = process.env.PORT || 3000;
+app.engine('html', consolidate.nunjucks);
+app.set('view engine', 'html'); // register nunjucks as the template engine
+app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
-	res.send('Hello World!');
+	res.render('index', {'name': 'Templates'});
 });
 
 app.use((req, res) => {

@@ -2,7 +2,7 @@
   "name": "mongod-uni",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,7 @@
     "assert": "^1.4.1",
     "consolidate": "^0.14.5",
     "express": "^4.15.3",
-    "mongodb": "^2.2.27"
+    "mongodb": "^2.2.27",
+    "nunjucks": "^3.0.1"
   }
 }
