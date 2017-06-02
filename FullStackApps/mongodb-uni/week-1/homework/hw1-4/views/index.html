@@ -1,0 +1,25 @@
+<!doctype HTML>
+<html>
+<head><title>Fruit Picker</title></head>
+<body>
+<form action="/favourite_movie" method="POST">
+	<h3>Enter your favorite Movie title, year and imdb number</h3>
+	<label for="title">Title</label>
+	<input type="text" id="title" placeholder="Title" name="title"><br>
+	<label for="year">Year</label>
+	<input type="text" id="year" placeholder="Year" name="year"><br>
+	<label for="imdb">imdb number</label>
+	<input type="text" id="imdb" placeholder="imdb number" name="imdb"><br>
+	<input type="submit" value="Submit"/>
+	
+	<h3>Your favourite movies</h3>
+	<ul>
+		{% for movie in movies %}
+		<li><a href="http://www.imdb.com/title/{{movie.imdb}}" target="_blank">{{movie.title}}, {{movie.year}}</a></li>
+		{% else %}
+		<li>No movies found</li>
+		{% endfor %}
+	</ul>
+</form>
+</body>
+</html>
