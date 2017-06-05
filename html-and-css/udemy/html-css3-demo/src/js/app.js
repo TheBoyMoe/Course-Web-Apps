@@ -17,5 +17,5 @@ class Person {
 	}
 }
 
-let person = new Person('Magic Mike!');
+let person = new Person('Andrew!');
 document.write(person.hello());

@@ -19,11 +19,15 @@
     "gulp-if": "^2.0.2",
     "gulp-livereload": "^3.8.1",
     "gulp-postcss": "^7.0.0",
+    "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^2.1.0",
     "static-server": "^2.0.4"
+  },
+  "dependencies": {
+    "pug": "^2.0.0-rc.2"
   }
 }

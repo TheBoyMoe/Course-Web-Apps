@@ -1,3 +1,9 @@
+/*
+	References:
+	[1] https://medium.com/@antonioregadas/getting-started-with-pug-template-engine-e49cfa291e33 (compiling pug with gulp)
+	[2] http://www.competa.com/blog/how-to-add-multiple-directories-in-one-gulp-task/
+ */
+
 'use strict';
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
@@ -12,6 +18,7 @@ const livereload = require('gulp-livereload');
 const autoprefixer = require('gulp-autoprefixer');
 const postcss = require('gulp-postcss');
 const babel = require('gulp-babel');
+const pug = require('gulp-pug');
 
 const options = {
 	src: 'src',
@@ -33,7 +40,7 @@ gulp.task('compileSass', () => {
 });
 
 
-gulp.task('html', ['compileSass'], () => {
+gulp.task('html', ['compileSass', 'pug'], () => {
 	let assets = useref.assets();
 	
 	return gulp.src(options.src + '/index.html')
@@ -51,7 +58,21 @@ gulp.task('html', ['compileSass'], () => {
 
 // watch for changes to the app's js file
 gulp.task('scripts', () => {
-	return gulp.src(options.src + '/js/*.js')
+	return gulp.src([
+		options.src + '/js/app.js',
+		options.src + '/js/main.js'
+	])
+	.pipe(livereload());
+});
+
+
+// compile pug to html
+gulp.task('pug', () => {
+	return gulp.src(options.src + '/views/index.pug')
+		.pipe(pug({
+			pretty: true
+		}))
+		.pipe(gulp.dest(options.src))
 		.pipe(livereload());
 });
 
@@ -61,6 +82,7 @@ gulp.task('watchFiles', () => {
 	livereload.listen(); // load live-reload server
  	gulp.watch(options.src + '/scss/**/*.scss', ['compileSass']);
 	gulp.watch(options.src + '/js/*.js', ['scripts']);
+	gulp.watch(options.src + '/views/**/*.pug', ['pug']);
 });
 
 
@@ -78,7 +100,8 @@ gulp.task('assets', () => {
 gulp.task('clean', () => {
 	del([
 		options.dist,
-		options.src + '/css/styles.css*'
+		options.src + '/css/styles.css*',
+		options.src + '/index.html'
 	]);
 });
 
