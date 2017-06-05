@@ -1,7 +1,7 @@
 'use strict';
 
 function goodbye() {
-	console.log(' & Goodbye!!');
+	console.log(' & Goodbye!!!');
 }
 
 goodbye();
