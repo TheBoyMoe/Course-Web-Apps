@@ -11,6 +11,7 @@ const csso = require('gulp-csso');
 const livereload = require('gulp-livereload');
 const autoprefixer = require('gulp-autoprefixer');
 const postcss = require('gulp-postcss');
+const babel = require('gulp-babel');
 
 const options = {
 	src: 'src',
@@ -18,6 +19,7 @@ const options = {
 };
 
 
+// watch for changes to scss
 gulp.task('compileSass', () => {
 	return gulp.src(options.src + '/scss/styles.scss')
 		.pipe(maps.init())
@@ -30,11 +32,15 @@ gulp.task('compileSass', () => {
 		.pipe(livereload());
 });
 
+
 gulp.task('html', ['compileSass'], () => {
 	let assets = useref.assets();
 	
 	return gulp.src(options.src + '/index.html')
 		.pipe(assets)
+		.pipe(iff('*.js', babel({
+			presets: ['es2015']
+		})))
 		.pipe(iff('*.js', uglify()))
 		.pipe(iff('*.css', csso()))
 		.pipe(assets.restore())
@@ -77,6 +83,7 @@ gulp.task('clean', () => {
 });
 
 // load server and watch for any changes during dev
+// ensure chrome LiveReload plugin is enabled
 gulp.task('serve', ['watchFiles']);
 
 // build the production app
