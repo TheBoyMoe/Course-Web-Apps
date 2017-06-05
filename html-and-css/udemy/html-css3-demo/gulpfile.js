@@ -19,11 +19,16 @@ const autoprefixer = require('gulp-autoprefixer');
 const postcss = require('gulp-postcss');
 const babel = require('gulp-babel');
 const pug = require('gulp-pug');
+const imagemin = require('gulp-imagemin');
+const pngcompress = require('imagemin-pngquant');
+const jpgcompress = require('imagemin-jpeg-recompress');
 
 const options = {
 	src: 'src',
 	dist: 'dist'
 };
+
+const image_path = '/imgs/**/*.{png,jpeg,jpg,gif,svg}';
 
 
 // watch for changes to scss
@@ -86,9 +91,23 @@ gulp.task('watchFiles', () => {
 });
 
 
-gulp.task('assets', () => {
+// minify any project images
+gulp.task('images', () => {
+	return gulp.src(options.src + image_path)
+		.pipe(imagemin([
+			imagemin.gifsicle(),
+			imagemin.jpegtran(),
+			imagemin.optipng(),
+			imagemin.svgo(),
+			pngcompress(),
+			jpgcompress()
+		]))
+		.pipe(gulp.dest(options.dist + '/imgs'));
+});
+
+
+gulp.task('assets', ['images'], () => {
 	return gulp.src([
-		options.src + '/imgs/**/*',
 		options.src + '/fonts/**/*',
 		options.src + '/font-awesome/**/*',
 		options.src + '/mail/**/*'
@@ -110,8 +129,8 @@ gulp.task('clean', () => {
 gulp.task('serve', ['watchFiles']);
 
 // build the production app
-// gulp.task('build', ['html', 'assets']);
-gulp.task('build', ['html']);
+// gulp.task('build', ['html']);
+gulp.task('build', ['html', 'assets']);
 
 
 gulp.task('default', ['clean'], () => {
