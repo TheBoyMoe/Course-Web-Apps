@@ -1,11 +1,54 @@
+html {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
 body {
-  box-sizing: border-box;
-  background-color: #efef11; }
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #efef11;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
 
 h1 {
   color: #666;
   font-size: 40px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300; }
+
+h2 {
+  -webkit-transition: all 4s ease;
+  transition: all 4s ease; }
+
+:-webkit-full-screen a {
+  display: -webkit-box;
+  display: flex; }
+
+:-moz-full-screen a {
+  display: flex; }
+
+:-ms-fullscreen a {
+  display: -ms-flexbox;
+  display: flex; }
+
+:fullscreen a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.example {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
+  background: linear-gradient(to bottom, white, black); }
 
 /*# sourceMappingURL=styles.css.map */

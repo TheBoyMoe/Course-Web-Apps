@@ -9,6 +9,8 @@ const useref = require('gulp-useref');
 const iff = require('gulp-if');
 const csso = require('gulp-csso');
 const livereload = require('gulp-livereload');
+const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
 
 const options = {
 	src: 'src',
@@ -20,6 +22,9 @@ gulp.task('compileSass', () => {
 	return gulp.src(options.src + '/scss/styles.scss')
 		.pipe(maps.init())
 		.pipe(sass())
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions']
+		}))
 		.pipe(maps.write('./'))
 		.pipe(gulp.dest(options.src + '/css'))
 		.pipe(livereload());
