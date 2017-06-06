@@ -7,10 +7,24 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	height: 300px;
 	justify-content: flex-start;
+	
+	height: 800px;
+	align-items: flex-start;
 }
 
-.item  {
+.item {
+	/*flex-grow: 1;*/
+	/*flex-basis: 150px;*/
+	
+	/*short hand - grow and shrink props(2nd and 2rd args) are optional, both set to 0 */
+	flex: 1 150px;
+}
 
+.item-2 {
+	/* use flex-grow on this item, otherwise you would have to set basis if using shorthand version */
+	/*flex-grow: 4;*/
+	
+	
+	align-self: center;
 }
