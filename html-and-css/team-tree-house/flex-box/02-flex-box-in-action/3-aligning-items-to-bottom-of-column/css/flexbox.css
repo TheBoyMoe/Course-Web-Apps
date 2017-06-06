@@ -1,0 +1,43 @@
+/* ================================= 
+  Media Queries
+==================================== */
+
+/* flex nav and 3-col layout */
+@media (min-width: 769px) {
+
+	.main-header,
+	.main-nav,
+	.row {
+		display: flex; /* makes all children the same height by default, no matter the content*/
+	}
+
+	.main-header {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	/* Align items at the bottom of columns */
+	.col {
+		display: flex;
+		flex: 1;
+		flex-direction: column; /* stack contents, including buttons */
+	}
+	
+	.button {
+		margin-top: auto;
+		/*align-self: flex-start;*/ /* otherwise stretch to occupy parent width */
+	}
+
+}
+
+@media (min-width: 1025px) {
+
+	.main-header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+}
+
+
+

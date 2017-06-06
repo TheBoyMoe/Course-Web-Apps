@@ -1,0 +1,38 @@
+/* =================================
+  Media Queries
+==================================== */
+
+@media (min-width: 769px) {
+
+	.main-header,
+	.main-nav {
+		display: flex;
+	}
+	.main-header {
+		flex-direction: column;
+		align-items: center;
+	}
+
+}
+
+@media (min-width: 1025px) {
+
+	.main-header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+}
+
+/* Sticky footer */
+
+/* applies at all widths */
+body {
+	display: flex;
+	flex-direction: column; /*stacks all elements*/
+	min-height: 100vh; /* body will take up enter height of the view port */
+}
+
+.row {
+	flex: 1; /* row takes up all remaining space, forcing footer to bottom */
+}
