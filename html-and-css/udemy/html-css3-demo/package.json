@@ -26,6 +26,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^2.1.0",
+    "gulp-zip": "^4.0.0",
     "imagemin-jpeg-recompress": "^5.1.0",
     "imagemin-pngquant": "^5.0.1",
     "static-server": "^2.0.4"
