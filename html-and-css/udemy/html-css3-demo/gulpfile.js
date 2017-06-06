@@ -22,10 +22,12 @@ const pug = require('gulp-pug');
 const imagemin = require('gulp-imagemin');
 const pngcompress = require('imagemin-pngquant');
 const jpgcompress = require('imagemin-jpeg-recompress');
+const zip = require('gulp-zip');
 
 const options = {
 	src: 'src',
-	dist: 'dist'
+	dist: 'dist',
+	exp: 'exp'
 };
 
 const image_path = '/imgs/**/*.{png,jpeg,jpg,gif,svg}';
@@ -120,13 +122,21 @@ gulp.task('clean', () => {
 	del([
 		options.dist,
 		options.src + '/css/styles.css*',
-		options.src + '/index.html'
+		options.src + '/index.html',
+		options.exp
 	]);
 });
 
 // load server and watch for any changes during dev
 // ensure chrome LiveReload plugin is enabled
 gulp.task('serve', ['watchFiles']);
+
+// export dist version
+gulp.task('export', ()=> {
+	gulp.src(options.dist + '/**/*')
+		.pipe(zip('app.zip'))
+		.pipe(gulp.dest(options.exp));
+});
 
 // build the production app
 // gulp.task('build', ['html']);

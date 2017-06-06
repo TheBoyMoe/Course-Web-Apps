@@ -1,0 +1,62 @@
+/* ================================= 
+  Media Queries
+==================================== */
+
+/* flex navigation */
+@media (min-width: 769px) {
+
+	.main-header,
+	.main-nav {
+		display: flex;
+	}
+
+	.main-header {
+		flex-direction: column;
+		align-items: center;
+	}
+
+}
+
+@media (min-width: 1025px) {
+
+	.main-header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+}
+
+
+/* Three column layout */
+@media (min-width: 769px) {
+	
+	/* columns take up equal amounts of space- when there isn't enough room on
+	 one line, columns will shift down flex-grow: 1, flex-basis: 50%*/
+	
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	
+	.col {
+		flex: 1 50%;
+		order: 10;
+	}
+	
+	/* place the secondary column 1st in the row */
+	.secondary {
+		order: 5;
+	}
+	
+}
+
+@media (min-width: 1025px) {
+	/* ensure that all three columns appear on the same line at 1025px or greater */
+	.col {
+		flex-basis: 0;
+	}
+	
+	.primary {
+		flex-grow: 1.4;
+	}
+}

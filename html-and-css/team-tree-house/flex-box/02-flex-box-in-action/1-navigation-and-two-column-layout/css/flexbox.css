@@ -1,0 +1,59 @@
+/* ================================= 
+  Media Queries
+==================================== */
+
+
+ /*Navigation*/
+@media (min-width: 769px) {
+
+	.main-nav,
+	.main-header {
+		display: flex;
+	}
+	
+	.main-header {
+		flex-direction: column;
+		align-items: center;
+	}
+
+}
+
+@media (min-width: 1025px) {
+	.main-header {
+		flex-direction: row;
+	}
+	
+	.name {
+		margin-right: auto;
+	}
+}
+
+
+/* Two column layout */
+@media (min-width: 769px) {
+
+	.row {
+		display: flex;
+	}
+	
+	.col {
+		flex: 1; /* each column take up equal space*/
+	}
+
+}
+
+@media (min-width: 1025px) {
+	.primary {
+		flex: 2;
+	}
+}
+
+
+/* Three-column layout */
+@media (min-width: 769px) {
+
+}
+
+@media (min-width: 1025px) {
+
+}
